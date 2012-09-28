@@ -15,5 +15,5 @@ Always is still very much a research project and should be considered in alpha s
 
 
 
-**The inspiration for the name comes from a character 'Always Teste' by edbassmaster.
-[http://www.youtube.com/watch?v=GAUWuBGP4mU]**
+***The inspiration for the name comes from a character ['Always Teste'](http://www.youtube.com/watch?v=GAUWuBGP4mU) by edbassmaster.***
+
