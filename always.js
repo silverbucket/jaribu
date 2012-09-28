@@ -10,12 +10,25 @@
 
 (function(undefined) {
 	//'use strict';
-    var jQuery = require('jquery');
+    var sys = require('sys');
+    var tools = {};
+    tools['jQuery'] = require('jquery');
+
     var red, blue, reset;
-    red   = '\u001b[31m';
-    blue  = '\u001b[34m';
+    black = '\u001b[30m';
+    red = '\u001b[31m';
     green = '\u001b[32m';
     yellow = '\u001b[33m';
+    blue  = '\u001b[34m';
+    purple  = '\u001b[35m';
+    cyan  = '\u001b[36m';
+    greybg  = '\u001b[40m';
+    redbg  = '\u001b[41m';
+    greenbg  = '\u001b[42m';
+    yellowbg  = '\u001b[43m';
+    bluebg  = '\u001b[44m';
+    purplebg  = '\u001b[45m';
+    cyanbg  = '\u001b[46m';
     reset = '\u001b[0m';
     console.log(reset);
 
@@ -35,6 +48,12 @@
             return suites.length;
         };
 
+
+        /**
+         * load a single suite json object into the library
+         * @param  object   s   suite object from test file
+         * @return boolean      success of loading
+         */
         pub.loadSuite = function(s) {
             if (! s.name ) {
                 err_msg = "suite requires a 'name' property";
@@ -47,13 +66,24 @@
                 return false;
             }
 
-            function funcTpl() {}
-            funcTpl.prototype = {
-                constructor: funcTpl,
+
+            /*
+             * class definitions for suites, tests, and scaffolding
+             */
+            var writeFunc = function(text) {
+                console.log('    ' + yellow + '> ' + text + reset);
+            };
+            function Scaffolding() {}
+            Scaffolding.prototype = {
+                constructor: Scaffolding,
+                type: "Scaffolding",
+                tools: tools,
+                write: writeFunc,
+                timeout: 10000,
                 run: function(){this.result(true);},
                 _result: undefined,
                 result: function(result) {
-                    if(result){this._result = result;}
+                    if(result !== undefined){this._result = result;}
                     return this._result;
                 }
             };
@@ -62,15 +92,18 @@
             Test.prototype = {
                 constructor: Test,
                 type: "Test",
+                tools: tools,
+                write: writeFunc,
+                timeout: 10000,
                 name: "",
                 desc: "",
-                setup: new funcTpl(),
-                takedown: new funcTpl(),
+                setup: new Scaffolding(),
+                takedown: new Scaffolding(),
                 run: "",
                 _result: undefined,
                 result: function(result) {
-                    if(result){this._runResult = result;}
-                    return this._runResult;
+                    if(result !== undefined){this._result = result;}
+                    return this._result;
                 },
                 next: undefined,
                 prev: undefined,
@@ -82,17 +115,24 @@
             Suite.prototype = {
                 constructor: Suite,
                 type: "Suite",
+                tools: tools,
+                write: writeFunc,
+                timeout: 10000,
                 name: "",
                 desc: "",
-                setup: new funcTpl(),
-                takedown: new funcTpl(),
-                beforeEach: new funcTpl(),
-                afterEach: new funcTpl(),
+                setup: new Scaffolding(),
+                takedown: new Scaffolding(),
+                beforeEach: new Scaffolding(),
+                afterEach: new Scaffolding(),
                 next: undefined,
                 prev: undefined,
                 position: null
             };
+            /* */
 
+            /*
+             * Create all the test objects from the JSON data
+             */
             var tests = [];
             var suite = new Suite(); // we define this early so we can assign it as parent to test objects
             var num_tests = s.tests.length;
@@ -112,17 +152,11 @@
                 test.name = s.tests[i].name;
                 test.desc = s.tests[i].desc;
                 test.run = s.tests[i].run;
-
                 if (typeof s.tests[i].setup === 'function') {
-                    var tsetup = new funcTpl();
-                    tsetup.run = s.tests[i].setup;
-                    test.setup = tsetup;
+                    test.setup.run = s.tests[i].setup;
                 }
-
                 if (typeof s.tests[i].takedown === 'function') {
-                    var ttakedown = new funcTpl();
-                    ttakedown.run = s.tests[i].takedown;
-                    test.takedown = ttakedown;
+                    test.takedown.run = s.tests[i].takedown;
                 }
 
                 // set position related attributes to test object
@@ -136,30 +170,25 @@
             }
 
 
+            /*
+             * Create the suite object
+             */
             suite.name = s.name;
             suite.desc = s.desc;
             if (typeof s.setup === 'function') {
-                var setup = new funcTpl();
-                setup.run = s.setup;
-                suite.setup = setup;
+                suite.setup.run = s.setup;
             }
             if (typeof s.takedown === 'function') {
-                var takedown = new funcTpl();
-                takedown.run = s.takedown;
-                suite.takedown = takedown;
+                suite.takedown.run = s.takedown;
             }
             if (typeof s.beforeEach === 'function') {
-                var beforeEach = new funcTpl();
-                beforeEach.run = s.beforeEach;
-                suite.beforeEach = beforeEach;
+                suite.beforeEach.run = s.beforeEach;
             }
             if (typeof s.afterEach === 'function') {
-                var afterEach = new funcTpl();
-                afterEach.run = s.afterEach;
-                suite.afterEach = afterEach;
+                suite.afterEach.run = s.afterEach;
             }
 
-            suite.tests = s.tests;
+            suite.tests = tests;
             // set position related attributes to suite object
             num_suites = suites.length;
             suite.position = num_suites;
@@ -171,163 +200,117 @@
             return true;
         };
 
+
         /**
-         * iterates through the suite objects and begins the test cyle
+         * begins the test cyle, by activating the first suite
          * @return none
          */
         pub.begin = function() {
-            console.log("beginning always teste's");
+            sys.print("beginning always teste's");
             if (suites[0]) {
                 run(suites[0], 'setup');
             }
         };
-        var pass = function(o, task) {
-            if (task) {
-                task = ' ' + task + ' ';
+        var pass = function(o, type) {
+            if (type) {
+                sys.puts(blue + 'completed' + reset);
             } else {
-                task = ' ';
+                sys.puts(greenbg + '  OK ' + reset + ' ' + cyan + o.name  + reset + ' test' + green + ' passed' + reset);
             }
-            console.log(reset + o.type + ' ' + blue + o.name + reset +
-                        task + green + 'passed' + reset);
         };
-        var fail = function(o, task) {
-            console.log(reset + o.type + blue + o.name + reset +
-                        task + red + ' faled' + reset);
+        var fail = function(o, type, msg) {
+            if (msg) {
+                msg = 'failed (' + msg + ')';
+            } else {
+                msg = 'failed';
+            }
+            if (type) {
+                sys.puts(red + msg + reset);
+            } else {
+                sys.puts(redbg + ' FAIL' + reset + ' ' + cyan + o.name  + reset + ' test ' + red + msg + reset);
+            }
         };
 
+
+        /**
+         * [run description]
+         * @param  {[type]} o    [description]
+         * @param  {[type]} type [description]
+         * @return {[type]}      [description]
+         */
         var run = function(o, type) {
             if ( type === 'setup' ) {
                 if (o.type === 'Suite') {
-                    console.log("\n" + 'suite ' + blue + o.name + reset);
+                    console.log("\n==========\n= " + cyan + o.name + reset +
+                                "\n= " + purple + o.desc + reset );
+                               // "\n==========");
+                    sys.print('= ::: setup ... ');
                 } else {
-                    console.log('[' + o.position + '] running test ' + blue + o.name + reset);
+                    console.log("\n-----\n- " + '[' + o.position + '] running test ' +
+                                cyan + o.name + reset );
+                    sys.print('- ::: setup ... ');
                 }
-                console.log('::: setup');
-                console.log(o);
                 local = o.setup;
-                o.setup.run();
             } else if ( type === 'takedown' ) {
+                if (o.type === 'Suite') {
+                    sys.print("\n= ::: takedown ... ");
+                } else {
+                    sys.print('- ::: takedown ... ');
+                }
                 local = o.takedown;
-                local.run();
             } else {
                 // must be a test
                 local = o;
-                local.run();
             }
+            local.run();
 
+            var waitCount = 0;
+            var waitInterval = 1000;
             (function waitResult() {
                 if (local.result() === undefined)  {
-                    console.log('...');
-                    setTimeout(waitResult, 500);
-                } else {
-                    if (local.result() === true) {
-                        pass(o, type);
-                        if (o.type === 'Suite') {
-                            if (type === 'setup') {
-                                // run first test in suite
-                                next_test = o.tests.shift();
-                                run(next_test, 'setup');
-                            } else if (type === 'takedown') {
-                                if (o.next) {
-                                    // move on to the next suite
-                                    run(o.next, 'setup');
-                                }
-                            }
-                        } else {
-                            // this test is ready to run
-                            if (type === 'setup') {
-                                run(o);
-                            } else if (type === 'takedown') {
-                                if (o.next) {
-                                    run(o.next, 'setup');
-                                } else {
-                                    // call the suites takedown method
-                                    run(o.parent, 'takedown');
-                                }
-                            } else {
-                                // test is complete
-                                run(o, 'takedown');
+                    //sys.print('... ');
+                    if (waitCount < local.timeout) {
+                        waitCount = waitCount + waitInterval;
+                        setTimeout(waitResult, waitInterval);
+                    } else {
+                        fail(o, type, 'timeout');
+                    }
+                } else if (local.result() === false) {
+                    fail(o, type);
+                } else if (local.result() === true) {
+                    pass(o, type);
+                    if (o.type === 'Suite') {
+                        if (type === 'setup') {
+                            // run first test in suite
+                            next_test = o.tests.shift();
+                            run(next_test, 'setup');
+                        } else if (type === 'takedown') {
+                            if (o.next) {
+                                // move on to the next suite
+                                run(o.next, 'setup');
                             }
                         }
-                    } else if (local.result() === false) {
-                        fail(o, type);
-                    } else {
-                        console.log(red + "ERROR GETTING RESULT" + reset);
-                        fail(o);
+                    } else {  // Test
+                        if (type === 'setup') {
+                            // this test is ready to run
+                            run(o);
+                        } else if (type === 'takedown') {
+                            if (o.next) {
+                                run(o.next, 'setup');
+                            } else {
+                                // call the suites takedown method
+                                run(o.parent, 'takedown');
+                            }
+                        } else {
+                            // test is complete
+                            run(o, 'takedown');
+                        }
                     }
-                }
-            })();
-        };
-
-        var runAux = function(name, func) {
-            //console.log(yellow);
-            if (func()) {
-                console.log(reset + name + green + ' passed' + reset);
-            } else {
-                console.log(reset + name + red + ' failed' + reset);
-            }
-        };
-
-        var test = {};
-        test.startPrep = function(test) {
-            runAux('... beforeEach', suite.beforeEach);
-            console.log("\n----------\ntest " + blue + test.name + reset);
-            console.log(blue + test.desc + reset);
-            runAux('prep for ' + blue + test.name + reset, test.prep);
-            runTest(test);
-        };
-
-        test.start = function(test) {
-            test._result = undefined;
-            test.result = function(result) {
-                if (result) {
-                    test._result = result;
-                }
-                return test._result;
-            };
-
-            console.log(reset + 'running test ' + test.name + '...' + yellow);
-            test.run();
-            console.log(reset + 'waiting for test to compelte ... ' + yellow);
-
-            (function waitResult() {
-                if (test.result() === undefined)  {
-                    console.log('.. ');
                 } else {
-
-                    console.log('im here so result must be set', test.result());
-
-                    if (test.result() === true) {
-                      console.log(reset + 'test ' + blue + test.name + green + ' passed' + reset);
-                        waiting = false;
-                    } else if (test.result() === false) {
-                        console.log(reset + 'test ' + blue + test.name + red + ' failed' + reset);
-                        waiting = false;
-                    } else { console.log(red + "ERROR TESTING RESULT" + reset); }
-                    endTest(test);
+                    console.log(red + "ERROR GETTING RESULT" + reset);
+                    fail(o, type);
                 }
-                setTimeout(waitResult, 500);
             })();
-            console.log(reset + 'end of runtest func');
-        };
-
-        function endTest(test) {
-            console.log("----------\n");
-            runAux('... afterEach', suite.afterEach);
-        };
-
-        function processSuite(suite) {
-            console.log("\n==========\n" + 'suite ' + blue + suite.name + reset);
-            console.log(blue + suite.desc + reset);
-
-            runAux('::: setup', suite.setup);
-            var len_tests = suite.tests.length;
-            for (var i = 0; i < len_tests; i++) {
-                var test = suite.tests[i];
-                prepTest(test);
-            }
-            runAux('::: takedown', suite.takedown);
-            console.log();
         };
 
         return pub;

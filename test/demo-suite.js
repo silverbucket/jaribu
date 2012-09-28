@@ -12,6 +12,7 @@ module.exports = function() {
             name: "default",
             desc: "default methods work",
             run: function() {
+                this.write('hello world');
                 if (1 === 1) {
                     this.result(true);
                 } else {
@@ -37,21 +38,33 @@ module.exports = function() {
         {
             name: "async test",
             desc: "testing async callback",
-            setup: function() {return true;},
             run: function() {
+                this.write('setting the timeout!');
+                var _this = this;
                 setTimeout(function(){
-                    console.log('test callback timeout!');
-                    this.result(true);
+                    _this.write('test callback timeout!');
+                    _this.result(true);
                 }, 2000);
+                this.write('timeout set');
+            }
+        },
+        {
+            name: "tools",
+            desc: 'test for tools object',
+            run: function() {
+                if (typeof this.tools === 'object') {
+                    this.result(true);
+                } else {
+                    this.result(false);
+                }
             }
         },
         {
             name: "jquery",
             desc: 'test for jquery support',
-            setup: function() { return true; },
             run: function() {
-                if (jQuery) {
-                    test.result(true);
+                if (typeof this.tools.jQuery === 'function') {
+                    this.result(true);
                 } else {
                     this.result(false);
                 }

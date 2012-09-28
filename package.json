@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "jquery": "*",
-    "mongoose": "3.1.x"
+    "express": "3.0.0rc4",
+    "jade": "*"
   }
 }
