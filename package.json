@@ -1,0 +1,9 @@
+{
+  "name": "always",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "jquery": "*",
+    "mongoose": "3.1.x"
+  }
+}
