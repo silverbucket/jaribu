@@ -221,6 +221,9 @@
             }
         };
         var pass = function(o, type) {
+            // TODO: make sure we check for assertFail here and fail tests
+            // that would have otherwise passed
+
             if (type) {
                 sys.puts(blue + 'completed' + reset);
             } else {

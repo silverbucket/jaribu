@@ -70,8 +70,19 @@ suites.push({
     takedown: function() { this.result(true); },
     beforeEach: function() { this.result(true); },
     afterEach: function() { this.result(true); },
-    timeout: 12000,
+    timeout: 3000,
     tests: [
+    {
+        name: "async timeout",
+        desc: "testing async timeout failure",
+        assertFail: true, // this test SHOULD fail
+        run: function() {
+            var _this = this;
+            setTimeout(function(){
+                _this.result(true);
+            }, 4000);
+        }
+    },
     {
         name: "overload",
         desc: "overloaded methods work",
@@ -93,30 +104,30 @@ suites.push({
             var _this = this;
             setTimeout(function(){
                 _this.result(true);
-            }, 11000);
+            }, 2000);
         }
     },
     {
         name: "extended timeout",
         desc: "testing async callback with extended wait period",
-        timeout: 13000,
+        timeout: 4000,
         run: function() {
             var _this = this;
             setTimeout(function(){
                 _this.result(true);
-            }, 12000);
+            }, 3000);
         }
     },
     {
         name: "async timeout",
         desc: "testing async timeout failure",
         assertFail: true, // this test SHOULD fail
-        timeout: 1000,
+        timeout: 4000,
         run: function() {
             var _this = this;
             setTimeout(function(){
                 _this.result(true);
-            }, 2000);
+            }, 5000);
         }
     }
     ]
