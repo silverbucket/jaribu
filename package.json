@@ -8,6 +8,6 @@
     "jade": "*"
   },
   "scripts": {
-    "test": "node always.js"
+    "test": "node console.js"
   }
 }

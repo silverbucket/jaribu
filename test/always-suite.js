@@ -4,8 +4,7 @@ var suites = [];
 suites.push({
     name: "always basics",
     desc: "collection of tests to test the test framework (basics)",
-    tests: [
-    {
+    tests: [{
         name: "default",
         desc: "default methods work",
         run: function() {
@@ -16,9 +15,7 @@ suites.push({
                 this.result(false);
             }
         }
-
-    },
-    {
+    }, {
         name: "async",
         desc: "testing async callback",
         run: function() {
@@ -30,8 +27,7 @@ suites.push({
             }, 2000);
             this.write('timeout set');
         }
-    },
-    {
+    }, {
         name: "tools",
         desc: 'test for tools object',
         run: function() {
@@ -41,8 +37,7 @@ suites.push({
                 this.result(false);
             }
         }
-    },
-    {
+    }, {
         name: "jquery",
         desc: 'test for jquery support',
         run: function() {
@@ -52,8 +47,7 @@ suites.push({
                 this.result(false);
             }
         }
-    }
-    ]
+    }]
 });
 
 
@@ -73,7 +67,7 @@ suites.push({
     timeout: 3000,
     tests: [
     {
-        name: "async timeout",
+        name: "timeout",
         desc: "testing async timeout failure",
         assertFail: true, // this test SHOULD fail
         run: function() {
@@ -108,7 +102,7 @@ suites.push({
         }
     },
     {
-        name: "extended timeout",
+        name: "timeout overload",
         desc: "testing async callback with extended wait period",
         timeout: 4000,
         run: function() {
@@ -128,6 +122,13 @@ suites.push({
             setTimeout(function(){
                 _this.result(true);
             }, 5000);
+        }
+    },
+    {
+        name: "summary",
+        desc: "test the summary data with loading data",
+        run: function() {
+            this.result(true);
         }
     }
     ]
