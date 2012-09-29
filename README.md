@@ -3,16 +3,14 @@ Always Testing
 
 Intro
 -----
-Always is a JavaScript testing framework build on node.js. It is being written first as a way to explore the area of testing, but also to either do away, or come to terms, with the psuedo-language surrounding most existing testing framerworks. This psuedo-language requires developers to learn a new way of doing things when it comes to testing, this over-simplification can actually create a larger barrier for developers just starting out with testing.
+Always is a JavaScript testing framework built on node.js. It is being written primarily as a way for me to explore the area of JavaScript testing, but also as an attempt to either do away, or come to terms, with the psuedo-language surrounding most existing testing frameworks. A lot of the more popular frameworks try to simplify things, but often introduce a lot of new terms and unecessary absraction in doing so. This over-simplification can actually create a larger barrier for developers just starting out with testing.
 
-A developer wants tests to be an easy and helpful addition to their project, they don't want to have to learn new ways of doing things, struggle with semantics and a new language of terms, they just want to write tests in the language they are already using for their project.
-
-Always attempts to address this niche. Each test is a JSON object. You use the same JavaScript skills you already have to write the tests and there is no flow like 'describe', 'it' etc.
+Always is a naive attempt to keep things simple and not introduce any new concepts aside from the bare minimum. Each test is a JSON object. You use the same JavaScript skills you already have to write the tests and there is no flow like 'describe', 'it' etc. common in other test frameworks.
 
 
 Status
 ------
-Always is still very much a research project and should be considered in alpha state.
+Always is not feature complete, is still very much a research project and should be considered in alpha state.
 
 
 
