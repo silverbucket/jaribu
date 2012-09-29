@@ -1,13 +1,14 @@
 module.exports = function() {
-    var suite = {};
-    suite.name = "demo suite";
-    suite.desc = "collection of tests for proof of concept";
-    suite.setup = function() { this.result(true); };
-    suite.takedown = function() { this.result(true); };
-    suite.beforeEach = function() { this.result(true); };
-    suite.afterEach = function() { this.result(true); };
+var suites = [];
 
-    suite.tests = [
+suites.push({
+    name: "always suite",
+    desc: "collection of tests to test the test framework",
+    setup: function() { this.result(true); },
+    takedown: function() { this.result(true); },
+    beforeEach: function() { this.result(true); },
+    afterEach: function() { this.result(true); },
+    tests: [
         {
             name: "default",
             desc: "default methods work",
@@ -36,7 +37,7 @@ module.exports = function() {
 
         },
         {
-            name: "async test",
+            name: "async",
             desc: "testing async callback",
             run: function() {
                 this.write('setting the timeout!');
@@ -46,6 +47,17 @@ module.exports = function() {
                     _this.result(true);
                 }, 2000);
                 this.write('timeout set');
+            }
+        },
+        {
+            name: "extended timeout",
+            desc: "testing async callback with extended wait period",
+            timeout: 15000,
+            run: function() {
+                var _this = this;
+                setTimeout(function(){
+                    _this.result(true);
+                }, 14000);
             }
         },
         {
@@ -70,7 +82,31 @@ module.exports = function() {
                 }
             }
         }
-    ];
+    ]
+});
 
-    return suite;
+
+suites.push({
+    name: "always 2",
+    desc: "collection of tests to test the test framework [override timeout]",
+    setup: function() { this.result(true); },
+    takedown: function() { this.result(true); },
+    beforeEach: function() { this.result(true); },
+    afterEach: function() { this.result(true); },
+    timeout: 14000,
+    tests: [
+        {
+            name: "async",
+            desc: "testing extended async callback",
+            run: function() {
+                var _this = this;
+                setTimeout(function(){
+                    _this.result(true);
+                }, 13000);
+            }
+        }
+    ]
+});
+
+return suites;
 }();

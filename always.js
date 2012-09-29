@@ -1,12 +1,3 @@
-/*var util = (function() {
-    var jQuery = require('jquery');
-    var pub = {};
-    pub.get = function(url) {
-
-    }
-
-    return pub;
-});*/
 
 (function(undefined) {
 	//'use strict';
@@ -135,16 +126,22 @@
              */
             var tests = [];
             var suite = new Suite(); // we define this early so we can assign it as parent to test objects
+            if (typeof s.timeout === 'number') {
+                Test.prototype.timeout = s.timeout; // override test timeouts with Suite timeout
+                Scaffolding.prototype.timeout = s.timeout; // override test timeouts with Suite timeout
+            }
             var num_tests = s.tests.length;
             for (var i = 0; i < num_tests; i++) {
                 if (! s.tests[i].name ) {
                     err_msg = s.name + ": test[" + i + "] requires a 'name' property";
                     return false;
                 } else if (! s.tests[i].desc ) {
-                    err_msg = s.name + ": test '" + s.tests[i].name + "'' requires a 'desc' property";
+                    err_msg = s.name + ": test '" + s.tests[i].name +
+                                    "'' requires a 'desc' property";
                     return false;
                 } else if (typeof s.tests[i].run !== 'function') {
-                    err_msg = s.name + ": test '" + s.tests[i].name + "'' requires a 'run' function";
+                    err_msg = s.name + ": test '" + s.tests[i].name +
+                                    "'' requires a 'run' function";
                     return false;
                 }
 
@@ -157,6 +154,12 @@
                 }
                 if (typeof s.tests[i].takedown === 'function') {
                     test.takedown.run = s.tests[i].takedown;
+                }
+                // figureout if there is a timeout to override default
+                if (typeof s.tests[i].timeout === 'number') {
+                    test.timeout = s.tests[i].timeout;
+                    test.setup.timeout = s.tests[i].timeout;
+                    test.takedown.timeout = s.tests[i].timeout;
                 }
 
                 // set position related attributes to test object
@@ -190,7 +193,7 @@
 
             suite.tests = tests;
             // set position related attributes to suite object
-            num_suites = suites.length;
+            var num_suites = suites.length;
             suite.position = num_suites;
             if (num_suites !== 0) {
                 suite.prev = suites[num_suites - 1];
@@ -206,7 +209,7 @@
          * @return none
          */
         pub.begin = function() {
-            sys.print("beginning always teste's");
+            sys.puts("\nrunning tests...");
             if (suites[0]) {
                 run(suites[0], 'setup');
             }
@@ -215,7 +218,8 @@
             if (type) {
                 sys.puts(blue + 'completed' + reset);
             } else {
-                sys.puts(greenbg + '  OK ' + reset + ' ' + cyan + o.name  + reset + ' test' + green + ' passed' + reset);
+                sys.puts(greenbg + '  OK ' + reset + ' ' + cyan + o.name  +
+                            reset + ' test' + green + ' passed' + reset);
             }
         };
         var fail = function(o, type, msg) {
@@ -227,7 +231,8 @@
             if (type) {
                 sys.puts(red + msg + reset);
             } else {
-                sys.puts(redbg + ' FAIL' + reset + ' ' + cyan + o.name  + reset + ' test ' + red + msg + reset);
+                sys.puts(redbg + ' FAIL' + reset + ' ' + cyan + o.name  +
+                            reset + ' test ' + red + msg + reset);
             }
         };
 
@@ -243,11 +248,11 @@
                 if (o.type === 'Suite') {
                     console.log("\n==========\n= " + cyan + o.name + reset +
                                 "\n= " + purple + o.desc + reset );
-                               // "\n==========");
                     sys.print('= ::: setup ... ');
                 } else {
-                    console.log("\n-----\n- " + '[' + o.position + '] running test ' +
-                                cyan + o.name + reset );
+                    console.log("\n-----\n- " + '[' + o.position +
+                                '] running test ' + cyan + o.name + reset +
+                                purple + "\n  " + o.desc + reset);
                     sys.print('- ::: setup ... ');
                 }
                 local = o.setup;
@@ -318,16 +323,28 @@
 
 
     var len_files = files.length;
-    for (i = 0; i < len_files; i++) {
+    for (var i = 0; i < len_files; i++) {
         var s = require(files[0]);
+        var suites = [];
 
-        if (! always.loadSuite(s) ) {
-            console.error('unable to load file: ' + files[i]);
-            console.error(always.getErrorMessage());
+        if (typeof s.name !== 'undefined') {
+            suites.push(s);
+        } else {
+            suites = s;
+        }
+
+        var num_suites = suites.length;
+        sys.print("\n"+'processing file '+files[i]+' '+num_suites+' suites found. ');
+        for (var n = 0; n < num_suites; n++) {
+            sys.print('...'+ (n+1));
+            if (! always.loadSuite(suites[n]) ) {
+                console.error("\n"+'unable to load file: ' + files[i]);
+                console.error(always.getErrorMessage());
+            }
         }
     }
 
-    console.log(blue + 'suites loaded: ' + reset + always.getNumSuites());
+    console.log("\n" + blue + 'suites loaded: ' + reset + always.getNumSuites());
     always.begin();
 
 })();
