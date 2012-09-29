@@ -10,10 +10,7 @@ Always is a naive attempt to keep things simple and not introduce any new concep
 
 Status
 ------
+[![Build Status](https://secure.travis-ci.org/silverbucket/always.png)](http://travis-ci.org/silverbucket/always)
 Always is not feature complete, is still very much a research project and should be considered in alpha state.
 
-
-
-
-*The inspiration for the name comes from a character ['Always Teste'](http://www.youtube.com/watch?v=GAUWuBGP4mU) by edbassmaster.*
 
