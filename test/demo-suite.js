@@ -2,32 +2,14 @@ module.exports = function() {
 var suites = [];
 
 suites.push({
-    name: "always suite",
-    desc: "collection of tests to test the test framework",
-    setup: function() { this.result(true); },
-    takedown: function() { this.result(true); },
-    beforeEach: function() { this.result(true); },
-    afterEach: function() { this.result(true); },
+    name: "always basics",
+    desc: "collection of tests to test the test framework (basics)",
     tests: [
         {
             name: "default",
             desc: "default methods work",
             run: function() {
                 this.write('hello world');
-                if (1 === 1) {
-                    this.result(true);
-                } else {
-                    this.result(false);
-                }
-            }
-
-        },
-        {
-            name: "overload",
-            desc: "overloaded methods work",
-            setup: function() { this.result(true); },
-            takedown: function() { this.result(true); },
-            run: function() {
                 if (1 === 1) {
                     this.result(true);
                 } else {
@@ -47,17 +29,6 @@ suites.push({
                     _this.result(true);
                 }, 2000);
                 this.write('timeout set');
-            }
-        },
-        {
-            name: "extended timeout",
-            desc: "testing async callback with extended wait period",
-            timeout: 15000,
-            run: function() {
-                var _this = this;
-                setTimeout(function(){
-                    _this.result(true);
-                }, 14000);
             }
         },
         {
@@ -87,14 +58,28 @@ suites.push({
 
 
 suites.push({
-    name: "always 2",
-    desc: "collection of tests to test the test framework [override timeout]",
+    name: "always override",
+    desc: "testing overriden methods and timeouts",
     setup: function() { this.result(true); },
     takedown: function() { this.result(true); },
     beforeEach: function() { this.result(true); },
     afterEach: function() { this.result(true); },
-    timeout: 14000,
+    timeout: 12000,
     tests: [
+        {
+            name: "overload",
+            desc: "overloaded methods work",
+            setup: function() { this.result(true); },
+            takedown: function() { this.result(true); },
+            run: function() {
+                if (1 === 1) {
+                    this.result(true);
+                } else {
+                    this.result(false);
+                }
+            }
+
+        },
         {
             name: "async",
             desc: "testing extended async callback",
@@ -102,7 +87,30 @@ suites.push({
                 var _this = this;
                 setTimeout(function(){
                     _this.result(true);
-                }, 13000);
+                }, 11000);
+            }
+        },
+        {
+            name: "extended timeout",
+            desc: "testing async callback with extended wait period",
+            timeout: 13000,
+            run: function() {
+                var _this = this;
+                setTimeout(function(){
+                    _this.result(true);
+                }, 12000);
+            }
+        },
+        {
+            name: "async timeout",
+            desc: "testing async timeout failure",
+            assertFail: true, // this test SHOULD fail
+            timeout: 1000,
+            run: function() {
+                var _this = this;
+                setTimeout(function(){
+                    _this.result(true);
+                }, 2000);
             }
         }
     ]

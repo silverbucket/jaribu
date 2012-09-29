@@ -85,6 +85,7 @@
                 type: "Test",
                 tools: tools,
                 write: writeFunc,
+                assertFail: false, // if true, a failing test passes, and passing test fails
                 timeout: 10000,
                 name: "",
                 desc: "",
@@ -161,6 +162,9 @@
                     test.setup.timeout = s.tests[i].timeout;
                     test.takedown.timeout = s.tests[i].timeout;
                 }
+                if (typeof s.tests[i].assertFail === 'boolean') {
+                    test.assertFail = s.tests[i].assertFail;
+                }
 
                 // set position related attributes to test object
                 test.position = i;
@@ -223,6 +227,12 @@
             }
         };
         var fail = function(o, type, msg) {
+            if (o.assertFail === true) {
+                console.log("this test failed, but that's OK because it's supposed to");
+                pass(o, type);
+                return;
+            }
+
             if (msg) {
                 msg = 'failed (' + msg + ')';
             } else {
