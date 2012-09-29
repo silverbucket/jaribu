@@ -1,5 +1,6 @@
-Always Testing
-==============
+Always
+======
+*a JavaScript (node.js) testing framework*
 
 Intro
 -----
