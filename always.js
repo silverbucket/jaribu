@@ -22,16 +22,16 @@
     cyanbg  = '\u001b[46m';
     reset = '\u001b[0m';
     console.log(reset);
+    var passed = green + 'passed' + reset;
+    var failed = red + 'failed' + reset;
 
-    var files = ['./test/demo-suite.js'];
-
+    var files = ['./test/always-suite.js'];
 
     var always = function() {
         var suites = [];
         var err_msg = {};
         var pub = {};
 
-        pub.hello = function() { return 'hello'; };
         pub.getErrorMessage = function() {
             return err_msg;
         };
@@ -39,11 +39,11 @@
             return suites.length;
         };
 
-
         /**
          * load a single suite json object into the library
-         * @param  object   s   suite object from test file
-         * @return boolean      success of loading
+         *
+         * @param  {[object]}   s   [suite object from test file]
+         * @return {[boolean]}      [success of loading]
          */
         pub.loadSuite = function(s) {
             if (! s.name ) {
@@ -70,6 +70,7 @@
                 type: "Scaffolding",
                 tools: tools,
                 write: writeFunc,
+                status: false,
                 timeout: 10000,
                 run: function(){this.result(true);},
                 _result: undefined,
@@ -85,6 +86,7 @@
                 type: "Test",
                 tools: tools,
                 write: writeFunc,
+                status: false,
                 assertFail: false, // if true, a failing test passes, and passing test fails
                 timeout: 10000,
                 name: "",
@@ -210,7 +212,7 @@
 
         /**
          * begins the test cyle, by activating the first suite
-         * @return none
+         * @return {[none]}
          */
         pub.begin = function() {
             sys.puts("\nrunning tests...");
@@ -225,6 +227,40 @@
                 sys.puts(greenbg + '  OK ' + reset + ' ' + cyan + o.name  +
                             reset + ' test' + green + ' passed' + reset);
             }
+
+            if (o.type === 'Suite') {
+                if (type === 'setup') {
+                    // run first test in suite
+                    o.setup.status = true;
+                    run(o.tests.shift(), 'setup');
+                } else if (type === 'takedown') {
+                    o.takedown.status = true;
+                    if (o.next) {
+                        // move on to the next suite
+                        run(o.next, 'setup');
+                    } else {
+                        showSummary();
+                    }
+                }
+            } else {  // Test
+                if (type === 'setup') {
+                    // this test is ready to run
+                    o.setup.status = true;
+                    run(o);
+                } else if (type === 'takedown') {
+                    o.takedown.status = true;
+                    if (o.next) {
+                        run(o.next, 'setup');
+                    } else {
+                        // call the suites takedown method
+                        run(o.parent, 'takedown');
+                    }
+                } else {
+                    // test is complete
+                    o.status = true;
+                    run(o, 'takedown');
+                }
+            }
         };
         var fail = function(o, type, msg) {
             if (o.assertFail === true) {
@@ -238,20 +274,31 @@
             } else {
                 msg = 'failed';
             }
+
             if (type) {
                 sys.puts(red + msg + reset);
             } else {
                 sys.puts(redbg + ' FAIL' + reset + ' ' + cyan + o.name  +
                             reset + ' test ' + red + msg + reset);
             }
+
+            // run next test or display summary
+            if (o.next) {
+                // move on to the next suite
+                run(o.next, 'setup');
+            } else {
+                showSummary();
+            }
         };
 
 
         /**
-         * [run description]
-         * @param  {[type]} o    [description]
-         * @param  {[type]} type [description]
-         * @return {[type]}      [description]
+         * generically handles each aspect of a suite/test setup/run/takedown
+         * using the commonalities in each of the objects methods, and the
+         * chaining references (o.next).
+         *
+         * @param  {[object]} o    [test or suite object]
+         * @param  {[string]} type [the type of task to be performed, if undefined assumes test]
          */
         var run = function(o, type) {
             if ( type === 'setup' ) {
@@ -294,33 +341,6 @@
                     fail(o, type);
                 } else if (local.result() === true) {
                     pass(o, type);
-                    if (o.type === 'Suite') {
-                        if (type === 'setup') {
-                            // run first test in suite
-                            next_test = o.tests.shift();
-                            run(next_test, 'setup');
-                        } else if (type === 'takedown') {
-                            if (o.next) {
-                                // move on to the next suite
-                                run(o.next, 'setup');
-                            }
-                        }
-                    } else {  // Test
-                        if (type === 'setup') {
-                            // this test is ready to run
-                            run(o);
-                        } else if (type === 'takedown') {
-                            if (o.next) {
-                                run(o.next, 'setup');
-                            } else {
-                                // call the suites takedown method
-                                run(o.parent, 'takedown');
-                            }
-                        } else {
-                            // test is complete
-                            run(o, 'takedown');
-                        }
-                    }
                 } else {
                     console.log(red + "ERROR GETTING RESULT" + reset);
                     fail(o, type);
@@ -328,6 +348,71 @@
             })();
         };
 
+
+        // TODO: the summary data should be accessible via methods to external
+        // users. not just wrapped up in a summary display function.
+        var showSummary = function() {
+            console.log("\n\nSummary\n=======\n");
+            var num_suites = suites.length;
+
+            var summary = {
+                'scaffolding': {
+                    'total': 0,
+                    'failures': 0
+                },
+                'tests': {
+                    'total': 0,
+                    'failures': 0
+                }
+            };
+
+            for (var i = 0; i < num_suites; i++) {
+                var s = suites[i];
+
+                summary.scaffolding.total = summary.scaffolding.total + 2;
+                if (!s.setup.status) {
+                    summary.scaffolding.failures = summary.scaffolding.failures + 1;
+                }
+                if (!s.takedown.status) {
+                    summary.scaffolding.failures = summary.scaffolding.failures + 1;
+                }
+                var num_tests = suites[i].tests.length;
+                for (var n = 0; n < num_tests; n++) {
+                    var t = suites[i].tests[n];
+                    summary.scaffolding.total = summary.scaffolding.total + 2;
+                    if (!t.setup.status) {
+                        summary.scaffolding.failures = summary.scaffolding.failures + 1;
+                    }
+                    if (!t.takedown.status) {
+                        summary.scaffolding.failures = summary.scaffolding.failures + 1;
+                    }
+                    summary.tests.total = summary.tests.total + 1;
+                    if (!t.status) {
+                        summary.tests.failures = summary.tests.failures + 1;
+                    }
+
+                }
+            }
+
+            sys.print('scaffolding failures  ');
+            sys.print((summary.scaffolding.failures) ?
+                            red+summary.scaffolding.failures+reset :
+                            blue+summary.scaffolding.failures+reset);
+            sys.puts('/'+purple+summary.scaffolding.total+reset);
+            sys.print('       test failures  ');
+            sys.print((summary.tests.failures) ?
+                            red+summary.tests.failures+reset :
+                            green+summary.tests.failures+reset);
+            sys.puts('/'+purple+summary.tests.total+reset);
+            sys.puts("\n");
+            if ((summary.tests.failures > 0) || (summary.tests.failures > 0)) {
+                sys.puts(redbg +   ' FAIL' + reset + red + ' some tests failed!'+reset);
+                process.exit(1);
+            } else {
+                sys.puts(greenbg + '  OK ' + reset + green + ' all tests passed!'+reset);
+                process.exit(0);
+            }
+        };
         return pub;
     }();
 
@@ -356,5 +441,4 @@
 
     console.log("\n" + blue + 'suites loaded: ' + reset + always.getNumSuites());
     always.begin();
-
 })();

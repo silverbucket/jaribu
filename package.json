@@ -6,5 +6,8 @@
     "jquery": "*",
     "express": "3.0.0rc4",
     "jade": "*"
+  },
+  "scripts": {
+    "test": "node always.js"
   }
 }
