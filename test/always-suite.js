@@ -99,6 +99,7 @@ suites.push({
                     if (typeof res.fooBar === 'string') {
                         if (res.fooBar === 'baz') {
                             this.result(true);
+                            return;
                         }
                     }
                 }
