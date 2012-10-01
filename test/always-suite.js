@@ -87,12 +87,12 @@ suites.push({
         }, {
             name: "res",
             desc: 'test for resource object',
-            setup: function(res) {
+            setup: function(env) {
                 var test = {
                     fooBar: 'baz'
                 };
+                this.env(test);
                 this.result(true);
-                return(test);
             },
             run: function(res) {
                 if (typeof res === 'object') {
