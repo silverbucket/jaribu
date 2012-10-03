@@ -15,7 +15,8 @@ suites.push({
                 this.result(false);
             }
         }
-    }, {
+    },
+    {
         name: "async",
         desc: "testing async callback",
         run: function() {
@@ -27,7 +28,8 @@ suites.push({
             }, 2000);
             this.write('timeout set');
         }
-    }, {
+    },
+    {
         name: "tools",
         desc: 'test for tools object',
         run: function() {
@@ -37,7 +39,8 @@ suites.push({
                 this.result(false);
             }
         }
-    }, {
+    },
+    {
         name: "jquery",
         desc: 'test for jquery support',
         run: function() {
@@ -72,7 +75,8 @@ suites.push({
                     _this.result(true);
                 }, 4000);
             }
-        }, {
+        },
+        {
             name: "overload",
             desc: "overloaded methods work",
             setup: function() { this.result(true); },
@@ -84,14 +88,15 @@ suites.push({
                     this.result(false);
                 }
             }
-        }, {
-            name: "res",
-            desc: 'test for resource object',
+        },
+        {
+            name: "env",
+            desc: 'test for environment object',
             setup: function(env) {
                 var test = {
                     fooBar: 'baz'
                 };
-                this.env(test);
+                this.env.set(test);
                 this.result(true);
             },
             run: function(res) {
@@ -105,7 +110,8 @@ suites.push({
                 }
                 this.result(false);
             }
-        }, {
+        },
+        {
             name: "async",
             desc: "testing extended async callback",
             run: function() {
@@ -114,7 +120,8 @@ suites.push({
                     _this.result(true);
                 }, 2000);
             }
-        }, {
+        },
+        {
             name: "timeout overload",
             desc: "testing async callback with extended wait period",
             timeout: 4000,
@@ -124,7 +131,8 @@ suites.push({
                     _this.result(true);
                 }, 3000);
             }
-        }, {
+        },
+        {
             name: "async timeout",
             desc: "testing async timeout failure",
             assertFail: true, // this test SHOULD fail
@@ -135,15 +143,67 @@ suites.push({
                     _this.result(true);
                 }, 5000);
             }
-        }, {
-            name: "summary",
-            desc: "test the summary data with loading data",
-            run: function() {
-                this.result(true);
-            }
         }
     ]
 });
 
+
+suites.push({
+    name: "available environment",
+    desc: "make sure the environment is accessible from within all phases of test",
+    setup: function(env) {
+        env.foo = 'bar';
+        env.counter = 0;
+        this.env.set(env);
+        this.result(true); },
+    takedown: function(env) {
+        if (typeof env.foo === 'undefined') {
+            this.result(false);
+            return;
+        } else if (env.foo === 'bar') {
+            this.result(true);
+            return;
+        }
+        this.result(false);
+    },
+    beforeEach: function(env) {
+        if (typeof env.foo === 'undefined') {
+            this.result(false);
+            return;
+        } else if (env.foo === 'bar') {
+            this.result(true);
+            env.counter = env.counter + 1;
+            return;
+        }
+        this.result(false);
+    },
+    afterEach: function(env) {
+        if (typeof env.foo === 'undefined') {
+            this.result(false);
+            return;
+        } else if (env.foo === 'bar') {
+            this.write('counter: '+env.counter);
+            this.result(true);
+            return;
+        }
+        this.result(false);
+    },
+    timeout: 3000,
+    tests: [
+        {
+            name: "env test1",
+            desc: "making sure setup env is here",
+            run: function(env) {
+                if (typeof env.foo === 'undefined') {
+                    this.result(false);
+                    return;
+                } else if (env.foo === 'bar') {
+                    this.result(true);
+                    return;
+                }
+            }
+        }
+    ]
+});
 return suites;
 }();
