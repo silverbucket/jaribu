@@ -4,53 +4,86 @@ var suites = [];
 suites.push({
     name: "always basics",
     desc: "collection of tests to test the test framework (basics)",
-    tests: [{
-        name: "default",
-        desc: "default methods work",
-        run: function() {
-            this.write('hello world');
-            if (1 === 1) {
-                this.result(true);
-            } else {
-                this.result(false);
+    tests: [
+        {
+            name: "default",
+            desc: "default methods work",
+            run: function() {
+                this.write('hello world');
+                this.assert(1, 1);
+                this.write('goodbye world');
+            }
+        },
+        {
+            name: "async",
+            desc: "testing async callback",
+            run: function() {
+                this.write('setting the timeout!');
+                var _this = this;
+                setTimeout(function(){
+                    _this.write('test callback timeout!');
+                    _this.result(true);
+                }, 2000);
+                this.write('timeout set');
+            }
+        },
+        {
+            name: "tools",
+            desc: 'test for tools object',
+            run: function() {
+                this.assertType(this.tools, 'object');
+            }
+        },
+        {
+            name: "jquery",
+            desc: 'test for jquery support',
+            run: function() {
+                this.assertType(this.tools.jQuery, 'function');
+            }
+        },
+        {
+            name: 'obj compare1',
+            desc: 'objects should compare correctly',
+            run: function(env) {
+                obj1 = {
+                    foo: "bar",
+                    beer: "good",
+                    greed: "bad"
+                };
+                obj2 = {
+                    foo: "bar",
+                    beer: "good",
+                    greed: "bad"
+                };
+                this.assert(obj1, obj2);
+                env.obj1 = obj1;
+            }
+        },
+        {
+            name: "obj compare2",
+            desc: "verify passing objects through env",
+            run: function(env) {
+                obj2 = {
+                    foo: "bar",
+                    beer: "good",
+                    greed: "bad"
+                };
+                this.assert(env.obj1, obj2);
+            }
+        },
+        {
+            name: "obj compare3",
+            desc: "different objects should not test true",
+            assertFail: true,
+            run: function(env) {
+                obj2 = {
+                    fresh: "prince",
+                    silver: "spoons"
+                };
+                this.assert(env.obj1, obj2);
             }
         }
-    },
-    {
-        name: "async",
-        desc: "testing async callback",
-        run: function() {
-            this.write('setting the timeout!');
-            var _this = this;
-            setTimeout(function(){
-                _this.write('test callback timeout!');
-                _this.result(true);
-            }, 2000);
-            this.write('timeout set');
-        }
-    },
-    {
-        name: "tools",
-        desc: 'test for tools object',
-        run: function() {
-            if (typeof this.tools === 'object') {
-                this.result(true);
-            } else {
-                this.result(false);
-            }
-        }
-    },
-    {
-        name: "jquery",
-        desc: 'test for jquery support',
-        run: function() {
-            if (typeof this.tools.jQuery === 'function') {
-                this.result(true);
-            } else {
-                this.result(false);
-            }
-        }
-    }]
+    ]
 });
 
 
@@ -82,11 +115,7 @@ suites.push({
             setup: function() { this.result(true); },
             takedown: function() { this.result(true); },
             run: function() {
-                if (1 === 1) {
-                    this.result(true);
-                } else {
-                    this.result(false);
-                }
+                this.assert(1, 1);
             }
         },
         {
@@ -100,15 +129,15 @@ suites.push({
                 this.result(true);
             },
             run: function(res) {
-                if (typeof res === 'object') {
+                /*if (typeof res === 'object') {
                     if (typeof res.fooBar === 'string') {
                         if (res.fooBar === 'baz') {
                             this.result(true);
                             return;
                         }
                     }
-                }
-                this.result(false);
+                }*/
+                this.assert(res.fooBar,'baz');
             }
         },
         {
@@ -154,39 +183,18 @@ suites.push({
     setup: function(env) {
         env.foo = 'bar';
         env.counter = 0;
-        this.env.set(env);
+        //this.env.set(env);
         this.result(true); },
     takedown: function(env) {
-        if (typeof env.foo === 'undefined') {
-            this.result(false);
-            return;
-        } else if (env.foo === 'bar') {
-            this.result(true);
-            return;
-        }
-        this.result(false);
+        this.assert(env.foo, 'bar');
     },
     beforeEach: function(env) {
-        if (typeof env.foo === 'undefined') {
-            this.result(false);
-            return;
-        } else if (env.foo === 'bar') {
-            this.result(true);
-            env.counter = env.counter + 1;
-            return;
-        }
-        this.result(false);
+        env.counter = env.counter + 1;
+        this.assert(env.foo, 'bar');
     },
     afterEach: function(env) {
-        if (typeof env.foo === 'undefined') {
-            this.result(false);
-            return;
-        } else if (env.foo === 'bar') {
-            this.write('counter: '+env.counter);
-            this.result(true);
-            return;
-        }
-        this.result(false);
+        this.write('counter: '+env.counter);
+        this.assert(env.foo, 'bar');
     },
     timeout: 3000,
     tests: [
@@ -194,15 +202,32 @@ suites.push({
             name: "env test1",
             desc: "making sure setup env is here",
             run: function(env) {
-                if (typeof env.foo === 'undefined') {
-                    this.result(false);
-                    return;
-                } else if (env.foo === 'bar') {
-                    this.result(true);
-                    return;
-                }
+                this.assert(env.foo, 'bar');
+            }
+        },
+        {
+            name: "env test2",
+            desc: "making sure counter is updating",
+            run: function(env) {
+                this.assert(env.counter, 2);
+            }
+        },
+        {
+            name: "env test3",
+            desc: "sandbox test env but keep setup env",
+            run: function(env) {
+                env.testVar = 'yarg';
+                this.assert(env.foo, 'bar');
+            }
+        },
+        {
+            name: "env test4",
+            desc: "making sure var from setup3 is not here, and counter is at 4",
+            run: function(env) {
+                this.assert(env.counter, 4);
             }
         }
+
     ]
 });
 return suites;
