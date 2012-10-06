@@ -122,21 +122,12 @@ suites.push({
             name: "env",
             desc: 'test for environment object',
             setup: function(env) {
-                var test = {
+                env.test = {
                     fooBar: 'baz'
                 };
-                this.env.set(test);
                 this.result(true);
             },
             run: function(res) {
-                /*if (typeof res === 'object') {
-                    if (typeof res.fooBar === 'string') {
-                        if (res.fooBar === 'baz') {
-                            this.result(true);
-                            return;
-                        }
-                    }
-                }*/
                 this.assert(res.fooBar,'baz');
             }
         },
@@ -183,7 +174,6 @@ suites.push({
     setup: function(env) {
         env.foo = 'bar';
         env.counter = 0;
-        //this.env.set(env);
         this.result(true); },
     takedown: function(env) {
         this.assert(env.foo, 'bar');
@@ -230,5 +220,44 @@ suites.push({
 
     ]
 });
+
+
+suites.push({
+    name: "testlib",
+    desc: "testing external lib",
+    setup: function(env) {
+        env.testlib = require('../lib/testlib.js');
+        console.log('testlib: ', env.teslib);
+        if (this.assert(env.testlib, undefined)) {
+            this.write('fail');
+            this.result(false);
+        } else {
+            this.write('pass');
+            console.log(env.testlib);
+            this.result(true);
+        }
+    },
+    tests: [
+        {
+            name: "libtest1",
+            desc: "verify external lib works",
+            run: function(env) {
+                console.log(env.testlib);
+                rstring = env.testlib.stringBeast('yo', 'mama', 'so', 'stupid');
+                this.assert(rstring, 'yomamasostupid');
+            }
+        },
+        {
+            name: "libtest2",
+            desc: "verify external lib works (break)",
+            assertFail: true,
+            run: function(env) {
+                rstring = env.testlib.stringBeast('yo', 'mama', 'so', 'smelly');
+                this.assert(rstring, 'yomamasostupid');
+            }
+        }
+    ]
+});
+
 return suites;
 }();
