@@ -122,13 +122,11 @@ suites.push({
             name: "env",
             desc: 'test for environment object',
             setup: function(env) {
-                env.test = {
-                    fooBar: 'baz'
-                };
+                env.fooBar = 'baz';
                 this.result(true);
             },
-            run: function(res) {
-                this.assert(res.fooBar,'baz');
+            run: function(env) {
+                this.assert(env.fooBar,'baz');
             }
         },
         {
