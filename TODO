@@ -1,0 +1,47 @@
+
+TODO:
+
+- make sure tests which have assertFail set to true, fail if they pass.
+
+- run tests from filenames passed as command-line arguments
+
+- provide command-line arguments to control the brevity of the test results.
+
+- testing in the browser
+
+- write tests to tests the assert library methods directly.
+
+
+
+MAYBE:
+
+? indicate in a test that you'd like to keep the env resident for the next
+  test
+
+? do we really name suite & tests 'name' and 'desc' ? less required fields to
+  encourage fast test writing.
+
+
+
+COMPLETED:
+
+x to test libraries, we need to patch the libraries to return modules.export if
+  it's enclosed in a self-executing function.
+
+x you can override timeouts if you know the async call may take a while
+
+x assertFail indicates the test is supposed to fail
+
+x this.assert() to test variables, can also compare objects. this.status()
+  automatically set based on results.
+
+x async testing works (test isn't complete when it returns, it's complete when
+  this.result() is set true or false.). using the this.tools.jQuery for async
+  calls (see tests in suite 'async').
+
+x tools available to tests, this.tools.jQuery, etc.
+
+x suites and tests have their own environments, and shared environments as
+  well. the 'env' object is passed to the test function as the first parameter.
+
+
