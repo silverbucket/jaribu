@@ -2,6 +2,9 @@
   "name": "always",
   "version": "0.0.1",
   "private": true,
+  "bin": {
+    "always": "./bin/always"
+  },
   "dependencies": {
     "jquery": "*",
     "express": "3.0.0rc4",
@@ -9,6 +12,6 @@
     "walk": "*"
   },
   "scripts": {
-    "test": "node console.js"
+    "test": "node bin/always"
   }
 }
