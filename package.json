@@ -5,7 +5,8 @@
   "dependencies": {
     "jquery": "*",
     "express": "3.0.0rc4",
-    "jade": "*"
+    "jade": "*",
+    "walk": "*"
   },
   "scripts": {
     "test": "node console.js"
