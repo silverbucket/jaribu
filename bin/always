@@ -4,9 +4,10 @@
 
     var walk    = require('walk');
     var files   = [];
+    var cwd     = process.cwd();
 
     // Walker options
-    var walker  = walk.walk('./test', { followLinks: false });
+    var walker  = walk.walk(cwd+'/test', { followLinks: false });
 
     walker.on('file', function(root, stat, next) {
         if (stat.name.match(/\-suite\.js$/g)) {
@@ -20,7 +21,7 @@
         console.log(files);
 
         var sys = require('sys');
-        var always = require('./lib/always.js');
+        var always = require(cwd+'/lib/always.js');
 
         var len_files = files.length;
         for (var i = 0; i < len_files; i++) {
