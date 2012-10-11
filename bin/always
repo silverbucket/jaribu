@@ -21,9 +21,13 @@
         console.log(files);
 
         var sys = require('sys');
-        var always = require(cwd+'/lib/always.js');
+        var always = require(__dirname+'/../lib/always.js');
 
         var len_files = files.length;
+        if (files.length === 0) {
+            console.log('no tests found to run');
+            return;
+        }
         for (var i = 0; i < len_files; i++) {
             var s = require(files[0]);
             var suites = [];
