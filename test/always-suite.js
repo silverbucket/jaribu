@@ -267,6 +267,21 @@ suites.push({
     ]
 });
 
+suites.push({
+    desc: "should be able to set up dummy functions (stubs)",
+    tests: [
+        {
+            desc: "make a stub function that returns its params",
+            run: function(env) {
+                myFunc = new Stub(function(p) {
+                    return p;
+                });
+                ret = myFunc('yarg');
+                this.assert(ret, 'yarg');
+            }
+        }
+    ]
+});
 
 return suites;
 }();
