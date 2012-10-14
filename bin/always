@@ -22,6 +22,7 @@
 
         var sys = require('sys');
         var always = require(__dirname+'/../lib/always.js');
+        var failedToLoad = [];
 
         var len_files = files.length;
         if (files.length === 0) {
@@ -42,12 +43,23 @@
             for (var n = 0; n < num_suites; n++) {
                 //sys.print('...'+ (n+1));
                 if (! always.loadSuite(suites[n]) ) {
-                    console.error("\n"+'unable to load file: ' + files[i]);
+                    console.error("\n"+'unable to load suite: ' + suites[n].desc);
                     console.error(always.getErrorMessage());
+                    failedToLoad.push({'desc':suites[n].desc, 'error': always.getErrorMessage()});
                 }
             }
         }
-        always.begin();
+        always.begin(function() {
+            // on complete
+            console.log('---');
+            var num_failedToLoad = failedToLoad.length;
+            for (var i = 0; i < num_failedToLoad; i++) {
+                console.log("\nsuite failed to load: " + failedToLoad[i].desc);
+                console.log(failedToLoad[i].error);
+            }
+            console.log("\n");
+        });
+        
 
     });
 

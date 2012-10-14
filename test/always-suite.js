@@ -214,6 +214,16 @@ suites.push({
             run: function(env) {
                 this.assert(env.counter, 4);
             }
+        },
+        {
+            desc: "we shouldnt have variables from always library",
+            run: function(env) {
+                if (typeof greybg !== 'undefined') {
+                    this.result(false);
+                } else {
+                    this.result(true);
+                }
+            }
         }
 
     ]
@@ -256,6 +266,7 @@ suites.push({
         }
     ]
 });
+
 
 return suites;
 }();
