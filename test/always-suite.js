@@ -6,7 +6,6 @@ suites.push({
     desc: "collection of tests to test the test framework (basics)",
     tests: [
         {
-            name: "default",
             desc: "default methods work",
             run: function() {
                 this.write('hello world');
@@ -15,7 +14,6 @@ suites.push({
             }
         },
         {
-            name: "async",
             desc: "testing async callback",
             run: function() {
                 this.write('setting the timeout!');
@@ -28,21 +26,18 @@ suites.push({
             }
         },
         {
-            name: "tools",
             desc: 'test for tools object',
             run: function() {
                 this.assertType(this.tools, 'object');
             }
         },
         {
-            name: "jquery",
             desc: 'test for jquery support',
             run: function() {
                 this.assertType(this.tools.jQuery, 'function');
             }
         },
         {
-            name: 'obj compare1',
             desc: 'objects should compare correctly',
             run: function(env) {
                 obj1 = {
@@ -60,7 +55,6 @@ suites.push({
             }
         },
         {
-            name: "obj compare2",
             desc: "verify passing objects through env",
             run: function(env) {
                 obj2 = {
@@ -72,7 +66,6 @@ suites.push({
             }
         },
         {
-            name: "obj compare3",
             desc: "different objects should not test true",
             assertFail: true,
             run: function(env) {
@@ -99,7 +92,6 @@ suites.push({
     timeout: 3000,
     tests: [
         {
-            name: "timeout",
             desc: "testing async timeout failure",
             assertFail: true, // this test SHOULD fail
             run: function() {
@@ -110,7 +102,6 @@ suites.push({
             }
         },
         {
-            name: "overload",
             desc: "overloaded methods work",
             setup: function() { this.result(true); },
             takedown: function() { this.result(true); },
@@ -119,7 +110,6 @@ suites.push({
             }
         },
         {
-            name: "env",
             desc: 'test for environment object',
             setup: function(env) {
                 env.fooBar = 'baz';
@@ -130,7 +120,6 @@ suites.push({
             }
         },
         {
-            name: "async",
             desc: "testing extended async callback",
             run: function() {
                 var _this = this;
@@ -140,7 +129,6 @@ suites.push({
             }
         },
         {
-            name: "timeout overload",
             desc: "testing async callback with extended wait period",
             timeout: 4000,
             run: function() {
@@ -151,7 +139,6 @@ suites.push({
             }
         },
         {
-            name: "async timeout",
             desc: "testing async timeout failure",
             assertFail: true, // this test SHOULD fail
             timeout: 4000,
@@ -187,21 +174,18 @@ suites.push({
     timeout: 3000,
     tests: [
         {
-            name: "env test1",
             desc: "making sure setup env is here",
             run: function(env) {
                 this.assert(env.foo, 'bar');
             }
         },
         {
-            name: "env test2",
             desc: "making sure counter is updating",
             run: function(env) {
                 this.assert(env.counter, 2);
             }
         },
         {
-            name: "env test3",
             desc: "sandbox test env but keep setup env",
             run: function(env) {
                 env.testVar = 'yarg';
@@ -209,7 +193,6 @@ suites.push({
             }
         },
         {
-            name: "env test4",
             desc: "making sure var from setup3 is not here, and counter is at 4",
             run: function(env) {
                 this.assert(env.counter, 4);
@@ -247,7 +230,6 @@ suites.push({
     },
     tests: [
         {
-            name: "libtest1",
             desc: "verify external lib works",
             run: function(env) {
                 console.log(env.testlib);
@@ -256,7 +238,6 @@ suites.push({
             }
         },
         {
-            name: "libtest2",
             desc: "verify external lib works (break)",
             assertFail: true,
             run: function(env) {
@@ -273,11 +254,52 @@ suites.push({
         {
             desc: "make a stub function that returns its params",
             run: function(env) {
-                myFunc = new Stub(function(p) {
+                stub = new this.Stub(function(p) {
                     return p;
                 });
+                stub.isCalled();
+                myFunc = stub.getFunc();
                 ret = myFunc('yarg');
+                this.write('ret:'+ret);
                 this.assert(ret, 'yarg');
+            }
+        }
+    ]
+});
+
+suites.push({
+    desc: "dummy functions (stubs) should give some basic info about usage",
+    setup: function(env) {
+        env.myStub = new this.Stub(function(p) {
+            return p;
+        });
+        env.myFunc = env.myStub.getFunc();
+        this.result(true);
+    },
+    tests: [
+        {
+            desc: "called is false",
+            run: function(env) {
+                this.assert(env.myStub.isCalled(), false);
+            }
+        },
+        {
+            desc: "env func works",
+            run: function(env) {
+                ret = env.myFunc('yarg');
+                this.assert(ret, 'yarg');
+            }
+        },
+        {
+            desc: "called is true",
+            run: function(env) {
+                this.assert(env.myStub.isCalled(), true);
+            }
+        },
+        {
+            desc: "numCalled is 1",
+            run: function(env) {
+                this.assert(env.myStub.getNumCalled(), 1);
             }
         }
     ]
