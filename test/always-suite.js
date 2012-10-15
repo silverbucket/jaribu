@@ -224,7 +224,7 @@ suites.push({
             this.result(false);
         } else {
             this.write('pass');
-            console.log(env.testlib);
+            //console.log(env.testlib);
             this.result(true);
         }
     },
@@ -254,13 +254,13 @@ suites.push({
         {
             desc: "make a stub function that returns its params",
             run: function(env) {
-                stub = new this.Stub(function(p) {
+                var stub = new this.Stub(function(p) {
                     return p;
                 });
-                stub.isCalled();
-                myFunc = stub.getFunc();
-                ret = myFunc('yarg');
+                this.write('stub.called: '+stub.called);
+                var ret = stub('yarg');
                 this.write('ret:'+ret);
+                this.write('stub.called: '+stub.called);
                 this.assert(ret, 'yarg');
             }
         }
@@ -273,33 +273,32 @@ suites.push({
         env.myStub = new this.Stub(function(p) {
             return p;
         });
-        env.myFunc = env.myStub.getFunc();
         this.result(true);
     },
     tests: [
         {
             desc: "called is false",
             run: function(env) {
-                this.assert(env.myStub.isCalled(), false);
+                this.assert(env.myStub.called, false);
             }
         },
         {
             desc: "env func works",
             run: function(env) {
-                ret = env.myFunc('yarg');
+                ret = env.myStub('yarg');
                 this.assert(ret, 'yarg');
             }
         },
         {
             desc: "called is true",
             run: function(env) {
-                this.assert(env.myStub.isCalled(), true);
+                this.assert(env.myStub.called, true);
             }
         },
         {
             desc: "numCalled is 1",
             run: function(env) {
-                this.assert(env.myStub.getNumCalled(), 1);
+                this.assert(env.myStub.numCalled, 1);
             }
         }
     ]
