@@ -29,11 +29,16 @@
             console.log('no tests found to run');
             return;
         }
+
         for (var i = 0; i < len_files; i++) {
-            var s = require(files[0]);
+            var s = require(files[i]);
             var suites = [];
 
-            if (typeof s.name !== 'undefined') {
+            if (typeof s === 'undefined') {
+                console.error('unable to read from file: '+files[i]);
+                failedToLoad.push({'desc':files[i], 'error': 'unable to read suite data from file'});
+                continue;
+            } else if ((s.hasOwnProperty('name')) && (typeof s.name !== 'undefined')) {
                 suites.push(s);
             } else {
                 suites = s;
@@ -41,7 +46,6 @@
 
             var num_suites = suites.length;
             for (var n = 0; n < num_suites; n++) {
-                //sys.print('...'+ (n+1));
                 if (! always.loadSuite(suites[n]) ) {
                     console.error("\n"+'unable to load suite: ' + suites[n].desc);
                     console.error(always.getErrorMessage());
