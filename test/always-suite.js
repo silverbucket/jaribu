@@ -2,7 +2,7 @@ module.exports = function() {
 var suites = [];
 
 suites.push({
-    name: "always basics",
+    name: "teste basics",
     desc: "collection of tests to test the test framework (basics)",
     tests: [
         {
@@ -134,7 +134,7 @@ suites.push({
 
 
 suites.push({
-    name: "always override",
+    name: "teste override",
     desc: "testing overriden methods and timeouts",
     setup: function() { this.result(true); },
     takedown: function() { this.result(true); },
@@ -250,7 +250,7 @@ suites.push({
             }
         },
         {
-            desc: "we shouldnt have variables from always library",
+            desc: "we shouldnt have variables from teste library",
             run: function(env) {
                 if (typeof greybg !== 'undefined') {
                     this.result(false);

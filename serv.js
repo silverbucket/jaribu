@@ -26,8 +26,8 @@ app.configure('development', function () {
 });
 
 app.get('/', function (req, res) {
-  always = require('./always.js');
-  res.send("always teste's running", always);
+  teste = require('./teste.js');
+  res.send("teste is running", teste);
 });
 
 http.createServer(app).listen(app.get('port'), function () {

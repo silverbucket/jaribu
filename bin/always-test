@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 (function(undefined) {
-	//'use strict';
-    //var files = ['./test/always-suite.js'];
+	'use strict';
 
     var walk    = require('walk');
     var files   = [];
@@ -23,7 +22,7 @@
         console.log(files);
 
         var sys = require('sys');
-        var always = require(__dirname+'/../lib/always.js');
+        var teste = require(__dirname+'/../lib/teste.js');
         var failedToLoad = [];
 
         var len_files = files.length;
@@ -48,14 +47,14 @@
 
             var num_suites = suites.length;
             for (var n = 0; n < num_suites; n++) {
-                if (! always.loadSuite(suites[n]) ) {
+                if (! teste.loadSuite(suites[n]) ) {
                     console.error("\n"+'unable to load suite: ' + suites[n].desc);
-                    console.error(always.getErrorMessage());
-                    failedToLoad.push({'desc':suites[n].desc, 'error': always.getErrorMessage()});
+                    console.error(teste.getErrorMessage());
+                    failedToLoad.push({'desc':suites[n].desc, 'error': teste.getErrorMessage()});
                 }
             }
         }
-        always.begin(function() {
+        teste.begin(function() {
             // on complete
             console.log('---');
             var num_failedToLoad = failedToLoad.length;
@@ -65,7 +64,7 @@
             }
             console.log("\n");
         });
-        
+
 
     });
 
