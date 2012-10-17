@@ -1,16 +1,21 @@
 {
   "name": "always-test",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a simple, full-featured, javascript testing framework",
   "main": "bin/always-test",
   "author": "Nick Jennings <nick@silverbucket.net>",
   "license": "BSD",
   "bin": {
-    "always": "./bin/always-test"
+    "always-test": "./bin/always-test"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/silverbucket/always-test.git"
+  },
+  "homepage": "http://github.com/silverbucket/always-test",
+  "author": {
+    "name": "Nick Jennings",
+    "email": "nick@silverbucket.net"
   },
   "dependencies": {
     "jquery": "*",
