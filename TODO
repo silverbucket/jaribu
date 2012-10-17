@@ -25,6 +25,10 @@ MAYBE:
 
 COMPLETED:
 
+x basic support for stub functions
+
+x names no longer used for tests, suite names options, descriptions still required, display output simplified
+
 x to test libraries, we need to patch the libraries to return modules.export if
   it's enclosed in a self-executing function.
 
