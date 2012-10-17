@@ -38,14 +38,48 @@ suites.push({
             }
         },
         {
+            desc: "arrays should match",
+            run: function() {
+                a1 = ['one', 'two', 'shoe'];
+                a2 = ['one', 'two', 'shoe'];
+                this.assert(a1,a2);
+            }
+        },
+        {
+            desc: "arrays with same values but different orders should match",
+            run: function() {
+                a1 = ['one', 'shoe', 'two'];
+                a2 = ['one', 'two', 'shoe'];
+                this.assert(a1,a2);
+            }
+        },
+        {
+            desc: "arrays with different orders should not match",
+            assertFail: true,
+            run: function() {
+                a1 = ['one', 'one', 'two'];
+                a2 = ['one', 'two', 'shoe'];
+                this.assert(a1,a2);
+            }
+        },
+        {
+            desc: "arrays with different orders should not match",
+            assertFail: true,
+            run: function() {
+                a1 = ['one', 'one', 'one'];
+                a2 = ['one', 'two', 'shoe'];
+                this.assert(a1,a2);
+            }
+        },
+        {
             desc: 'objects should compare correctly',
             run: function(env) {
-                obj1 = {
+                var obj1 = {
                     foo: "bar",
                     beer: "good",
                     greed: "bad"
                 };
-                obj2 = {
+                var obj2 = {
                     foo: "bar",
                     beer: "good",
                     greed: "bad"
@@ -57,7 +91,7 @@ suites.push({
         {
             desc: "verify passing objects through env",
             run: function(env) {
-                obj2 = {
+                var obj2 = {
                     foo: "bar",
                     beer: "good",
                     greed: "bad"
@@ -69,11 +103,28 @@ suites.push({
             desc: "different objects should not test true",
             assertFail: true,
             run: function(env) {
-                obj2 = {
+                var obj2 = {
                     fresh: "prince",
                     silver: "spoons"
                 };
                 this.assert(env.obj1, obj2);
+            }
+        },
+        {
+            desc: "arrays with the same elements but different orders should pass",
+            run: function(env) {
+                var o1 = [ 'dog', 'cat', 'aardvark'];
+                var o2 = ['aardvark', 'dog', 'cat'];
+                this.assert(o1, o2);
+            }
+        },
+        {
+            desc: "arrays with the different elements should not pass",
+            assertFail: true,
+            run: function(env) {
+                var o1 = [ 'dog', 'cat', 'aardvark'];
+                var o2 = ['aardvark', 'cat'];
+                this.assert(o1, o2);
             }
         }
     ]
