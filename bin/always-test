@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 (function(undefined) {
 	//'use strict';
     //var files = ['./test/always-suite.js'];

@@ -1,9 +1,16 @@
 {
-  "name": "always",
+  "name": "always-test",
   "version": "0.0.1",
-  "private": true,
+  "description": "a simple, full-featured, javascript testing framework",
+  "main": "bin/always-test",
+  "author": "Nick Jennings <nick@silverbucket.net>",
+  "license": "BSD",
   "bin": {
-    "always": "./bin/always"
+    "always": "./bin/always-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/silverbucket/always-test.git"
   },
   "dependencies": {
     "jquery": "*",
@@ -12,6 +19,12 @@
     "walk": "*"
   },
   "scripts": {
-    "test": "node bin/always"
-  }
+    "test": "bin/always-test"
+  },
+  "keywords": [
+      "node",
+      "javascript",
+      "testing",
+      "framework"
+  ]
 }
