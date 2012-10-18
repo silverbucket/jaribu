@@ -38,6 +38,13 @@ suites.push({
             }
         },
         {
+            desc: "test double assertType statements",
+            run: function() {
+                this.assertTypeAnd(this.tools, 'function');
+                this.assertType(this.tools.jQuery, 'function');
+            }
+        },
+        {
             desc: "arrays should match",
             run: function() {
                 a1 = ['one', 'two', 'shoe'];
@@ -48,6 +55,17 @@ suites.push({
         {
             desc: "arrays with same values but different orders should match",
             run: function() {
+                a1 = ['one', 'shoe', 'two'];
+                a2 = ['one', 'two', 'shoe'];
+                this.assert(a1,a2);
+            }
+        },
+        {
+            desc: "arrays should match",
+            run: function() {
+                a1 = ['one', 'two', 'shoe'];
+                a2 = ['one', 'two', 'shoe'];
+                this.assertAnd(a1,a2);
                 a1 = ['one', 'shoe', 'two'];
                 a2 = ['one', 'two', 'shoe'];
                 this.assert(a1,a2);
