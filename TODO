@@ -9,7 +9,7 @@ TODO:
 
 - testing in the browser
 
-- write tests to tests the assert library methods directly.
+- write tests to tests the Teste library methods directly.
 
 
 
@@ -18,12 +18,11 @@ MAYBE:
 ? indicate in a test that you'd like to keep the env resident for the next
   test
 
-? do we really name suite & tests 'name' and 'desc' ? less required fields to
-  encourage fast test writing.
-
 
 
 COMPLETED:
+
+x support for multipe asserts in the same test with assertAnd() and assertTypeAnd()
 
 x basic support for stub functions
 
