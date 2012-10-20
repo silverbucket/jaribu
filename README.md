@@ -9,11 +9,16 @@ Teste is a JavaScript testing framework built on node.js. It's meant to keep thi
 Features
 --------
 
-  * Support for mocks/stubs:
+  * **Support for mocks/stubs** technically they are mocks, since they have info about whether they've been called, and how many times, but can be used as stubs as well.
 
-    mock = new this.Stub(function(p1, p2) {
+    var mock = new this.Stub(function(p1, p2) {
         console.log('hello world');
     });
+
+    mock.called;  // false
+    
+    mock.numCalled;  // 0
+
     
     mock();  // hello world
 
