@@ -11,38 +11,38 @@ Features
 
   * **Shared environments** : a suite has an 'env' object which you can write to and that data will be available for any test in that suite.
 
-    suites.push({
-        name: "test suite",
-        desc: "example",
-        setup: function(env) {
-            env.foo = 'bar';
-        },
-        tests: [
-            {
-                desc: "we should have the foo property",
-                run: function(env) {
-                    env.foo;  // bar
-                }
-            }
-        ]
-    });
+	suites.push({
+		name: "test suite",
+		desc: "example",
+		setup: function(env) {
+			env.foo = 'bar';
+		},
+		tests: [
+			{
+				desc: "we should have the foo property",
+				run: function(env) {
+					env.foo;  // bar
+				}
+			}
+		]
+	});
 
   * **Support for mocks/stubs** technically they are mocks, since they have info about whether they've been called, and how many times, but can be used as stubs as well.
 
-    var mock = new this.Stub(function(p1, p2) {
-        console.log('hello world');
-    });
+	var mock = new this.Stub(function(p1, p2) {
+		console.log('hello world');
+	});
 
-    mock.called;  // false
-    
-    mock.numCalled;  // 0
+	mock.called;  // false
+	
+	mock.numCalled;  // 0
 
-    
-    mock();  // hello world
+	
+	mock();  // hello world
 
-    mock.called;  // true
-    
-    mock.numCalled;  // 1
+	mock.called;  // true
+	
+	mock.numCalled;  // 1
 
 
 Status
