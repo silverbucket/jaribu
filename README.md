@@ -9,7 +9,7 @@ Teste is a JavaScript testing framework built on node.js. It's meant to keep thi
 Features
 --------
 
-  * **Shared environments** : a suite has an 'env' object which you can write to and that data will be available for any test in that suite.
+**Shared environments** : a suite has an 'env' object which you can write to and that data will be available for any test in that suite.
 
 	suites.push({
 		name: "test suite",
@@ -27,7 +27,7 @@ Features
 		]
 	});
 
-  * **Support for mocks/stubs** technically they are mocks, since they have info about whether they've been called, and how many times, but can be used as stubs as well.
+**Support for mocks/stubs** technically they are mocks, since they have info about whether they've been called, and how many times, but can be used as stubs as well.
 
 	var mock = new this.Stub(function(p1, p2) {
 		console.log('hello world');
