@@ -45,6 +45,13 @@ suites.push({
             }
         },
         {
+            desc: "two different types should fail",
+            assertFail: true,
+            run: function() {
+                this.assertType('string', 1);
+            }
+        },
+        {
             desc: "arrays should match",
             run: function() {
                 a1 = ['one', 'two', 'shoe'];

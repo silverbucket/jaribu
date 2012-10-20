@@ -4,7 +4,24 @@ Teste
 
 Intro
 -----
-Teste is a JavaScript testing framework built on node.js. It is being written primarily as a way for me to explore the area of JavaScript testing, but also as an attempt to try to keep things as simple as possible without obfuscation, to avoid introducing any psuedo-language when writing tests and in general make the barrier for writing tests as thin as possible.
+Teste is a JavaScript testing framework built on node.js. It's meant to keep things simple, and make the barrier for writing tests as thin as possible.
+
+Features
+--------
+
+  * Support for mocks/stubs:
+
+      > mock = new this.Stub(function(p1, p2) {
+      >   console.log('hello world');
+      > });
+      >
+      > mock();
+      > // hello world
+      > mock.called;
+      > // true
+      > mock.numCalled;
+      > // 1
+
 
 
 Status
