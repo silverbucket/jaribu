@@ -21,7 +21,34 @@ Features
 			{
 				desc: "we should have the foo property",
 				run: function(env) {
-					env.foo;  // bar
+					this.assert(env.foo, 'bar');  // true
+				}
+			},
+			{
+				desc: "lets set a var",
+				run: function(env) {
+					env.pizza = 'slice';
+					this.assert(env.pizza, 'slice');  // true
+				}
+			},
+			{
+				desc: "verify it's still there",
+				run: function(env) {
+					this.assert(env.pizza, 'slice');   // true
+				}
+			},
+			{
+				desc: "remove a variable",
+				run: function(env) {
+					delete env.foo;
+					this.assertType(env.foo, 'undefined');   // true
+				}
+			},
+			{
+				desc: "we shouldn't be able to access the deleted property",
+				assertFail: true,
+				run: function(env) {
+					this.assert(env.foo, 'bar');   // false
 				}
 			}
 		]
