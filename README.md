@@ -11,20 +11,15 @@ Features
 
   * Support for mocks/stubs:
 
-      > mock = new this.Stub(function(p1, p2) {
+    mock = new this.Stub(function(p1, p2) {
+        console.log('hello world');
+    });
+    
+    mock();  // hello world
 
-      >   console.log('hello world');
-
-      > });
-      >
-      > mock();
-      > // hello world
-
-      > mock.called;
-      > // true
-
-      > mock.numCalled;
-      > // 1
+    mock.called;  // true
+    
+    mock.numCalled;  // 1
 
 
 
