@@ -20,6 +20,8 @@ MAYBE:
 
 COMPLETED:
 
+x support for baseClient.on() function (on error or change)
+
 x built in support for remoteStorage module testing, baseClient mocks and schema validation
 
 x make sure tests which have assertFail set to true, fail if they pass.

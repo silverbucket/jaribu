@@ -169,6 +169,41 @@ suites.push({
                 };
                 this.assert(obj, should_be);
             }
+        },
+        {
+            desc: "test on 'error' callback",
+            run: function(env) {
+                var data = {
+                    'name': 12345,
+                    'quote': 'evil!'
+                };
+                var _this = this;
+                env.module.on('error', function(err) {
+                    // we got the callback from a failure!
+                    _this.write(err);
+                    _this.result(true);
+                });
+                env.module.add(data, 'badman');
+            }
+        },
+        {
+            desc: "test on 'change' callback",
+            run: function(env) {
+                var data = {
+                    'name': '12345',
+                    'quote': 'evil!'
+                };
+                var _this = this;
+                env.module.on('change', function(obj) {
+                    // we got the callback from a failure!
+                    var should_be = {
+                        'name': '12345',
+                        'quote': 'evil!'
+                    };
+                    _this.assert(obj, should_be);
+                });
+                env.module.add(data, 'badman');
+            }
         }
     ]
 });
