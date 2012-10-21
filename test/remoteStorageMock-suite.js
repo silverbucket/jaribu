@@ -22,7 +22,7 @@ suites.push({
                 'name': 'code',
                 'quote': 'word'
             },
-            'work/82912': {
+            'work/82912/deadline': {
                 'name': 'frank',
                 'quote': 'busy man'
             },
