@@ -21,14 +21,38 @@ suites.push({
             'fghij': {
                 'name': 'code',
                 'quote': 'word'
+            },
+            'work/82912': {
+                'name': 'frank',
+                'quote': 'busy man'
+            },
+            'work/lalala': {
+                'name': 'billy',
+                'quote': 'yah'
             }
         });
-        console.log(env.remoteStorage.defineModule);
+
         this.assertTypeAnd(env.remoteStorage, 'function');
         this.assertTypeAnd(env.remoteStorage.baseClient, 'function');
         this.assertType(env.remoteStorage.defineModule, 'function');
     },
     tests: [
+        {
+            desc: "first, try to get a good listing from the mock directly",
+            run: function(env) {
+                var l = env.remoteStorage.baseClient.getListing('');
+                var should_be = ['12345','67890','abcde','fghij'];
+                this.assert(l, should_be);
+            }
+        },
+        {
+            desc: "try to get a bad listing from the mock directly",
+            assertFail: true,
+            run: function(env) {
+                var ss = env.remoteStorage.baseClient.getListing('spreadsheets/');
+                this.assert(ss, 'object');
+            }
+        },
         {
             desc: "try loading a test module",
             run: function(env) {
@@ -58,7 +82,7 @@ suites.push({
             }
         },
         {
-            desc: "try save some data",
+            desc: "try save some data - NOT IMPLEMENTED",
             run: function(env) {
                 var data = {
                     'name': 'ninja',
@@ -71,6 +95,59 @@ suites.push({
                     'quote': 'gaiden'
                 };
                 this.assert(obj, should_be);
+            }
+        },
+        {
+            desc: "get object and specify a callback using the baseClient",
+            run: function(env) {
+                var _this = this;
+                function testCallback(obj) {
+                    var should_be = {
+                        'name': 'foo',
+                        'quote': 'bar'
+                    };
+                    _this.assert(obj, should_be);
+                }
+                env.remoteStorage.baseClient.getObject('12345', testCallback);
+            }
+        },
+        {
+            desc: "get listing and specify a callback using the baseClient",
+            run: function(env) {
+                var _this = this;
+                function testCallback(list) {
+                    var should_be = ['82912', 'lalala'];
+                    _this.assert(list, should_be);
+                }
+                env.remoteStorage.baseClient.getListing('work/', testCallback);
+            }
+        },
+        {
+            desc: "get object and specify a callback using the module",
+            run: function(env) {
+                var _this = this;
+                function testCallback(obj) {
+                    var should_be = {
+                        'name': 'foo',
+                        'quote': 'bar'
+                    };
+                    _this.assert(obj, should_be);
+                }
+                env.module.get('12345', testCallback);
+            }
+        },
+        {
+            desc: "get listing and specify a callback using module",
+            run: function(env) {
+                var _this = this;
+                function testCallback(obj) {
+                    var should_be = {
+                        'name': 'foo',
+                        'quote': 'bar'
+                    };
+                    _this.assert(obj, should_be);
+                }
+                env.remoteStorage.baseClient.getObject('12345', testCallback);
             }
         }
     ]

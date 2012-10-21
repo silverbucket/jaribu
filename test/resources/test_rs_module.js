@@ -26,12 +26,12 @@ var test_module = remoteStorage.defineModule('tests', function(privateClient, pu
       on: privateClient.on,
 
 
-      getIds: function() {
-        return privateClient.getListing('');
+      getIds: function(callback) {
+        return privateClient.getListing('', callback);
       },
 
-      get: function(id) {
-        return privateClient.getObject(id);
+      get: function(id, callback) {
+        return privateClient.getObject(id, callback);
       },
 
       add: function(details, id) {
