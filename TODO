@@ -22,6 +22,8 @@ MAYBE:
 
 COMPLETED:
 
+x built in support for remoteStorage module testing, baseClient mocks and schema validation
+
 x support for multipe asserts in the same test with assertAnd() and assertTypeAnd()
 
 x basic support for stub functions
