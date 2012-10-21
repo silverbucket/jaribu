@@ -58,13 +58,15 @@ suites.push({
             run: function(env) {
                 global.remoteStorage = env.remoteStorage;
                 env.moduleImport = require('./resources/test_rs_module');
-                this.assertType(env.moduleImport[1], 'function');
+
+                this.assertTypeAnd(env.moduleImport[1], 'function');
+                env.module = env.moduleImport[1](remoteStorage.baseClient, remoteStorage.baseClient).exports;
+                this.assertType(env.module, 'object');
             }
         },
         {
             desc: "try to grab a listing",
             run: function(env) {
-                env.module = env.moduleImport[1](remoteStorage.baseClient, remoteStorage.baseClient).exports;
                 var obj = env.module.getIds();
                 var should_be = ['12345', '67890', 'abcde', 'fghij'];
                 this.assert(obj, should_be);
@@ -148,6 +150,23 @@ suites.push({
                     _this.assert(obj, should_be);
                 }
                 env.remoteStorage.baseClient.getObject('12345', testCallback);
+            }
+        },
+        {
+            desc: "try to break schema to test validation",
+            assertFail: true,
+            run: function(env) {
+                var data = {
+                    'name': 12345,
+                    'quote': 'evil!'
+                };
+                env.module.add(data, 'badman');
+                var obj = env.module.get('badman');
+                var should_be = {
+                    'name': 12345,
+                    'quote': 'evil!'
+                };
+                this.assert(obj, should_be);
             }
         }
     ]

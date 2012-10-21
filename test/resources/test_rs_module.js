@@ -4,6 +4,23 @@ var test_module = remoteStorage.defineModule('tests', function(privateClient, pu
   privateClient.use('');
   publicClient.use('');
 
+
+  privateClient.declareType('test', {
+      "description": "test module",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of test record",
+          "required": true
+        },
+        "quote": {
+          "type": "string",
+          "description": "test property, just nonsense"
+        }
+      }
+  });
+
   return {
     name: moduleName,
 
