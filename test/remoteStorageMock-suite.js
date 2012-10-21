@@ -118,7 +118,8 @@ suites.push({
             run: function(env) {
                 var _this = this;
                 function testCallback(list) {
-                    var should_be = ['82912', 'lalala'];
+                    var should_be = ['lalala'];
+                   console.log(list);
                     _this.assert(list, should_be);
                 }
                 env.remoteStorage.baseClient.getListing('work/', testCallback);
