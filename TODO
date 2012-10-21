@@ -1,8 +1,6 @@
 
 TODO:
 
-- make sure tests which have assertFail set to true, fail if they pass.
-
 - run tests from filenames passed as command-line arguments
 
 - provide command-line arguments to control the brevity of the test results.
@@ -23,6 +21,8 @@ MAYBE:
 COMPLETED:
 
 x built in support for remoteStorage module testing, baseClient mocks and schema validation
+
+x make sure tests which have assertFail set to true, fail if they pass.
 
 x support for multipe asserts in the same test with assertAnd() and assertTypeAnd()
 
