@@ -1,6 +1,9 @@
 teste v0.0.6 - 2012/10/28
 =========================
 
+- encase test and scaffolding runs in a try/catch clause
+
+
 - now use the term 'willFail' for announcing ahead of time that a test with fail.
 
 

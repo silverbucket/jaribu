@@ -179,6 +179,33 @@ suites.push({
             run: function(env) {
                 this.assertTypeFail('no', 'array');
             }
+        },
+        {
+            desc: "test result messages",
+            willFail: true,
+            run: function(env) {
+                this.result(false, 'fail message here');
+            }
+        },
+        {
+            desc: "try throw",
+            willFail: true,
+            run: function(env) {
+                throw "i threw an exception";
+            }
+        },
+        {
+            desc: "assertTypeFail should fail",
+            run: function(env) {
+                this.assertTypeFail(0, 'object');
+            }
+        },
+        {
+            desc: "assertTypeFail should pass",
+            willFail: true,
+            run: function(env) {
+                this.assertTypeFail(0, 'number');
+            }
         }
     ]
 });
