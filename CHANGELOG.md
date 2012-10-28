@@ -11,12 +11,9 @@ teste v0.0.6 - 2012/10/28
 		}
 	}
 
-- display output now handled by the display.js library, which currently just
-  supports console output, but can be extended to support HTML output (once we
-  get in-browser testing working).
+- display output now handled by the display.js library, which currently just supports console output, but can be extended to support HTML output (once we get in-browser testing working).
 
-- added test functions `this.assertFail()`, `this.assertFailAnd()`, 
-  `this.assertTypeFail()`, `this.assertTypeFailAnd()`.
+- added test functions `this.assertFail()`, `this.assertFailAnd()`, `this.assertTypeFail()`, `this.assertTypeFailAnd()`.
 
 	{
 		desc: "if an assertFail fails, that resolves to a passed test",
