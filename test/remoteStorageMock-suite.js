@@ -3,7 +3,7 @@ var suites = [];
 
 suites.push({
     name: "remoteStorage Mock tests",
-    desc: "tests that the mock for remoteStorage testing behaves correctly",
+    desc: "tests for the remoteStorage mock functionality",
     setup: function(env) {
         env.remoteStorage = new this.Stub.mock.remoteStorage({
             '12345': {
@@ -47,7 +47,7 @@ suites.push({
         },
         {
             desc: "try to get a bad listing from the mock directly",
-            assertFail: true,
+            willFail: true,
             run: function(env) {
                 var ss = env.remoteStorage.baseClient.getListing('spreadsheets/');
                 this.assert(ss, 'object');
@@ -155,7 +155,7 @@ suites.push({
         },
         {
             desc: "try to break schema to test validation",
-            assertFail: true,
+            willFail: true,
             run: function(env) {
                 var data = {
                     'name': 12345,

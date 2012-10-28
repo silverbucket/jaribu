@@ -46,7 +46,7 @@ Features
 			},
 			{
 				desc: "we shouldn't be able to access the deleted property",
-				assertFail: true,
+				willFail: true,
 				run: function(env) {
 					this.assert(env.foo, 'bar');   // false
 				}

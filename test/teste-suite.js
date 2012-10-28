@@ -7,7 +7,7 @@ suites.push({
     tests: [
         {
             desc: "default methods work",
-            run: function() {
+            run: function(env) {
                 this.write('hello world');
                 this.assert(1, 1);
                 this.write('goodbye world');
@@ -46,7 +46,7 @@ suites.push({
         },
         {
             desc: "two different types should fail",
-            assertFail: true,
+            willFail: true,
             run: function() {
                 this.assertType('string', 1);
             }
@@ -80,7 +80,7 @@ suites.push({
         },
         {
             desc: "arrays with different orders should not match",
-            assertFail: true,
+            willFail: true,
             run: function() {
                 a1 = ['one', 'one', 'two'];
                 a2 = ['one', 'two', 'shoe'];
@@ -89,7 +89,7 @@ suites.push({
         },
         {
             desc: "arrays with different orders should not match",
-            assertFail: true,
+            willFail: true,
             run: function() {
                 a1 = ['one', 'one', 'one'];
                 a2 = ['one', 'two', 'shoe'];
@@ -126,7 +126,7 @@ suites.push({
         },
         {
             desc: "different objects should not test true",
-            assertFail: true,
+            willFail: true,
             run: function(env) {
                 var obj2 = {
                     fresh: "prince",
@@ -145,11 +145,39 @@ suites.push({
         },
         {
             desc: "arrays with the different elements should not pass",
-            assertFail: true,
+            willFail: true,
             run: function(env) {
                 var o1 = [ 'dog', 'cat', 'aardvark'];
                 var o2 = ['aardvark', 'cat'];
                 this.assert(o1, o2);
+            }
+        },
+        {
+            desc: "assertFail inline use",
+            run: function(env) {
+                console.log(this);
+                this.assertFail(false);
+            }
+        },
+        {
+            desc: "assertFail inline use - should fail",
+            willFail: true,
+            run: function(env) {
+                this.assertFail(true, true);
+            }
+        },
+        {
+            desc: "assertTypeFail inline use",
+            run: function(env) {
+                this.write(typeof 'yes');
+                this.assertTypeFailAnd('yes', 'array');
+                this.assertType('yes', 'string');
+            }
+        },
+        {
+            desc: "assertTypeFail inline use - assertfail",
+            run: function(env) {
+                this.assertTypeFail('no', 'array');
             }
         }
     ]
@@ -168,8 +196,8 @@ suites.push({
     timeout: 3000,
     tests: [
         {
-            desc: "testing async timeout failure",
-            assertFail: true, // this test SHOULD fail
+            desc: "testing async timeout failure (default timeout)",
+            willFail: true, // this test SHOULD fail
             run: function() {
                 var _this = this;
                 setTimeout(function(){
@@ -215,8 +243,8 @@ suites.push({
             }
         },
         {
-            desc: "testing async timeout failure",
-            assertFail: true, // this test SHOULD fail
+            desc: "testing async timeout failure (extended timeout)",
+            willFail: true, // this test SHOULD fail
             timeout: 4000,
             run: function() {
                 var _this = this;
@@ -315,7 +343,7 @@ suites.push({
         },
         {
             desc: "verify external lib works (break)",
-            assertFail: true,
+            willFail: true,
             run: function(env) {
                 rstring = env.testlib.stringBeast('yo', 'mama', 'so', 'smelly');
                 this.assert(rstring, 'yomamasostupid');
