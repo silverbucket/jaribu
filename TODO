@@ -1,6 +1,8 @@
 
 TODO:
 
+- assertType fails still pass?
+
 - run tests from filenames passed as command-line arguments
 
 - provide command-line arguments to control the brevity of the test results.
