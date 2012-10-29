@@ -1,7 +1,6 @@
 
 TODO:
 
-- assertType fails still pass?
 
 - run tests from filenames passed as command-line arguments
 
@@ -21,6 +20,8 @@ MAYBE:
 
 
 COMPLETED:
+
+x move modules to requirejs for interoperabilty on both server and client side
 
 x support for baseClient.on() function (on error or change)
 

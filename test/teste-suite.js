@@ -1,10 +1,19 @@
-module.exports = function() {
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
+define(['../lib/testlib'], function(testlib, undefined) {
 var suites = [];
 
 suites.push({
     name: "teste basics",
     desc: "collection of tests to test the test framework (basics)",
     tests: [
+        {
+            desc: "undefined should be undefined",
+            run: function(env) {
+                this.assertType(undefined, 'undefined');
+            }
+        },
         {
             desc: "default methods work",
             run: function(env) {
@@ -348,23 +357,14 @@ suites.push({
     name: "testlib",
     desc: "testing external lib",
     setup: function(env) {
-        env.testlib = require('../lib/testlib.js');
-        console.log('testlib: ', env.teslib);
-        if (this.assert(env.testlib, undefined)) {
-            this.write('fail');
-            this.result(false);
-        } else {
-            this.write('pass');
-            //console.log(env.testlib);
-            this.result(true);
-        }
+        this.write('testlib: '+typeof testlib);
+        this.assertType(testlib, 'object');
     },
     tests: [
         {
             desc: "verify external lib works",
             run: function(env) {
-                console.log(env.testlib);
-                rstring = env.testlib.stringBeast('yo', 'mama', 'so', 'stupid');
+                rstring = testlib.stringBeast('yo', 'mama', 'so', 'stupid');
                 this.assert(rstring, 'yomamasostupid');
             }
         },
@@ -372,7 +372,7 @@ suites.push({
             desc: "verify external lib works (break)",
             willFail: true,
             run: function(env) {
-                rstring = env.testlib.stringBeast('yo', 'mama', 'so', 'smelly');
+                rstring = testlib.stringBeast('yo', 'mama', 'so', 'smelly');
                 this.assert(rstring, 'yomamasostupid');
             }
         }
@@ -436,4 +436,4 @@ suites.push({
 });
 
 return suites;
-}();
+});

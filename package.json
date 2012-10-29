@@ -1,6 +1,6 @@
 {
   "name": "teste",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "a simple, full-featured, JavaScript testing framework",
   "main": "bin/teste",
   "author": "Nick Jennings <nick@silverbucket.net>",
@@ -19,7 +19,9 @@
   },
   "dependencies": {
     "jquery": "*",
-    "walk": "*"
+    "walk": "*",
+    "requirejs": "*",
+    "amdefine": "*"
   },
   "scripts": {
     "test": "bin/teste"

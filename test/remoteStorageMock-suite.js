@@ -1,4 +1,7 @@
-module.exports = function() {
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
+define(['requirejs'], function(requirejs, undefined) {
 var suites = [];
 
 suites.push({
@@ -57,8 +60,7 @@ suites.push({
             desc: "try loading a test module",
             run: function(env) {
                 global.remoteStorage = env.remoteStorage;
-                env.moduleImport = require('./resources/test_rs_module');
-
+                env.moduleImport = requirejs('./../test/resources/test_rs_module');
                 this.assertTypeAnd(env.moduleImport[1], 'function');
                 env.module = env.moduleImport[1](remoteStorage.baseClient, remoteStorage.baseClient).exports;
                 this.assertType(env.module, 'object');
@@ -209,4 +211,4 @@ suites.push({
 });
 
 return suites;
-}();
+});
