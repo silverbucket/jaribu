@@ -7,14 +7,21 @@
     var files   = [];
     var cwd     = process.cwd();
 
+    var testDir = __dirname+"/../";
+    if (__dirname.match(/node_modules\/teste\/bin$/)) {
+        // we're a node module, set the require root
+        // to the root of the app, not this module.
+        testDir = __dirname+"/../../../";
+    }
     var requirejs = require('requirejs');
     requirejs.config({
         //Pass the top-level main.js/index.js require
         //function to requirejs so that node modules
         //are loaded relative to the top-level JS file.
-        baseUrl: __dirname+'/../lib/',
+        baseUrl: testDir,
         nodeRequire: require
     });
+
 
     // Walker options
     var walker  = walk.walk(cwd+'/test', { followLinks: false });
@@ -31,7 +38,7 @@
         console.log(files);
 
         var sys = require('sys');
-        var teste = require(__dirname+'/../lib/node-bootstrap.js');
+        var teste = requirejs('./lib/teste');
         var failedToLoad = [];
 
         var len_files = files.length;
