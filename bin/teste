@@ -37,7 +37,7 @@
     walker.on('end', function() {
         console.log(files);
 
-        var sys = require('sys');
+        var sys = require('util');
         var teste = requirejs('./lib/teste');
         var failedToLoad = [];
 
