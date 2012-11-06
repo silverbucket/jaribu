@@ -1,9 +1,6 @@
 
 TODO:
 
-
-- run tests from filenames passed as command-line arguments
-
 - provide command-line arguments to control the brevity of the test results.
 
 - testing in the browser
@@ -20,6 +17,8 @@ MAYBE:
 
 
 COMPLETED:
+
+x run tests from filenames passed as command-line arguments (nilclass)
 
 x move modules to requirejs for interoperabilty on both server and client side
 
