@@ -1,11 +1,14 @@
 #!/usr/bin/env node
+// -*- mode:js; js-indent-level:4 -*-
 
 (function(undefined) {
 	'use strict';
 
-    var walk    = require('walk');
-    var files   = [];
-    var cwd     = process.cwd();
+    var walk           = require('walk');
+    var files          = [];
+    var cwd            = process.cwd();
+    var argv           = process.argv.slice(2);
+    var requestedFiles = null;
 
     var testDir = __dirname+"/../";
     if (__dirname.match(/node_modules\/teste\/bin$/)) {
@@ -22,14 +25,25 @@
         nodeRequire: require
     });
 
+    if(argv.length > 0) {
+        requestedFiles = {};
+        argv.forEach(function(arg) {
+            var path = arg[0] == '/' ? arg : (cwd + '/' + arg);
+            requestedFiles[path] = true;
+        });
+    }
 
     // Walker options
     var walker  = walk.walk(cwd+'/test', { followLinks: false });
 
     walker.on('file', function(root, stat, next) {
+        var path;
         if (stat.name.match(/\-suite\.js$/g)) {
+            path = root + '/' + stat.name;
             // Add this file to the list of files
-            files.push(root + '/' + stat.name);
+            if((! requestedFiles) || requestedFiles[path]) {
+                files.push(path);
+            }
         }
         next();
     });
