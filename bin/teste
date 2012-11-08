@@ -55,6 +55,7 @@
     });
 
     walker.on('end', function() {
+        files = files.sort();
         console.log(files);
 
         var sys = require('util');

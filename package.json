@@ -21,7 +21,8 @@
     "jquery": "*",
     "walk": "*",
     "requirejs": "*",
-    "amdefine": "*"
+    "amdefine": "*",
+    "express": "*"
   },
   "scripts": {
     "test": "bin/teste"

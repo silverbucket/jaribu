@@ -44,7 +44,7 @@ suites.push({
         {
             desc: "same call as in setup, from test",
             run: function(env) {
-                _this = this;
+                var _this = this;
                 env.http.get('/', {
                     success: function(r) {
                         console.log(r);
@@ -55,6 +55,48 @@ suites.push({
                     }
                 });
 
+            }
+        },
+        {
+            desc: "get /test",
+            run: function(env) {
+                var _this = this;
+                env.http.get('/test', {
+                    success: function(data) {
+                        _this.assert(data, {foo:'bar'});
+                    },
+                    error: function() {
+                        _this.result(false, 'failed get /test');
+                    }
+                });
+            }
+        },
+        {
+            desc: "post /test",
+            run: function(env) {
+                var _this = this;
+                env.http.post('/test', {foo:"baz"}, {
+                    success: function(data) {
+                        _this.assert(data, 'POST /test');
+                    },
+                    error: function() {
+                        _this.result(false, 'failed post /test');
+                    }
+                });
+            }
+        },
+        {
+            desc: "get /test with new data",
+            run: function(env) {
+                var _this = this;
+                env.http.get('/test', {
+                    success: function(data) {
+                        _this.assert(data, {foo:'baz'});
+                    },
+                    error: function() {
+                        _this.result(false, 'failed get /test');
+                    }
+                });
             }
         }
     ]

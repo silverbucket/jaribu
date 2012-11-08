@@ -1,6 +1,10 @@
 
 TODO:
 
+- HTTP / REST testing
+    - write a framework for making remoteStorage provider integration test.
+    - use github.com/jcoglan/remotestorage-oauth to get a token for testing
+
 - provide command-line arguments to control the brevity of the test results.
 
 - testing in the browser
@@ -17,6 +21,9 @@ MAYBE:
 
 
 COMPLETED:
+
+x move before & afterEach objects to be children of the test object, so each
+  times it's run it has it's own clean environment.
 
 x run tests from filenames passed as command-line arguments (nilclass)
 
