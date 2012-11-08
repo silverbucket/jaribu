@@ -1,3 +1,7 @@
+
+- added stack traces for failures
+
+
 teste v0.0.7 - 2012/11/06
 =========================
 
