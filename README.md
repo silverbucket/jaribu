@@ -1,4 +1,4 @@
-Teste
+Teste [![Build Status](https://secure.travis-ci.org/silverbucket/teste.png)](http://travis-ci.org/silverbucket/teste)
 =====
 *a JavaScript (node.js) testing framework*
 
@@ -122,9 +122,5 @@ Features
 	    ]
 	});
 
-Status
-------
-[![Build Status](https://secure.travis-ci.org/silverbucket/teste.png)](http://travis-ci.org/silverbucket/teste)
-Teste is not feature complete, is still very much a research project and should be considered in alpha state.
 
 
