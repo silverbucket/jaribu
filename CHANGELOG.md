@@ -1,3 +1,71 @@
+teste v0.0.8 - 2012/11/08
+=========================
+
+- added support for HTTP GET / POST testing, using a simple jQuery wrapper. All
+  you can do with jQuery.ajax() applies. But for simple cases:
+
+		{
+			desc: 'http get example',
+			run: function(env) {
+				var _this = this;
+				env.http = new this.Http()
+				env.http.get('/', {
+					success: function(data, textStatus, jqXHR) {
+						_this.assert(data, <expected_data>);
+					},
+					error: function() {
+						_this.result(false, 'failed');
+					}
+				});
+			}
+		},
+		{
+			desc: 'http post example',
+			run: function(env) {
+				var _this = this;
+				env.http.post('/', {foo:'bar'}, {
+					success: function(data, textStatus, jqXHR) {
+						_this.assert(data, <expected_data>);
+					},
+					error: function() {
+						_this.result(false, 'failed');
+					}
+				});
+			}
+		}
+
+- added a simple JSON HTTP server. It takes a data struct as an argument and
+  uses it to make URIs/results.
+
+		setup: function(env) {
+			var data = { // struct of expected results for each http call.
+		        test: { // the first set of properties are URIs, all children
+		                // of these properties are the data returned.
+		            foo: "bar"
+		        }
+		    };
+		    var server = new this.HttpServer({
+		        port: 9991,
+		        uris: data
+		    });
+		    var _this = this;
+		    server.run(function() {
+		        _this.write('http dummy server running');
+
+		        var http = new _this.Http({
+		            baseUrl: 'http://localhost:9991'
+		        });
+
+		        env.http.get('/test', {
+		            success: function(data, textStatus, jqXHR) {
+		                _this.assert(data, {foo:'bar'});
+		            },
+		            error: function() {
+		                _this.result(false, 'failed http request on /');
+		            }
+		        });
+		    });
+		}
 
 - added stack traces for failures
 

@@ -1,10 +1,10 @@
 {
   "name": "teste",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "a simple, full-featured, JavaScript testing framework",
   "main": "bin/teste",
   "author": "Nick Jennings <nick@silverbucket.net>",
-  "license": "BSD",
+  "license": "GPL",
   "bin": {
     "teste": "./bin/teste"
   },
