@@ -73,7 +73,7 @@
             var suites = [];
 
             if (typeof s === 'undefined') {
-                console.error('unable to read from file: '+files[i]);
+                console.error("expected an array of tests, but got 'undefined' from file: "+files[i]);
                 failedToLoad.push({'desc':files[i], 'error': 'unable to read suite data from file'});
                 continue;
             } else if ((s.hasOwnProperty('name')) && (typeof s.name !== 'undefined')) {
