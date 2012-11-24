@@ -22,13 +22,16 @@
     "walk": "*",
     "requirejs": "*",
     "amdefine": "*",
-    "express": "*"
+    "websocket": "*"
+  },
+  "devDependencies": {
+    "express": "*",
+    "websocket": "*"
   },
   "scripts": {
     "test": "bin/teste"
   },
   "keywords": [
-      "node",
       "javascript",
       "testing",
       "framework"
