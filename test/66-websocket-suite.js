@@ -17,6 +17,17 @@ suites.push({
         leather: "boots",
         flip: "flops",
         block: "of wood"
+      },
+      complex: {
+        we: "are",
+        using: [ "a", "complex", "data"],
+        struct: [
+          {
+            here: "because",
+            it: ['makes', 'us', {feel: "better"}, "about"],
+          },
+          "things"
+        ]
       }
     };
 
@@ -64,6 +75,13 @@ suites.push({
           _this.assert(data.utf8Data,
                  JSON.stringify(env.expected['footwear']));
         });
+      }
+    },
+    {
+      desc: 'lets try to fail! how exciting!',
+      willFail: true,
+      run: function(env) {
+        env.connection.sendAndVerify('dontexist', this);
       }
     }
   ]
