@@ -1,5 +1,53 @@
+CHANGELOG
+=========
+
+- added support for performing tests against WebSocket servers. If you provide
+  the WebSocketClient with the expected data result for each command you can use
+  auto verification to easily test the responses.
+
+		setup: function(env) {
+			env.expected = { // struct of expected results for each http call
+				setupTest: 'setupTest',
+				test: {
+					foo: "bar"
+				},
+				footwear: {
+					leather: "boots",
+					flip: "flops",
+					block: "of wood"
+				}
+			};
+
+			var client = new this.WebSocketClient({
+				url: 'ws://localhost:9992/',
+				messages: env.expected  // data struct of commands and expected
+									    // results
+			});
+
+			var _this = this;
+			client.connect(function(connection) {
+				env.connection = connection;
+				env.connection.sendAndVerify('setupTest', _this);
+			});
+		},
+		tests: [
+			{
+				desc: 'auto validate websocket command',
+				run: function(env) {
+					env.connection.sendAndVerify('footwear', this); // passes
+				}
+			},
+			{
+				desc: 'the first level of properties are the commands',
+				run: function(env) {
+				env.connection.sendAndVerify('blah', this); // fails
+				}
+			}
+		]
+
+
 teste v0.0.8 - 2012/11/08
-=========================
+-------------------------
 
 - added support for HTTP GET / POST testing, using a simple jQuery wrapper. All
   you can do with jQuery.ajax() applies. But for simple cases:
@@ -39,39 +87,39 @@ teste v0.0.8 - 2012/11/08
 
 		setup: function(env) {
 			var data = { // struct of expected results for each http call.
-		        test: { // the first set of properties are URIs, all children
-		                // of these properties are the data returned.
-		            foo: "bar"
-		        }
-		    };
-		    var server = new this.HttpServer({
-		        port: 9991,
-		        uris: data
-		    });
-		    var _this = this;
-		    server.run(function() {
-		        _this.write('http dummy server running');
+				test: { // the first set of properties are URIs, all children
+						// of these properties are the data returned.
+					foo: "bar"
+				}
+			};
+			var server = new this.HttpServer({
+				port: 9991,
+				uris: data
+			});
+			var _this = this;
+			server.run(function() {
+				_this.write('http dummy server running');
 
-		        var http = new _this.Http({
-		            baseUrl: 'http://localhost:9991'
-		        });
+				var http = new _this.Http({
+					baseUrl: 'http://localhost:9991'
+				});
 
-		        env.http.get('/test', {
-		            success: function(data, textStatus, jqXHR) {
-		                _this.assert(data, {foo:'bar'});
-		            },
-		            error: function() {
-		                _this.result(false, 'failed http request on /');
-		            }
-		        });
-		    });
+				env.http.get('/test', {
+					success: function(data, textStatus, jqXHR) {
+						_this.assert(data, {foo:'bar'});
+					},
+					error: function() {
+						_this.result(false, 'failed http request on /');
+					}
+				});
+			});
 		}
 
 - added stack traces for failures
 
 
 teste v0.0.7 - 2012/11/06
-=========================
+-------------------------
 
 - added support for specifying suite files to run via. the command-line
   (@nilclass)
@@ -90,7 +138,7 @@ teste v0.0.7 - 2012/11/06
 
 
 teste v0.0.6 - 2012/10/28
-=========================
+-------------------------
 
 - encase test and scaffolding runs in a try/catch clause
 
