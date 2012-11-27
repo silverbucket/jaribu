@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // -*- mode:js; js-indent-level:2 -*-
 
-(function(undefined) {
-  'use strict';
+(function (undefined) {
+  "use strict";
 
   var walk           = require('walk');
   var files          = [];
@@ -42,7 +42,7 @@
   // Walker options
   var walker  = walk.walk(cwd+'/test', { followLinks: false });
 
-  walker.on('file', function(root, stat, next) {
+  walker.on('file', function (root, stat, next) {
     var path;
     if (stat.name.match(/\-suite\.js$/g)) {
       path = root + '/' + stat.name;
@@ -54,7 +54,8 @@
     next();
   });
 
-  walker.on('end', function() {
+  walker.on('end', function () {
+    var i, n;
     files = files.sort();
     console.log(files);
 
@@ -68,7 +69,7 @@
       return;
     }
 
-    for (var i = 0; i < len_files; i++) {
+    for (i = 0; i < len_files; i += 1) {
       var s = requirejs(files[i]);
       var suites = [];
 
@@ -83,7 +84,7 @@
       }
 
       var num_suites = suites.length;
-      for (var n = 0; n < num_suites; n++) {
+      for (n = 0; n < num_suites; n += 1) {
         if (! teste.loadSuite(suites[n]) ) {
           console.error("\n"+'unable to load suite: ' + suites[n].desc);
           console.error(teste.getErrorMessage());
@@ -93,13 +94,14 @@
     }
     teste.begin(function() {
       // on complete
+      var i;
       console.log('---');
       var num_failedToLoad = failedToLoad.length;
-      for (var i = 0; i < num_failedToLoad; i++) {
+      for (i = 0; i < num_failedToLoad; i += 1) {
         console.log("\nsuite failed to load: " + failedToLoad[i].desc);
         console.log(failedToLoad[i].error);
       }
       console.log("\n");
     });
   });
-})();
+}());
