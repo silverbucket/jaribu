@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+teste v0.0.9 - 2012/11/25
+-------------------------
+
 - added support for performing tests against WebSocket servers. If you provide
   the WebSocketClient with the expected data result for each command you can use
   auto verification to easily test the responses.
