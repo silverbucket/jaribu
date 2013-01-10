@@ -1,6 +1,10 @@
 
 TODO:
 
+- specify suite and test number via. command-line to run a specific test
+
+- make tests use promises
+
 - HTTP / REST testing
     - write a framework for making remoteStorage provider integration test.
     - use github.com/jcoglan/remotestorage-oauth to get a token for testing
