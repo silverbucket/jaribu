@@ -55,7 +55,7 @@ define([], function () {
       {
         desc: "test double assertType statements",
         run: function () {
-          this.assertTypeAnd(this.tools, 'function');
+          this.assertTypeAnd(this.tools, 'object');
           this.assertType(this.tools.jQuery, 'function');
         }
       },

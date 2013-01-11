@@ -24,7 +24,7 @@ define([], function () {
           struct: [
             {
               here: "because",
-              it: ['makes', 'us', {feel: "better"}, "about"],
+              it: ['makes', 'us', {feel: "better"}, "about"]
             },
             "things"
           ]

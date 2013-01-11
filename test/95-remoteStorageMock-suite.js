@@ -35,7 +35,7 @@ define(['requirejs'], function (requirejs, undefined) {
         }
       });
 
-      this.assertTypeAnd(env.remoteStorage, 'function');
+      this.assertTypeAnd(env.remoteStorage, 'object');
       this.assertTypeAnd(env.remoteStorage.baseClient, 'function');
       this.assertType(env.remoteStorage.defineModule, 'function');
     },
