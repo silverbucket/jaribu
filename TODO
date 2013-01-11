@@ -1,6 +1,8 @@
 
 TODO:
 
+- object compare should be more informative than 'objects dont match'
+
 - specify suite and test number via. command-line to run a specific test
 
 - make tests use promises
