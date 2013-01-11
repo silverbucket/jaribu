@@ -94,6 +94,16 @@ define([], function () {
         }
       },
       {
+        desc: "assertAnd fails, you shouldn't be able to set result true right after",
+        willFail: true,
+        run: function () {
+          a1 = ['one', 'two', 'shoe'];
+          a2 = ['one', 'two', 'boot'];
+          this.assertAnd(a1,a2);
+          this.result(true);
+        }
+      },
+      {
         desc: "arrays with different orders should not match",
         willFail: true,
         run: function () {
