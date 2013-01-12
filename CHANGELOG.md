@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+- assert*() functions now take an optional 3rd parameter which is printed along
+  with the error message when the assert fails, for more informative
+  information.
+
+- bugfixes where assert*And() fails were slipping through the cracks
+
+
 teste v0.0.9 - 2012/11/25
 -------------------------
 
