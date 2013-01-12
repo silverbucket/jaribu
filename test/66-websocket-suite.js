@@ -9,7 +9,7 @@ define([], function () {
     desc: "collection of tests to test WebSocket communication",
     setup: function (env) {
       env.expected = { // struct of expected results for each http call
-        setupTest: 'setupTest',
+        setupTest: { test: 'setupTest' },
         test: {
           foo: "bar"
         },
