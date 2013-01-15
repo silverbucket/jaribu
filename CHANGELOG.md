@@ -1,9 +1,27 @@
 CHANGELOG
 =========
 
+- added second parameter to all tests, the 'test' object will help in cases where
+	you constantly have to re-assign 'this' due to async callbacks.
+
+	{
+		desc: 'test with this',
+		run: func(env) {
+			this.result(true);
+		}
+	},
+	{
+		desc: 'test with test param',
+		run: func(env, test) {
+			someAsyncFunction(function(status) {
+				test.result(status);
+			});
+		}
+	}
+
 - assert*() functions now take an optional 3rd parameter which is printed along
-  with the error message when the assert fails, for more informative
-  information.
+	with the error message when the assert fails, for more informative
+	information.
 
 - bugfixes where assert*And() fails were slipping through the cracks
 
@@ -12,8 +30,8 @@ teste v0.0.9 - 2012/11/25
 -------------------------
 
 - added support for performing tests against WebSocket servers. If you provide
-  the WebSocketClient with the expected data result for each command you can use
-  auto verification to easily test the responses.
+	the WebSocketClient with the expected data result for each command you can use
+	auto verification to easily test the responses.
 
 		setup: function(env) {
 			env.expected = { // struct of expected results for each http call
@@ -31,7 +49,7 @@ teste v0.0.9 - 2012/11/25
 			var client = new this.WebSocketClient({
 				url: 'ws://localhost:9992/',
 				messages: env.expected  // data struct of commands and expected
-									    // results
+											// results
 			});
 
 			var _this = this;
@@ -60,7 +78,7 @@ teste v0.0.8 - 2012/11/08
 -------------------------
 
 - added support for HTTP GET / POST testing, using a simple jQuery wrapper. All
-  you can do with jQuery.ajax() applies. But for simple cases:
+	you can do with jQuery.ajax() applies. But for simple cases:
 
 		{
 			desc: 'http get example',
@@ -93,7 +111,7 @@ teste v0.0.8 - 2012/11/08
 		}
 
 - added a simple JSON HTTP server. It takes a data struct as an argument and
-  uses it to make URIs/results.
+	uses it to make URIs/results.
 
 		setup: function(env) {
 			var data = { // struct of expected results for each http call.
@@ -132,10 +150,10 @@ teste v0.0.7 - 2012/11/06
 -------------------------
 
 - added support for specifying suite files to run via. the command-line
-  (@nilclass)
+	(@nilclass)
 
 - switched to using requirejs by default for all file inclusions. Suite files
-  now begin like this:
+	now begin like this:
 
 		if (typeof define !== 'function') {
 			var define = require('amdefine')(module);
@@ -143,7 +161,7 @@ teste v0.0.7 - 2012/11/06
 		define(['requirejs'], function(requirejs, undefined) {
 			var suites = [];
 			// ... tests
-		   return suites;
+			 return suites;
 		});
 
 
@@ -153,7 +171,7 @@ teste v0.0.6 - 2012/10/28
 - encase test and scaffolding runs in a try/catch clause
 
 - now use the term 'willFail' for announcing ahead of time that a test with
-  fail.
+	fail.
 
 		{
 			desc: "this test will fail, and that should pass",
@@ -164,11 +182,11 @@ teste v0.0.6 - 2012/10/28
 		}
 
 - display output now handled by the display.js library, which currently just
-  supports console output, but can be extended to support HTML output (once we
-  get in-browser testing working).
+	supports console output, but can be extended to support HTML output (once we
+	get in-browser testing working).
 
 - added test functions `this.assertFail()`, `this.assertFailAnd()`,
-  `this.assertTypeFail()`, `this.assertTypeFailAnd()`.
+	`this.assertTypeFail()`, `this.assertTypeFailAnd()`.
 
 
 		{

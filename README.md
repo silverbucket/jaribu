@@ -20,35 +20,35 @@ Features
 		tests: [
 			{
 				desc: "we should have the foo property",
-				run: function(env) {
-					this.assert(env.foo, 'bar');  // true
+				run: function(env, test) {
+					test.assert(env.foo, 'bar');  // true
 				}
 			},
 			{
 				desc: "lets set a var",
-				run: function(env) {
+				run: function(env, test) {
 					env.pizza = 'slice';
-					this.assert(env.pizza, 'slice');  // true
+					test.assert(env.pizza, 'slice');  // true
 				}
 			},
 			{
 				desc: "verify it's still there",
-				run: function(env) {
-					this.assert(env.pizza, 'slice');   // true
+				run: function(env, test) {
+					test.assert(env.pizza, 'slice');   // true
 				}
 			},
 			{
 				desc: "remove a variable",
-				run: function(env) {
+				run: function(env, test) {
 					delete env.foo;
-					this.assertType(env.foo, 'undefined');   // true
+					test.assertType(env.foo, 'undefined');   // true
 				}
 			},
 			{
 				desc: "we shouldn't be able to access the deleted property",
 				willFail: true,
-				run: function(env) {
-					this.assert(env.foo, 'bar');   // false
+				run: function(env, test) {
+					test.assert(env.foo, 'bar');   // false
 				}
 			}
 		]
@@ -61,14 +61,14 @@ Features
 	});
 
 	mock.called;  // false
-	
+
 	mock.numCalled;  // 0
 
-	
+
 	mock();  // hello world
 
 	mock.called;  // true
-	
+
 	mock.numCalled;  // 1
 
 **Built in remoteStorage.js module testing mocks** Teste has built in support for testing remoteStorage.js modules. You pass it some test data and it can mimick the baseClient, allowing you to test your module from the command-line.
@@ -76,7 +76,7 @@ Features
     suites.push({
     	name: "module tests",
     	desc: "tests for my brand-new remoteStorage.js module",
-    	setup: function(env) {
+    	setup: function(env, test) {
         	env.remoteStorage = new this.Stub.mock.remoteStorage({
             	// dummy data, schema defined in test module
             	'12345': {
@@ -93,30 +93,30 @@ Features
             	},
         	});
 
-        	this.assertTypeAnd(env.remoteStorage, 'function');
-        	this.assertTypeAnd(env.remoteStorage.baseClient, 'function');
-        	this.assertType(env.remoteStorage.defineModule, 'function');
+        	test.assertTypeAnd(env.remoteStorage, 'function');
+        	test.assertTypeAnd(env.remoteStorage.baseClient, 'function');
+        	test.assertType(env.remoteStorage.defineModule, 'function');
         },
-        takedown: function(env) {
+        takedown: function(env, test) {
         	env.remoteStorage.destroy();
         }
         tests: [
 	        {
 	            desc: "load a test module",
-	            run: function(env) {
+	            run: function(env, test) {
 	            	global.remoteStorage = env.remoteStorage;
 	                env.moduleImport = require('./resources/test_rs_module');
-	                this.assertTypeAnd(env.moduleImport[1], 'function');
+	                test.assertTypeAnd(env.moduleImport[1], 'function');
 	                env.module = env.moduleImport[1](remoteStorage.baseClient, remoteStorage.baseClient).exports;
-	                this.assertType(env.module, 'object');
+	                test.assertType(env.module, 'object');
 	            }
 	        },
 	        {
 	            desc: "try to get a listing",
-	            run: function(env) {
+	            run: function(env, test) {
 	                var obj = env.module.getIds();
 	                var should_be = ['12345', abcde'];
-	                this.assert(obj, should_be);
+	                test.assert(obj, should_be);
 	            }
 	        }
 	    ]

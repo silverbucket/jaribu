@@ -10,120 +10,119 @@ define([], function () {
     tests: [
       {
         desc: "undefined should be undefined",
-        run: function (env) {
-          this.assertType(undefined, 'undefined');
+        run: function (env, test) {
+          test.assertType(undefined, 'undefined');
         }
       },
       {
         desc: "default methods work",
-        run: function (env) {
-          this.write('hello world');
-          this.assert(1, 1);
-          this.write('goodbye world');
+        run: function (env, test) {
+          test.write('hello world');
+          test.assert(1, 1);
+          test.write('goodbye world');
         }
       },
       {
         desc: "testing async callback",
-        run: function () {
-          this.write('setting the timeout!');
-          var _this = this;
+        run: function (env, test) {
+          test.write('setting the timeout!');
           setTimeout(function (){
-            _this.write('test callback timeout!');
-            _this.result(true, 'got async callback');
+            test.write('test callback timeout!');
+            test.result(true, 'got async callback');
           }, 2000);
-          this.write('timeout set');
+          test.write('timeout set');
         }
       },
       {
         desc: '_message should not be set',
-        run: function () {
-          this.assert(this._message, '');
+        run: function (env, test) {
+          test.assert(test._message, '');
         }
       },
       {
         desc: 'test for tools object',
-        run: function () {
-          this.assertType(this.tools, 'object');
+        run: function (env, test) {
+          test.assertType(test.tools, 'object');
         }
       },
       {
         desc: 'test for jquery support',
-        run: function () {
-          this.assertType(this.tools.jQuery, 'function');
+        run: function (env, test) {
+          test.assertType(test.tools.jQuery, 'function');
         }
       },
       {
         desc: "test double assertType statements",
-        run: function () {
-          this.assertTypeAnd(this.tools, 'object');
-          this.assertType(this.tools.jQuery, 'function');
+        run: function (env, test) {
+          test.assertTypeAnd(test.tools, 'object');
+          test.assertType(test.tools.jQuery, 'function');
         }
       },
       {
         desc: "two different types should fail",
         willFail: true,
-        run: function () {
-          this.assertType('string', 1);
+        run: function (env, test) {
+          test.assertType('string', 1);
         }
       },
       {
         desc: "arrays should match",
-        run: function() {
+        run: function(env, test) {
           a1 = ['one', 'two', 'shoe'];
           a2 = ['one', 'two', 'shoe'];
-          this.assert(a1,a2);
+          test.assert(a1,a2);
         }
       },
       {
         desc: "arrays with same values but different orders should match",
-        run: function () {
+        run: function (env, test) {
           a1 = ['one', 'shoe', 'two'];
           a2 = ['one', 'two', 'shoe'];
-          this.assert(a1,a2);
+          test.assert(a1,a2);
         }
       },
       {
         desc: "arrays should match",
-        run: function () {
+        run: function (env, test) {
           a1 = ['one', 'two', 'shoe'];
           a2 = ['one', 'two', 'shoe'];
-          this.assertAnd(a1,a2);
+          test.assertAnd(a1,a2);
           a1 = ['one', 'shoe', 'two'];
           a2 = ['one', 'two', 'shoe'];
-          this.assert(a1,a2);
+          test.assert(a1,a2);
         }
       },
       {
         desc: "assertAnd fails, you shouldn't be able to set result true right after",
         willFail: true,
-        run: function () {
+        run: function (env, test) {
           a1 = ['one', 'two', 'shoe'];
           a2 = ['one', 'two', 'boot'];
-          this.assertAnd(a1,a2);
-          this.result(true);
+          test.assertAnd(a1,a2);
+          test.result(true);
         }
       },
       {
         desc: "arrays with different orders should not match",
         willFail: true,
-        run: function () {
+        run: function (env, test) {
           a1 = ['one', 'one', 'two'];
           a2 = ['one', 'two', 'shoe'];
-          this.assert(a1,a2);
+          test.assert(a1,a2);
         }
       },
       {
         desc: "arrays with different orders should not match",
         willFail: true,
-        run: function () {
+        run: function (env, test) {
           a1 = ['one', 'one', 'one'];
           a2 = ['one', 'two', 'shoe'];
-          this.assert(a1,a2);
+          test.assert(a1,a2);
         }
       },
       {
         desc: 'objects should compare correctly',
-        run: function (env) {
+        run: function (env, test) {
           var obj1 = {
             foo: "bar",
             beer: "good",
@@ -134,115 +133,115 @@ define([], function () {
             beer: "good",
             greed: "bad"
           };
-          this.assert(obj1, obj2);
+          test.assert(obj1, obj2);
           env.obj1 = obj1;
         }
       },
       {
         desc: "verify passing objects through env",
-        run: function (env) {
+        run: function (env, test) {
           var obj2 = {
             foo: "bar",
             beer: "good",
             greed: "bad"
           };
-          this.assert(env.obj1, obj2);
+          test.assert(env.obj1, obj2);
         }
       },
       {
         desc: "different objects should not test true",
         willFail: true,
-        run: function (env) {
+        run: function (env, test) {
           var obj2 = {
             fresh: "prince",
             silver: "spoons"
           };
-          this.assert(env.obj1, obj2);
+          test.assert(env.obj1, obj2);
         }
       },
       {
         desc: "arrays with the same elements but different orders should pass",
-        run: function (env) {
+        run: function (env, test) {
           var o1 = [ 'dog', 'cat', 'aardvark'];
           var o2 = ['aardvark', 'dog', 'cat'];
-          this.assert(o1, o2);
+          test.assert(o1, o2);
         }
       },
       {
         desc: "arrays with the different elements should not pass",
         willFail: true,
-        run: function (env) {
+        run: function (env, test) {
           var o1 = [ 'dog', 'cat', 'aardvark'];
           var o2 = ['aardvark', 'cat'];
-          this.assert(o1, o2);
+          test.assert(o1, o2);
         }
       },
       {
         desc: "assertFail inline use",
-        run: function (env) {
-          console.log(this);
-          this.assertFail(false);
+        run: function (env, test) {
+          console.log(test);
+          test.assertFail(false);
         }
       },
       {
         desc: "assertFail inline use - should fail",
         willFail: true,
-        run: function (env) {
-          this.assertFail(true, true);
+        run: function (env, test) {
+          test.assertFail(true, true);
         }
       },
       {
         desc: "assertTypeFail inline use",
-        run: function (env) {
-          this.write(typeof 'yes');
-          this.assertTypeFailAnd('yes', 'array');
-          this.assertType('yes', 'string');
+        run: function (env, test) {
+          test.write(typeof 'yes');
+          test.assertTypeFailAnd('yes', 'array');
+          test.assertType('yes', 'string');
         }
       },
       {
         desc: "assertTypeFail inline use - assertfail",
-        run: function (env) {
-          this.assertTypeFail('no', 'array');
+        run: function (env, test) {
+          test.assertTypeFail('no', 'array');
         }
       },
       {
         desc: "test result messages",
         willFail: true,
-        run: function (env) {
-          this.result(false, 'fail message here');
+        run: function (env, test) {
+          test.result(false, 'fail message here');
         }
       },
       {
         desc: "try throw",
         willFail: true,
-        run: function (env) {
+        run: function (env, test) {
           throw "i threw an exception";
         }
       },
       {
         desc: "assertTypeFail should fail",
-        run: function (env) {
-          this.assertTypeFail(0, 'object');
+        run: function (env, test) {
+          test.assertTypeFail(0, 'object');
         }
       },
       {
         desc: "assertTypeFail should pass",
         willFail: true,
-        run: function (env) {
-          this.assertTypeFail(0, 'number');
+        run: function (env, test) {
+          test.assertTypeFail(0, 'number');
         }
       },
       {
         desc: "fail message test",
         willFail: true,
-        run: function (env) {
-          this.result(false, 'test message');
+        run: function (env, test) {
+          test.result(false, 'test message');
         }
       },
       {
         desc: "fail message should be empty",
-        run: function (env) {
-          this.assert(this._message, '');
+        run: function (env, test) {
+          test.assert(test._message, '');
         }
       }
     ]
