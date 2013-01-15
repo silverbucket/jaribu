@@ -1,6 +1,6 @@
 {
   "name": "teste",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "a simple, full-featured, JavaScript testing framework",
   "main": "bin/teste",
   "author": "Nick Jennings <nick@silverbucket.net>",

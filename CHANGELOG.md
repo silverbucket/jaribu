@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+teste v0.0.10 - 2013/01/15
+--------------------------
+
+- support for promises in tests:
+
+	{
+		desc: "async call making use of promises",
+		run: func(env, test) {
+			return someAsyncCall(function(result) {
+				test.assert(result, 'success');
+			});
+		}
+	}
+
 - failing tests now get a generic stack trace to aid in debugging.
 
 - added second parameter to all tests, the 'test' object will help in cases where
