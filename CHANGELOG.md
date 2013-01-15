@@ -1,6 +1,8 @@
 CHANGELOG
 =========
 
+- failing tests now get a generic stack trace to aid in debugging.
+
 - added second parameter to all tests, the 'test' object will help in cases where
 	you constantly have to re-assign 'this' due to async callbacks.
 
