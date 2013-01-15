@@ -11,7 +11,7 @@ define([], function () {
       {
         desc: "undefined should be undefined",
         run: function (env, test) {
-          test.assertType(undefined, 'undefinedxx');
+          test.assertType(undefined, 'undefined');
         }
       },
       {
