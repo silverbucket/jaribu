@@ -43,13 +43,14 @@
   var walker  = walk.walk(cwd+'/test', { followLinks: false });
 
   walker.on('file', function (root, stat, next) {
-    var path;
+    var path = root + '/' + stat.name;
     if (stat.name.match(/\-suite\.js$/g)) {
-      path = root + '/' + stat.name;
       // Add this file to the list of files
       if((! requestedFiles) || requestedFiles[path]) {
         files.push(path);
       }
+    } else if ((requestedFiles) && (requestedFiles[path])) {
+        files.push(path);
     }
     next();
   });
