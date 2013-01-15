@@ -7,34 +7,34 @@ teste v0.0.10 - 2013/01/15
 
 - support for promises in tests:
 
-	{
-		desc: "async call making use of promises",
-		run: func(env, test) {
-			return someAsyncCall(function(result) {
-				test.assert(result, 'success');
-			});
+		{
+			desc: "async call making use of promises",
+			run: func(env, test) {
+				return someAsyncCall(function(result) {
+					test.assert(result, 'success');
+				});
+			}
 		}
-	}
 
 - failing tests now get a generic stack trace to aid in debugging.
 
 - added second parameter to all tests, the 'test' object will help in cases where
 	you constantly have to re-assign 'this' due to async callbacks.
 
-	{
-		desc: 'test with this',
-		run: func(env) {
-			this.result(true);
+		{
+			desc: 'test with this',
+			run: func(env) {
+				this.result(true);
+			}
+		},
+		{
+			desc: 'test with test param',
+			run: func(env, test) {
+				someAsyncFunction(function(status) {
+					test.result(status);
+				});
+			}
 		}
-	},
-	{
-		desc: 'test with test param',
-		run: func(env, test) {
-			someAsyncFunction(function(status) {
-				test.result(status);
-			});
-		}
-	}
 
 - assert*() functions now take an optional 3rd parameter which is printed along
 	with the error message when the assert fails, for more informative
