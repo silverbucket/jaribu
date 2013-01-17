@@ -1,6 +1,49 @@
 CHANGELOG
 =========
 
+teste v0.0.11 - 2013/01/17
+--------------------------
+
+- modified WebSocketClient's sendAndVerify() function. Now it takes three params.
+	send data, expected data, and test object. and you no long pass 'messages' data
+	to client.
+
+		setup: function(env, test) {
+			env.expected = { // struct of expected results for each http call
+				setupTest: 'setupTest',
+				test: {
+					foo: "bar"
+				},
+				footwear: {
+					leather: "boots",
+					flip: "flops",
+					block: "of wood"
+				}
+			};
+
+			var client = new this.WebSocketClient({
+				url: 'ws://localhost:9992/',
+			});
+
+			client.connect(function(connection) {
+				env.connection = connection;
+				env.connection.sendAndVerify('setupTest', env.expected.setupTest, test);
+			});
+		},
+		tests: [
+			{
+				desc: 'auto validate websocket command',
+				run: function (env, test) {
+					env.connection.sendAndVerify('footwear', env.expected.footwear, this); // passes
+				}
+			},
+			{
+				desc: 'the first level of properties are the commands',
+				run: function (env, test) {
+				env.connection.sendAndVerify('blah', 'lalala', test); // fails
+				}
+			}
+		]
 
 teste v0.0.10 - 2013/01/15
 --------------------------

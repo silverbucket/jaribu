@@ -7,7 +7,7 @@ define([], function () {
   suites.push({
     name: "WebSocket tests",
     desc: "collection of tests to test WebSocket communication",
-    setup: function (env) {
+    setup: function (env, test) {
       env.expected = { // struct of expected results for each http call
         setupTest: { test: 'setupTest' },
         test: {
@@ -33,10 +33,7 @@ define([], function () {
 
       var client = new this.WebSocketClient({
         url: 'ws://localhost:9992/',
-        type: 'echo-protocol',
-        messages: env.expected // used for auto verification (if specified
-                     // by using the sendAndVerify() method in the
-                     // test).
+        type: 'echo-protocol'
       });
       var server = new this.WebSocketServer({
         port: 9992,
@@ -49,30 +46,29 @@ define([], function () {
         // setup client
         client.connect(function (connection) {
           env.connection = connection;
-          env.connection.sendAndVerify('setupTest', _this);
+          env.connection.sendAndVerify('setupTest', env.expected.setupTest, test);
         });
       });
     },
     tests: [
       {
         desc: "first test",
-        run: function (env) {
+        run: function (env, test) {
           this.assertAnd(env.connection.connected, true);
-          env.connection.sendAndVerify('test', this);
+          env.connection.sendAndVerify('test', env.expected['test'], test);
         }
       },
       {
         desc: "complex data struct",
-        run: function (env) {
-          env.connection.sendAndVerify('complex', this);
+        run: function (env, test) {
+          env.connection.sendAndVerify('complex', env.expected['complex'], test);
         }
       },
       {
         desc: "with callback",
-        run: function (env) {
-          var _this = this;
+        run: function (env, test) {
           env.connection.sendWithCallback('footwear', function (data) {
-            _this.assert(data.utf8Data,
+            test.assert(data.utf8Data,
                    JSON.stringify(env.expected['footwear']));
           });
         }
@@ -80,8 +76,8 @@ define([], function () {
       {
         desc: 'lets try to fail! how exciting!',
         willFail: true,
-        run: function (env) {
-          env.connection.sendAndVerify('dontexist', this);
+        run: function (env, test) {
+          env.connection.sendAndVerify('dontexist', 'lalaa', test);
         }
       }
     ]
