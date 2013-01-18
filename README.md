@@ -71,56 +71,7 @@ Features
 
 	mock.numCalled;  // 1
 
-**Built in remoteStorage.js module testing mocks** Teste has built in support for testing remoteStorage.js modules. You pass it some test data and it can mimick the baseClient, allowing you to test your module from the command-line.
 
-    suites.push({
-    	name: "module tests",
-    	desc: "tests for my brand-new remoteStorage.js module",
-    	setup: function(env, test) {
-        	env.remoteStorage = new this.Stub.mock.remoteStorage({
-            	// dummy data, schema defined in test module
-            	'12345': {
-                	'name': 'foo',
-                	'quote': 'bar'
-            	},
-            	'abcde': {
-                	'name': 'blah',
-                	'quote': 'lala'
-            	},
-            	'work/67890': {
-                	'name': 'hello',
-                	'quote': 'world'
-            	},
-        	});
-
-        	test.assertTypeAnd(env.remoteStorage, 'function');
-        	test.assertTypeAnd(env.remoteStorage.baseClient, 'function');
-        	test.assertType(env.remoteStorage.defineModule, 'function');
-        },
-        takedown: function(env, test) {
-        	env.remoteStorage.destroy();
-        }
-        tests: [
-	        {
-	            desc: "load a test module",
-	            run: function(env, test) {
-	            	global.remoteStorage = env.remoteStorage;
-	                env.moduleImport = require('./resources/test_rs_module');
-	                test.assertTypeAnd(env.moduleImport[1], 'function');
-	                env.module = env.moduleImport[1](remoteStorage.baseClient, remoteStorage.baseClient).exports;
-	                test.assertType(env.module, 'object');
-	            }
-	        },
-	        {
-	            desc: "try to get a listing",
-	            run: function(env, test) {
-	                var obj = env.module.getIds();
-	                var should_be = ['12345', abcde'];
-	                test.assert(obj, should_be);
-	            }
-	        }
-	    ]
-	});
 
 
 
