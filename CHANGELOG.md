@@ -1,6 +1,34 @@
 CHANGELOG
 =========
 
+- added support for confirmation messages in WebSocketClient sendAndVerify()
+	function. this allows you to say you are expecting a confirmation message before
+	the actual result you eventually want to test.
+
+		var confirmProps = {
+			status: true,
+			verb: 'confirm'
+		};
+		var data = {
+			platform: "dispatcher",
+			object: {
+				secret: '1234567890'
+			},
+			verb: "register",
+			rid: "123454"
+		};
+		var expected = {
+			status: true,
+			rid: "123454",
+			verb: 'register',
+			platform: "dispatcher"
+		};
+		env.connection.sendAndVerify(JSON.stringify(data), expected, test, confirmProps);
+
+	Params are: data to send, expected result data, test object, confirm properties.
+
+
+
 teste v0.0.11 - 2013/01/17
 --------------------------
 
