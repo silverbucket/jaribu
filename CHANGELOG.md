@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+teste v0.0.12 - 2013/01/28
+--------------------------
+
 - added support for confirmation messages in WebSocketClient sendAndVerify()
 	function. this allows you to say you are expecting a confirmation message before
 	the actual result you eventually want to test.
@@ -26,7 +29,6 @@ CHANGELOG
 		env.connection.sendAndVerify(JSON.stringify(data), expected, test, confirmProps);
 
 	Params are: data to send, expected result data, test object, confirm properties.
-
 
 
 teste v0.0.11 - 2013/01/17
