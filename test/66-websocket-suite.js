@@ -46,7 +46,12 @@ define([], function () {
         // setup client
         client.connect(function (connection) {
           env.connection = connection;
-          env.connection.sendAndVerify('setupTest', env.expected.setupTest, test);
+          env.connection.sendWith({
+            send: 'setupTest',
+            expect: env.expected.setupTest,
+            autoVerify: true,
+            testObj: test
+          });
         });
       });
     },
@@ -55,21 +60,33 @@ define([], function () {
         desc: "first test",
         run: function (env, test) {
           this.assertAnd(env.connection.connected, true);
-          env.connection.sendAndVerify('test', env.expected['test'], test);
+          env.connection.sendWith({
+            send: 'test',
+            expect: env.expected['test'],
+            autoVerify: true,
+            testObj: test
+          });
         }
       },
       {
         desc: "complex data struct",
         run: function (env, test) {
-          env.connection.sendAndVerify('complex', env.expected['complex'], test);
+          env.connection.sendWith({
+            send: 'complex',
+            expect: env.expected['complex'],
+            autoVerify: true,
+            testObj: test
+          });
         }
       },
       {
         desc: "with callback",
         run: function (env, test) {
-          env.connection.sendWithCallback('footwear', function (data) {
-            test.assert(data.utf8Data,
-                   JSON.stringify(env.expected['footwear']));
+          env.connection.sendWith({
+            send: 'footwear',
+            onMessage: function (data) {
+                test.assert(data.utf8Data, JSON.stringify(env.expected['footwear']));
+              }
           });
         }
       },
@@ -77,7 +94,45 @@ define([], function () {
         desc: 'lets try to fail! how exciting!',
         willFail: true,
         run: function (env, test) {
-          env.connection.sendAndVerify('dontexist', 'lalaa', test);
+          env.connection.sendWith({
+            send: 'dontexist',
+            expect: 'lalaa',
+            autoVerify: true,
+            testObj: test
+          });
+        }
+      },
+      {
+        desc: "use autoVerify with onComplete callback",
+        run: function (env, test) {
+          env.connection.sendWith({
+            send: 'complex',
+            expect: env.expected['complex'],
+            autoVerify: true,
+            testObj: test,
+            onComplete: function(msg) {
+              // after autoVerify, callback here
+              test.write('back from autoVerify');
+              test.result(true);
+            }
+          });
+        }
+      },
+      {
+        desc: "use autoVerify with onComplete callback - fail before",
+        willFail: true,
+        run: function (env, test) {
+          env.connection.sendWith({
+            send: 'complexa',
+            expect: env.expected['complex'],
+            autoVerify: true,
+            testObj: test,
+            onComplete: function(msg) {
+              // after autoVerify, callback here
+              test.write('back from autoVerify');
+              test.result(true);
+            }
+          });
         }
       }
     ]
