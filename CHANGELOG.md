@@ -1,6 +1,35 @@
 CHANGELOG
 =========
 
+teste v0.0.13 - 2013/01/30
+--------------------------
+
+- created a new function for the WebSocketClient, called sendWith(). it's meant
+	to replace all of the functionality of both sendAndVerify() and sendWithCallback(),
+	using a single properties object (param object), this we the function can be
+	extended, and modified in the future without worrying about param order, instead
+	sending a single object with named properties.
+
+	A list of all available properties at this time:
+
+		// {
+		//   send: JSON.stringify(data),
+		//   expect: expected,
+		//   testObj: test,
+		//   confirmProps: confirmProps,
+		//   autoVerify: true,
+		//   onComplete: function() { }, // if callback function is called,
+		//															 // verification is used with assertAnd,
+		//                               // not assert.
+		//
+		//   onMessage: function() { },  // mutually exclusive to autoVerify, if
+		//                               // autoVerify is set, this is not called
+		//
+		//   onError: function() { },  // mututall exclusive to autoVerify
+		//                             // autoVerify is set, this is not called
+		// }
+
+
 teste v0.0.12 - 2013/01/28
 --------------------------
 
