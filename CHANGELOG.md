@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+teste v0.0.14 - 2013/02/14
+--------------------------
+
+- bugfixes in the assert and WebSocketClient tools.
+
+
 teste v0.0.13 - 2013/01/30
 --------------------------
 
