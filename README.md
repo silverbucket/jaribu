@@ -1,6 +1,9 @@
-Teste [![Build Status](https://secure.travis-ci.org/silverbucket/teste.png)](http://travis-ci.org/silverbucket/teste)
-=====
+![teste](https://raw.github.com/silverbucket/teste/master/design/teste_logo.png) 
+
 *a JavaScript (node.js) testing framework*
+
+[![Build Status](https://secure.travis-ci.org/silverbucket/teste.png)](http://travis-ci.org/silverbucket/teste)
+
 
 Intro
 -----
