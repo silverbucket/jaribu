@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+teste v0.0.15 - 2013/03/09
+--------------------------
+
+- decreased wait interval so async tests complete faster.
+
+- added done() as an alias to result() for tests.
+
+- minor fixes, binded functions so they can be used as callbacks.
+
+
+
 teste v0.0.14 - 2013/02/14
 --------------------------
 
