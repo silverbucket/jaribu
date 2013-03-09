@@ -218,6 +218,15 @@ define([], function () {
           throw "i threw an exception";
         }
       },
+     {
+       desc: "try throw asynchronously",
+       willFail: true,
+       run: function (env, test) {
+         setTimeout(function() {
+           throw "I threw an exception later";
+         }, 0);
+       }
+     },
       {
         desc: "assertTypeFail should fail",
         run: function (env, test) {
