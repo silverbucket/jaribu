@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+teste v0.0.16 - 2013/03/20
+--------------------------
+
+- minor bugfixes for assert and WebSocketClient
+
+
 teste v0.0.15 - 2013/03/09
 --------------------------
 
@@ -9,7 +15,6 @@ teste v0.0.15 - 2013/03/09
 - added done() as an alias to result() for tests.
 
 - minor fixes, binded functions so they can be used as callbacks.
-
 
 
 teste v0.0.14 - 2013/02/14
