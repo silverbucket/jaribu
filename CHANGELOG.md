@@ -1,6 +1,23 @@
 CHANGELOG
 =========
 
+teste v0.0.17 - 2013/06/23
+--------------------------
+
+- added `abortOnFail` boolean to suite options. If a test fails in that suite, entire
+  execution is halted. This is useful for cases where you know everything is
+  going to break if any tests in a suite fail.
+
+  	suites.push({
+	    desc: "checks for various version requirements",
+	    abortOnFail: true, // don't continue with further test suites if any tests in this suite fail
+	    setup: function (env, test) {
+	    	...
+	    },
+	    tests: [{...}]
+	  });
+
+
 teste v0.0.16 - 2013/03/20
 --------------------------
 
