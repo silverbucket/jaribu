@@ -1,9 +1,10 @@
-![teste](https://raw.github.com/silverbucket/teste/master/design/teste_logo.png) 
+![teste](https://raw.github.com/silverbucket/teste/master/design/teste_logo.png)
 
 *a JavaScript (node.js) testing framework*
 
 [![Build Status](https://secure.travis-ci.org/silverbucket/teste.png)](http://travis-ci.org/silverbucket/teste)
-
+[![devDependency Status](https://david-dm.org/silverbucket/teste/dev-status.png)](https://david-dm.org/silverbucket/teste#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/silverbucket/teste.png)](https://codeclimate.com/github/silverbucket/teste)
 
 Intro
 -----
