@@ -5,7 +5,8 @@ TODO:
 
 - specify suite and test number via. command-line to run a specific test
 
-- make tests use promises
+- make tests use promises (already done to a degree, might be good to provide
+  the q promise library as a helper, similar to jquery)
 
 - HTTP / REST testing
     - write a framework for making remoteStorage provider integration test.
