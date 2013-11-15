@@ -1,21 +1,37 @@
 CHANGELOG
 =========
 
+teste v0.0.19 - 2013/11/15
+--------------------------
+
+- refactored the teste.loadSuite() function to reduce function complexity,
+	splitting out class functions to separate files: `lib/Scaffolding.js`,
+	`lib/Teste.js`, `lib/Suite.js`, `lib/helpers.js`.
+	(https://codeclimate.com/github/silverbucket/teste).
+
+- minor adjustments to logging behavior.
+
+- if a teste returns a promise with a `fail` function, we can use that to catch
+	unexpected errors.
+
+
 teste v0.0.18 - 2013/07/10
 --------------------------
 
 - Fixes to WebSocketClient tool
 
+
 teste v0.0.17 - 2013/06/23
 --------------------------
 
-- added `abortOnFail` boolean to suite options. If a test fails in that suite, entire
-  execution is halted. This is useful for cases where you know everything is
-  going to break if any tests in a suite fail.
+- added `abortOnFail` boolean to suite options. If a test fails in that suite,
+	entire execution is halted. This is useful for cases where you know
+	everything is going to break if any tests in a suite fail.
 
   	suites.push({
 	    desc: "checks for various version requirements",
-	    abortOnFail: true, // don't continue with further test suites if any tests in this suite fail
+	    abortOnFail: true,  // don't continue with further test suites if any
+	    									  // tests in this suite fail
 	    setup: function (env, test) {
 	    	...
 	    },
@@ -48,11 +64,11 @@ teste v0.0.14 - 2013/02/14
 teste v0.0.13 - 2013/01/30
 --------------------------
 
-- created a new function for the WebSocketClient, called sendWith(). it's meant
-	to replace all of the functionality of both sendAndVerify() and sendWithCallback(),
-	using a single properties object (param object), this we the function can be
-	extended, and modified in the future without worrying about param order, instead
-	sending a single object with named properties.
+- created a new function for the `WebSocketClient`, called `sendWith()`. it's
+	meant to replace all of the functionality of both `sendAndVerify()` and
+	`sendWithCallback()`, using a single properties object (param object), this
+	we the function can be extended, and modified in the future without worrying
+	about param order, instead sending a single object with named properties.
 
 	A list of all available properties at this time:
 
@@ -77,9 +93,9 @@ teste v0.0.13 - 2013/01/30
 teste v0.0.12 - 2013/01/28
 --------------------------
 
-- added support for confirmation messages in WebSocketClient sendAndVerify()
-	function. this allows you to say you are expecting a confirmation message before
-	the actual result you eventually want to test.
+- added support for confirmation messages in `WebSocketClient.sendAndVerify()`
+	function. this allows you to say you are expecting a confirmation message
+	before the actual result you eventually want to test.
 
 		var confirmProps = {
 			status: true,
@@ -101,15 +117,16 @@ teste v0.0.12 - 2013/01/28
 		};
 		env.connection.sendAndVerify(JSON.stringify(data), expected, test, confirmProps);
 
-	Params are: data to send, expected result data, test object, confirm properties.
+	Params are: data to send, expected result data, test object, confirm
+	properties.
 
 
 teste v0.0.11 - 2013/01/17
 --------------------------
 
-- modified WebSocketClient's sendAndVerify() function. Now it takes three params.
-	send data, expected data, and test object. and you no long pass 'messages' data
-	to client.
+- modified WebSocketClient's sendAndVerify() function. Now it takes three
+	params: send data, expected data, and test object. and you no long pass
+	'messages' data to client.
 
 		setup: function(env, test) {
 			env.expected = { // struct of expected results for each http call
@@ -164,8 +181,8 @@ teste v0.0.10 - 2013/01/15
 
 - failing tests now get a generic stack trace to aid in debugging.
 
-- added second parameter to all tests, the 'test' object will help in cases where
-	you constantly have to re-assign 'this' due to async callbacks.
+- added second parameter to all tests, the 'test' object will help in cases
+	where you constantly have to re-assign 'this' due to async callbacks.
 
 		{
 			desc: 'test with this',
