@@ -58,7 +58,11 @@ Features
 		]
 	});
 
-**Support for mocks/stubs** technically they are mocks, since they have info about whether they've been called, and how many times, but can be used as stubs as well.
+
+== Mocks and Stubs
+Technically they are all mocks, since they have info about whether they've been
+called, and how many times, but can be used as stubs as well (which are
+basically just mocks without meta data).
 
 	var mock = new this.Stub(function(p1, p2) {
 		console.log('hello world');
@@ -76,8 +80,14 @@ Features
 	mock.numCalled;  // 1
 
 
+== Testing for thrown exceptions
+Catching thrown exceptions works with normal thrown exceptions or exceptions
+thrown asyncronously. The interface is the same either way, just call the
+function you want to test. If it throws an exception, the test passes.
 
-
+	this.throws(function () {
+		throw new Error('oops');
+	}, Error, 'caught thrown exception');
 
 
 
