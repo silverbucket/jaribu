@@ -84,6 +84,18 @@ define([], function () {
           // );
 
         }
+      },
+
+      {
+        desc: "throw an async error - and fail!",
+        willFail: true,
+        run: function (env, test) {
+          function causeTrouble() {
+            setTimeout(function () {
+              throw new Error("I'm nothing but trouble.");
+            }, 1000);
+          }
+        }
       }
 
     ]
