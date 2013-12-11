@@ -49,8 +49,7 @@ define([], function () {
           env.connection.sendWith({
             send: 'setupTest',
             expect: env.expected.setupTest,
-            autoVerify: true,
-            testObj: test
+            autoVerify: true
           });
         });
       });
@@ -63,8 +62,7 @@ define([], function () {
           env.connection.sendWith({
             send: 'test',
             expect: env.expected['test'],
-            autoVerify: true,
-            testObj: test
+            autoVerify: true
           });
         }
       },
@@ -74,8 +72,7 @@ define([], function () {
           env.connection.sendWith({
             send: 'complex',
             expect: env.expected['complex'],
-            autoVerify: true,
-            testObj: test
+            autoVerify: true
           });
         }
       },
@@ -97,8 +94,7 @@ define([], function () {
           env.connection.sendWith({
             send: 'dontexist',
             expect: 'lalaa',
-            autoVerify: true,
-            testObj: test
+            autoVerify: true
           });
         }
       },
@@ -109,7 +105,6 @@ define([], function () {
             send: 'complex',
             expect: env.expected['complex'],
             autoVerify: true,
-            testObj: test,
             onComplete: function(msg) {
               // after autoVerify, callback here
               test.write('back from autoVerify');
@@ -126,7 +121,6 @@ define([], function () {
             send: 'complexa',
             expect: env.expected['complex'],
             autoVerify: true,
-            testObj: test,
             onComplete: function(msg) {
               // after autoVerify, callback here
               test.write('back from autoVerify');
