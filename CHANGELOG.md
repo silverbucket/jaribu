@@ -1,6 +1,28 @@
 CHANGELOG
 =========
 
+teste v0.1.0 - 2013/12/10
+-------------------------
+
+- bugfix for custom error messages during `assert*()`'s. Previously it wasn only
+  working for `assertAnd()`. ([issue #14](http://github.com/silverbucket/teste/issues/14))
+
+- testing tools (functions) which previously needed the test object passed in,
+  don't anymore.
+
+- added support for testing for thrown exceptions. ([feature request #15](http://github.com/silverbucket/teste/issues/14))
+
+		this.throws(function () {
+			throw new Error('oops');
+		}, Error, 'caught thrown exception');
+
+- fixed an issue where the maximum call stack size was being exceeded when
+ 	running thousands of tests.
+
+- refactoring and improvement of code clarity (using codeclimate.com as a
+	benchmark)
+
+
 teste v0.0.19 - 2013/11/15
 --------------------------
 
@@ -75,7 +97,6 @@ teste v0.0.13 - 2013/01/30
 		// {
 		//   send: JSON.stringify(data),
 		//   expect: expected,
-		//   testObj: test,
 		//   confirmProps: confirmProps,
 		//   autoVerify: true,
 		//   onComplete: function() { }, // if callback function is called,
