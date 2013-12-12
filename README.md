@@ -59,7 +59,7 @@ Features
 	});
 
 
-== Mocks and Stubs
+## Mocks and Stubs
 Technically they are all mocks, since they have info about whether they've been
 called, and how many times, but can be used as stubs as well (which are
 basically just mocks without meta data).
@@ -80,7 +80,7 @@ basically just mocks without meta data).
 	mock.numCalled;  // 1
 
 
-== Testing for thrown exceptions
+## Testing for thrown exceptions
 Catching thrown exceptions works with normal thrown exceptions or exceptions
 thrown asyncronously. The interface is the same either way, just call the
 function you want to test. If it throws an exception, the test passes.
