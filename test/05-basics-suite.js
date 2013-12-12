@@ -8,6 +8,15 @@ define([], function () {
     name: "teste basics",
     desc: "collection of tests to test the test framework (basics)",
     tests: [
+
+      {
+        desc: "basic sucessful test",
+        timeout: 100000,
+        run: function (env, test) {
+          test.result(true);
+        }
+      },
+
       {
         desc: "undefined should be undefined",
         run: function (env, test) {
