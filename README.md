@@ -90,9 +90,12 @@ Same as `assertType()` except does not pass the test automatically when the
 result is true. If the object type is *incorrect*, however, the test will fail.
 
 ### assertTypeFail()
-Behaves the opposite of `assertTypeAnd()`, test will not fail if the type of
+Behaves the opposite of `assertType()`, test will succeed if the type of
 object is incorrect, and will automatically fail if the types match.
 
+### assertTypeFailAnd()
+Behaves the opposite of `assertTypeAnd()`, test will not fail if the type of
+object is incorrect, and will automatically fail if the types match.
 
 ## Mocks and Stubs
 Technically they are all mocks, since they have info about whether they've been
