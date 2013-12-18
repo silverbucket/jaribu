@@ -188,7 +188,6 @@ define([], function () {
       {
         desc: "assertFail inline use",
         run: function (env, test) {
-          console.log(test);
           test.assertFail(false);
         }
       },
@@ -197,6 +196,14 @@ define([], function () {
         willFail: true,
         run: function (env, test) {
           test.assertFail(true, true);
+        }
+      },
+      {
+        desc: "assertFail with assert",
+        run: function (env, test) {
+          var o1 = [ 'dog', 'cat', 'aardvark'];
+          var o2 = ['aardvark', 'cat'];
+          test.assertFail(o1, o2);
         }
       },
       {
@@ -211,6 +218,12 @@ define([], function () {
         desc: "assertTypeFail inline use - assertfail",
         run: function (env, test) {
           test.assertTypeFail('no', 'array');
+        }
+      },
+      {
+        desc: "assertType inline use",
+        run: function (env, test) {
+          test.assertType({foo:'bar'}, 'object');
         }
       },
       {
