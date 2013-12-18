@@ -186,6 +186,13 @@ define([], function () {
         }
       },
       {
+        desc: "assert booleans",
+        willFail: true,
+        run: function (env, test) {
+          test.assert(true, false);
+        }
+      },
+      {
         desc: "assertFail inline use",
         run: function (env, test) {
           test.assertFail(false);
