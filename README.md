@@ -58,6 +58,41 @@ Features
 		]
 	});
 
+## Asserts
+You can use the assert family of functions to compare values with each other
+(objects, arrays, strings, types).
+
+### assert()
+The `assert()` function compares two objects for truthiness and passes or fails
+the test based on the result of the comparison.
+
+ 		assert(object1, object2, "testing object1 and 2 are the same")
+
+### assertAnd()
+Same as `assert()` except does not pass the test automatically when the result
+is true. If the objects *do not* match, however, the test will fail.
+
+### assertFail()
+Behaves the opposite of `assert()`, test will pass if the objects do not match.
+
+### assertFailAnd()
+Behaves the opposite of `assertAnd()`, test will not fail if objects do not
+match, and will fail automatically if objects match.
+
+### assertType()
+The `assertType()` function tests the type of a given variable *(object, string,
+boolean, etc.)*.
+
+		assertType(object, 'object', "testing object is actually an object")
+
+### assertTypeAnd()
+Same as `assertType()` except does not pass the test automatically when the
+result is true. If the object type is *incorrect*, however, the test will fail.
+
+### assertTypeFail()
+Behaves the opposite of `assertTypeAnd()`, test will not fail if the type of
+object is incorrect, and will automatically fail if the types match.
+
 
 ## Mocks and Stubs
 Technically they are all mocks, since they have info about whether they've been
