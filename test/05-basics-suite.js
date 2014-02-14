@@ -83,7 +83,8 @@ define([], function () {
         }
       },
       {
-        desc: "arrays with same values but different orders should match",
+        desc: "arrays with same values but different orders should not match",
+        willFail: true,
         run: function (env, test) {
           a1 = ['one', 'shoe', 'two'];
           a2 = ['one', 'two', 'shoe'];
@@ -97,7 +98,7 @@ define([], function () {
           a2 = ['one', 'two', 'shoe'];
           test.assertAnd(a1,a2);
           a1 = ['one', 'shoe', 'two'];
-          a2 = ['one', 'two', 'shoe'];
+          a2 = ['one', 'shoe', 'two'];
           test.assert(a1,a2);
         }
       },
@@ -169,10 +170,20 @@ define([], function () {
         }
       },
       {
-        desc: "arrays with the same elements but different orders should pass",
+        desc: "arrays with the same elements but different orders should not pass",
+        willFail: true,
         run: function (env, test) {
           var o1 = [ 'dog', 'cat', 'aardvark'];
           var o2 = ['aardvark', 'dog', 'cat'];
+          test.assert(o1, o2);
+        }
+      },
+      {
+        desc: "arrays with different number of repeated elements should not pass",
+        willFail: true,
+        run: function (env, test) {
+          var o1 = ['a', 'a'];
+          var o2 = ['a'];
           test.assert(o1, o2);
         }
       },
