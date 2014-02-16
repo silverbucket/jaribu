@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "jquery": "*",
+    "jsdom": "*",
     "walk": "*",
     "requirejs": "*",
     "amdefine": "*",

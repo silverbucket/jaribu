@@ -20,24 +20,25 @@ define([], function () {
       });
       var _this = this;
       env.server.run(function () {
+
         _this.write('http dummy server running');
 
         env.http = new _this.Http({
-          baseUrl: 'http://localhost:9991'
+          baseUrl: 'http://127.0.0.1:9991'
         });
 
         env.http.get('/', {
           success: function (data, textStatus, jqXHR) {
             _this.assert(data, 'teste');
           },
-          error: function () {
-            _this.result(false, 'failed http request on /');
+          error: function (xhr, type, err) {
+            _this.result(false, 'failed http request on / : ['+type+'] ' + err);
           }
         });
       });
     },
     takedown: function (env) {
-      //env.server.stop();
+      env.server.stop();
       this.result(true);
     },
     tests: [
