@@ -131,3 +131,7 @@ function you want to test. If it throws an exception, the test passes.
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/silverbucket/jaribu/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/silverbucket/jaribu/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
