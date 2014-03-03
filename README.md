@@ -1,14 +1,14 @@
-![teste](https://raw.github.com/silverbucket/teste/master/design/teste_logo.png)
+![jaribu](https://raw.github.com/silverbucket/jaribu/master/design/jaribu_logo.png)
 
 *a JavaScript (node.js) testing framework*
 
-[![Build Status](https://secure.travis-ci.org/silverbucket/teste.png)](http://travis-ci.org/silverbucket/teste)
-[![devDependency Status](https://david-dm.org/silverbucket/teste/dev-status.png)](https://david-dm.org/silverbucket/teste#info=devDependencies)
-[![Code Climate](https://codeclimate.com/github/silverbucket/teste.png)](https://codeclimate.com/github/silverbucket/teste)
+[![Build Status](https://secure.travis-ci.org/silverbucket/jaribu.png)](http://travis-ci.org/silverbucket/jaribu)
+[![devDependency Status](https://david-dm.org/silverbucket/jaribu/dev-status.png)](https://david-dm.org/silverbucket/jaribu#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/silverbucket/jaribu.png)](https://codeclimate.com/github/silverbucket/jaribu)
 
 Intro
 -----
-Teste is a JavaScript testing framework built on node.js. It's meant to keep things simple, and make the barrier for writing tests as thin as possible.
+Jaribu is a JavaScript testing framework built on node.js. It's meant to keep things simple, and make the barrier for writing tests as thin as possible.
 
 Features
 --------
@@ -129,5 +129,5 @@ function you want to test. If it throws an exception, the test passes.
 
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/silverbucket/teste/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/silverbucket/jaribu/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
