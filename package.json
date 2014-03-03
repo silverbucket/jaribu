@@ -1,6 +1,6 @@
 {
   "name": "jaribu",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "a simple, full-featured, JavaScript testing framework",
   "main": "bin/jaribu",
   "author": "Nick Jennings <nick@silverbucket.net>",
