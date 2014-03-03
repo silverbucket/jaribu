@@ -1,18 +1,18 @@
 {
-  "name": "teste",
-  "version": "0.1.2",
+  "name": "jaribu",
+  "version": "0.1.3",
   "description": "a simple, full-featured, JavaScript testing framework",
-  "main": "bin/teste",
+  "main": "bin/jaribu",
   "author": "Nick Jennings <nick@silverbucket.net>",
   "license": "GPL",
   "bin": {
-    "teste": "./bin/teste"
+    "teste": "./bin/jaribu"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/silverbucket/teste.git"
+    "url": "git://github.com/silverbucket/jaribu.git"
   },
-  "homepage": "http://github.com/silverbucket/teste",
+  "homepage": "http://github.com/silverbucket/jaribu",
   "author": {
     "name": "Nick Jennings",
     "email": "nick@silverbucket.net"
@@ -30,7 +30,7 @@
     "websocket": "*"
   },
   "scripts": {
-    "test": "bin/teste"
+    "jaribu": "bin/jaribu"
   },
   "keywords": [
       "javascript",

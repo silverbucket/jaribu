@@ -1,12 +1,31 @@
 CHANGELOG
 =========
 
+jaribu v0.1.3 - 2014/03/03
+--------------------------
+
+- renamed project to 'jaribu'.
+
+- initial work on using tests within a browser environment (thanks @ggrin)
+
+- better array comparisons during assert (thanks @michielbdejong)
+
+- added some http test as examples.
+
+
+teste v0.1.2 - 2013/12/21
+-------------------------
+
+- improved stack trace reporting during failures.
+
+
 teste v0.1.1 - 2013/12/18
 -------------------------
 
 - fixed assert* informational messages. In some cases the automatic messages
   which indicated the location where the object match failed was being set as
   undefined.
+
 
 teste v0.1.0 - 2013/12/10
 -------------------------
