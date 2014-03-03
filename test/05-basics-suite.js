@@ -5,7 +5,7 @@ define([], function () {
   var suites = [];
 
   suites.push({
-    name: "teste basics",
+    name: "jaribu basics",
     desc: "collection of tests to test the test framework (basics)",
     tests: [
 

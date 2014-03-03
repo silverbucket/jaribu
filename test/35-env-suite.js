@@ -56,7 +56,7 @@ define([], function () {
         }
       },
       {
-        desc: "we shouldnt have variables from teste library",
+        desc: "we shouldnt have variables from jaribu library",
         run: function (env) {
           if (typeof greybg !== 'undefined') {
             this.result(false);

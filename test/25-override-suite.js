@@ -5,7 +5,7 @@ define([], function () {
   var suites = [];
 
   suites.push({
-    name: "teste override",
+    name: "jaribu override",
     desc: "testing overriden methods and timeouts",
     setup: function () { this.result(true); },
     takedown: function () { this.result(true); },

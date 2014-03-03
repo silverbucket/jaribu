@@ -1,7 +1,7 @@
 if (typeof define !== 'function') {
   var define = require('amdefine')(module);
 }
-define(['teste/lib/testlib'], function (testlib, undefined) {
+define(['jaribu/lib/testlib'], function (testlib, undefined) {
   var suites = [];
   suites.push({
     name: "testlib",

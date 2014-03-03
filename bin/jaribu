@@ -10,14 +10,14 @@
   var argv           = process.argv.slice(2);
   var requestedFiles = null;
 
-  var testeDir = __dirname+"/../";
+  var jaribuDir = __dirname+"/../";
   var appDir = __dirname+"/../";
-  if (__dirname.match(/node_modules\/teste\/bin$/)) {
+  if (__dirname.match(/node_modules\/jaribu\/bin$/)) {
     // we're a node module, set the require root
     // to the root of the app, not this module.
     appDir = __dirname+"/../../../";
   }
-  console.log('teste is in:'+testeDir);
+  console.log('jaribu is in:'+jaribuDir);
   console.log('app is in:'+appDir);
   var requirejs = require('requirejs');
   requirejs.config({
@@ -26,7 +26,7 @@
     //are loaded relative to the top-level JS file.
     baseUrl: appDir,
     paths: {
-      teste: testeDir
+      jaribu: jaribuDir
     },
     nodeRequire: require
   });
@@ -61,7 +61,7 @@
     console.log(files);
 
     var sys = require('util');
-    var teste = requirejs('teste/lib/teste');
+    var jaribu = requirejs('jaribu/lib/jaribu');
     var failedToLoad = [];
 
     var len_files = files.length;
@@ -86,14 +86,14 @@
 
       var num_suites = suites.length;
       for (n = 0; n < num_suites; n += 1) {
-        if (! teste.loadSuite(suites[n]) ) {
+        if (! jaribu.loadSuite(suites[n]) ) {
           console.error("\n"+'unable to load suite: ' + suites[n].desc);
-          console.error(teste.getErrorMessage());
-          failedToLoad.push({'desc':suites[n].desc, 'error': teste.getErrorMessage()});
+          console.error(jaribu.getErrorMessage());
+          failedToLoad.push({'desc':suites[n].desc, 'error': jaribu.getErrorMessage()});
         }
       }
     }
-    teste.begin(function() {
+    jaribu.begin(function() {
       // on complete
       var i;
       console.log('---');

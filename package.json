@@ -30,7 +30,7 @@
     "websocket": "*"
   },
   "scripts": {
-    "jaribu": "bin/jaribu"
+    "test": "bin/jaribu"
   },
   "keywords": [
       "javascript",

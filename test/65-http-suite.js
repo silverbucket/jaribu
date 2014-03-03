@@ -29,7 +29,7 @@ define([], function () {
 
         env.http.get('/', {
           success: function (data, textStatus, jqXHR) {
-            _this.assert(data, 'teste');
+            _this.assert(data, 'jaribu');
           },
           error: function (xhr, type, err) {
             _this.result(false, 'failed http request on / : ['+type+'] ' + err);
@@ -49,7 +49,7 @@ define([], function () {
           env.http.get('/', {
             success: function (r) {
               console.log(r);
-              _this.assert(r, 'teste');
+              _this.assert(r, 'jaribu');
             },
             error: function (r) {
               _this.result(false, 'failed http request on /');
