@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-jaribu v0.1.3 - 2014/03/03
+jaribu v0.1.4 - 2014/03/03
 --------------------------
 
 - renamed project to 'jaribu'.
