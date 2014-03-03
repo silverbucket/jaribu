@@ -59,14 +59,30 @@ define([], function () {
         }
       },
       {
+        desc: "get /testBAD",
+        run: function (env) {
+          var _this = this;
+          env.http.get('/testBAD', {
+            success: function (data, textStatus, req) {
+              _this.result(false, 'shouldn\'t succeed in fetching a bad URL');
+            },
+            error: function (req, textStatus, errorThrown) {
+              _this.assertAnd(404, req.status);
+              _this.result(true, 'failed get /testBAD');
+            }
+          });
+        }
+      },
+      {
         desc: "get /test",
         run: function (env) {
           var _this = this;
           env.http.get('/test', {
-            success: function (data) {
+            success: function (data, textStatus, req) {
+              _this.assertAnd(200, req.status);
               _this.assert(data, {foo:'bar'});
             },
-            error: function () {
+            error: function (req, textStatus, errorThrown) {
               _this.result(false, 'failed get /test');
             }
           });
@@ -77,10 +93,10 @@ define([], function () {
         run: function (env) {
           var _this = this;
           env.http.post('/test', {foo:"baz"}, {
-            success: function (data) {
+            success: function (data, textStatus, req) {
               _this.assert(data, 'POST /test');
             },
-            error: function () {
+            error: function (req, textStatus, errorThrown) {
               _this.result(false, 'failed post /test');
             }
           });
