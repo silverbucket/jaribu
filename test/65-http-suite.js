@@ -59,7 +59,7 @@ define([], function () {
         }
       },
       {
-        desc: "get /testBAD",
+        desc: "GET /testBAD",
         run: function (env) {
           var _this = this;
           env.http.get('/testBAD', {
@@ -74,7 +74,7 @@ define([], function () {
         }
       },
       {
-        desc: "get /test",
+        desc: "GET /test",
         run: function (env) {
           var _this = this;
           env.http.get('/test', {
@@ -89,7 +89,7 @@ define([], function () {
         }
       },
       {
-        desc: "post /test",
+        desc: "POST /test",
         run: function (env) {
           var _this = this;
           env.http.post('/test', {foo:"baz"}, {
@@ -103,7 +103,7 @@ define([], function () {
         }
       },
       {
-        desc: "get /test with new data",
+        desc: "GET /test with new data",
         run: function (env) {
           var _this = this;
           env.http.get('/test', {
@@ -112,6 +112,34 @@ define([], function () {
             },
             error: function () {
               _this.result(false, 'failed get /test');
+            }
+          });
+        }
+      },
+      {
+        desc: "DEL /test",
+        run: function (env) {
+          var _this = this;
+          env.http.del('/test', {
+            success: function (data) {
+              _this.assert(data, 'DEL /test');
+            },
+            error: function () {
+              _this.result(false, 'failed DEL /test');
+            }
+          });
+        }
+      },
+      {
+        desc: "PUT /test",
+        run: function (env) {
+          var _this = this;
+          env.http.put('/test', {
+            success: function (data) {
+              _this.assert(data, 'PUT /test');
+            },
+            error: function () {
+              _this.result(false, 'failed PUT /test');
             }
           });
         }
