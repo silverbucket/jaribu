@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-jaribu v0.1.5 - 2014/03/04
+jaribu v0.1.6 - 2014/03/04
 --------------------------
 
 - added http DEL and PUT functionlity to Http object.
