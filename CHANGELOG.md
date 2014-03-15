@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-jaribu v0.1.7 - 2014/03/15
+jaribu v0.1.8 - 2014/03/15
 --------------------------
 
 - fixed informational messages displayed during `test.assertFail()` and `test.assertFailAnd()` failures.

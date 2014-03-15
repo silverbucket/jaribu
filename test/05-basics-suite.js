@@ -206,7 +206,7 @@ define([], function () {
       {
         desc: "assertFail inline use",
         run: function (env, test) {
-          test.assertFail(false);
+          test.assertFail(false, true);
         }
       },
       {
