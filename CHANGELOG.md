@@ -1,10 +1,17 @@
 CHANGELOG
 =========
 
+jaribu v0.1.9 - 2014/03/31
+--------------------------
+
+- fix in object assertion, an object with no properties was asserting 
+  as the same as an object with an undefined property. [issue #26](http://github.com/silverbucket/jaribu/issues/26)
+
 jaribu v0.1.8 - 2014/03/15
 --------------------------
 
-- fixed informational messages displayed during `test.assertFail()` and `test.assertFailAnd()` failures.
+- fixed informational messages displayed during `test.assertFail()` and 
+  `test.assertFailAnd()` failures.
 
 
 jaribu v0.1.6 - 2014/03/04
@@ -25,13 +32,13 @@ jaribu v0.1.4 - 2014/03/03
 - added some http test as examples.
 
 
-teste v0.1.2 - 2013/12/21
+jaribu v0.1.2 - 2013/12/21
 -------------------------
 
 - improved stack trace reporting during failures.
 
 
-teste v0.1.1 - 2013/12/18
+jaribu v0.1.1 - 2013/12/18
 -------------------------
 
 - fixed assert* informational messages. In some cases the automatic messages
@@ -39,16 +46,16 @@ teste v0.1.1 - 2013/12/18
   undefined.
 
 
-teste v0.1.0 - 2013/12/10
+jaribu v0.1.0 - 2013/12/10
 -------------------------
 
 - bugfix for custom error messages during `assert*()`'s. Previously it wasn only
-  working for `assertAnd()`. ([issue #14](http://github.com/silverbucket/teste/issues/14))
+  working for `assertAnd()`. ([issue #14](http://github.com/silverbucket/jaribu/issues/14))
 
 - testing tools (functions) which previously needed the test object passed in,
   don't anymore.
 
-- added support for testing for thrown exceptions. ([feature request #15](http://github.com/silverbucket/teste/issues/14))
+- added support for testing for thrown exceptions. ([feature request #15](http://github.com/silverbucket/jaribu/issues/14))
 
 		this.throws(function () {
 			throw new Error('oops');
@@ -61,27 +68,27 @@ teste v0.1.0 - 2013/12/10
 	benchmark)
 
 
-teste v0.0.19 - 2013/11/15
+jaribu v0.0.19 - 2013/11/15
 --------------------------
 
-- refactored the teste.loadSuite() function to reduce function complexity,
+- refactored the jaribu.loadSuite() function to reduce function complexity,
 	splitting out class functions to separate files: `lib/Scaffolding.js`,
 	`lib/Teste.js`, `lib/Suite.js`, `lib/helpers.js`.
-	(https://codeclimate.com/github/silverbucket/teste).
+	(https://codeclimate.com/github/silverbucket/jaribu).
 
 - minor adjustments to logging behavior.
 
-- if a teste returns a promise with a `fail` function, we can use that to catch
+- if a jaribu returns a promise with a `fail` function, we can use that to catch
 	unexpected errors.
 
 
-teste v0.0.18 - 2013/07/10
+jaribu v0.0.18 - 2013/07/10
 --------------------------
 
 - Fixes to WebSocketClient tool
 
 
-teste v0.0.17 - 2013/06/23
+jaribu v0.0.17 - 2013/06/23
 --------------------------
 
 - added `abortOnFail` boolean to suite options. If a test fails in that suite,
@@ -91,7 +98,7 @@ teste v0.0.17 - 2013/06/23
   	suites.push({
 	    desc: "checks for various version requirements",
 	    abortOnFail: true,  // don't continue with further test suites if any
-	    									  // tests in this suite fail
+	                        // tests in this suite fail
 	    setup: function (env, test) {
 	    	...
 	    },
@@ -99,13 +106,13 @@ teste v0.0.17 - 2013/06/23
 	  });
 
 
-teste v0.0.16 - 2013/03/20
+jaribu v0.0.16 - 2013/03/20
 --------------------------
 
 - minor bugfixes for assert and WebSocketClient
 
 
-teste v0.0.15 - 2013/03/09
+jaribu v0.0.15 - 2013/03/09
 --------------------------
 
 - decreased wait interval so async tests complete faster.
@@ -115,13 +122,13 @@ teste v0.0.15 - 2013/03/09
 - minor fixes, binded functions so they can be used as callbacks.
 
 
-teste v0.0.14 - 2013/02/14
+jaribu v0.0.14 - 2013/02/14
 --------------------------
 
 - bugfixes in the assert and WebSocketClient tools.
 
 
-teste v0.0.13 - 2013/01/30
+jaribu v0.0.13 - 2013/01/30
 --------------------------
 
 - created a new function for the `WebSocketClient`, called `sendWith()`. it's
@@ -149,7 +156,7 @@ teste v0.0.13 - 2013/01/30
 		// }
 
 
-teste v0.0.12 - 2013/01/28
+jaribu v0.0.12 - 2013/01/28
 --------------------------
 
 - added support for confirmation messages in `WebSocketClient.sendAndVerify()`
@@ -180,7 +187,7 @@ teste v0.0.12 - 2013/01/28
 	properties.
 
 
-teste v0.0.11 - 2013/01/17
+jaribu v0.0.11 - 2013/01/17
 --------------------------
 
 - modified WebSocketClient's sendAndVerify() function. Now it takes three
@@ -224,7 +231,7 @@ teste v0.0.11 - 2013/01/17
 			}
 		]
 
-teste v0.0.10 - 2013/01/15
+jaribu v0.0.10 - 2013/01/15
 --------------------------
 
 - support for promises in tests:
@@ -265,7 +272,7 @@ teste v0.0.10 - 2013/01/15
 - bugfixes where assert*And() fails were slipping through the cracks
 
 
-teste v0.0.9 - 2012/11/25
+jaribu v0.0.9 - 2012/11/25
 -------------------------
 
 - added support for performing tests against WebSocket servers. If you provide
@@ -313,7 +320,7 @@ teste v0.0.9 - 2012/11/25
 		]
 
 
-teste v0.0.8 - 2012/11/08
+jaribu v0.0.8 - 2012/11/08
 -------------------------
 
 - added support for HTTP GET / POST testing, using a simple jQuery wrapper. All
@@ -385,7 +392,7 @@ teste v0.0.8 - 2012/11/08
 - added stack traces for failures
 
 
-teste v0.0.7 - 2012/11/06
+jaribu v0.0.7 - 2012/11/06
 -------------------------
 
 - added support for specifying suite files to run via. the command-line
@@ -404,7 +411,7 @@ teste v0.0.7 - 2012/11/06
 		});
 
 
-teste v0.0.6 - 2012/10/28
+jaribu v0.0.6 - 2012/10/28
 -------------------------
 
 - encase test and scaffolding runs in a try/catch clause
