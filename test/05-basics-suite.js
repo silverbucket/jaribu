@@ -210,6 +210,12 @@ define([], function () {
         }
       },
       {
+        desc: "assert object with undefined property",
+        run: function (env, test) {
+          test.assertFail({}, {'foo': undefined});
+        }
+      },
+      {
         desc: "assertFail inline use - should fail",
         willFail: true,
         run: function (env, test) {
