@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+jaribu v0.1.10 - 2014/05/21
+---------------------------
+
+- fix deep object assertion making sure we only fail if one objects 
+  property returns true for hasOwnProperty() while it returns fails 
+  for the other object
+
+
 jaribu v0.1.9 - 2014/03/31
 --------------------------
 
