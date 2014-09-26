@@ -26,7 +26,7 @@
     "websocket": "*"
   },
   "devDependencies": {
-    "express": "*",
+    "express": "3.x",
     "websocket": "*"
   },
   "scripts": {
