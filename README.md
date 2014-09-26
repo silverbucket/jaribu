@@ -3,7 +3,6 @@
 *a JavaScript (node.js) testing framework*
 
 [![Build Status](https://secure.travis-ci.org/silverbucket/jaribu.png)](http://travis-ci.org/silverbucket/jaribu)
-[![devDependency Status](https://david-dm.org/silverbucket/jaribu/dev-status.png)](https://david-dm.org/silverbucket/jaribu#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/silverbucket/jaribu.png)](https://codeclimate.com/github/silverbucket/jaribu)
 
 Intro
