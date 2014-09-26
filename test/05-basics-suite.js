@@ -298,6 +298,19 @@ define([], function () {
         run: function (env, test) {
           test.assert(test._message, '');
         }
+      },
+      {
+        desc: "#done should succeed",
+        run: function (env, test) {
+          test.done();
+        }
+      },
+      {
+        desc: "#fail should fail",
+        willFail: true,
+        run: function (env, test) {
+          test.fail('failed!');
+        }
       }
     ]
   });
