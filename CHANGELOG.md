@@ -1,6 +1,19 @@
 CHANGELOG
 =========
 
+jaribu v0.2.0  - 2014/09/26
+---------------------------
+
+- added `test.fail()` function to easily pass promise errors directly to
+  jaribu.
+
+    myLib.myMethod(function(yes) {
+        test.assert(yes, true);
+    }, test.fail).catch(test.fail);
+
+- lots of code cleanup and improvements to readability.
+
+
 jaribu v0.1.10 - 2014/05/21
 ---------------------------
 
