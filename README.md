@@ -126,6 +126,14 @@ function you want to test. If it throws an exception, the test passes.
 		throw new Error('oops');
 	}, Error, 'caught thrown exception');
 
+## Shortcuts
+
+When resolving tests there are a number of calls you can make.
+
+	test.result(false, 'this broke because ...'); // fails test with message
+	test.result(true); // passes test
+	test.done(); // passes test
+	test.fail('problem with stuff ...'); // fails test with message
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/silverbucket/jaribu/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
