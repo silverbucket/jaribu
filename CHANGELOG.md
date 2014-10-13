@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+jaribu v0.2.1  - 2014/10/13
+---------------------------
+
+- stricter npm dependency versions, fix for a broken npm package
+
 jaribu v0.2.0  - 2014/09/26
 ---------------------------
 
