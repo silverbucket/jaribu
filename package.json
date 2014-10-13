@@ -1,6 +1,6 @@
 {
   "name": "jaribu",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "a simple, full-featured, JavaScript testing framework",
   "main": "bin/jaribu",
   "author": "Nick Jennings <nick@silverbucket.net>",
@@ -19,15 +19,15 @@
   },
   "dependencies": {
     "jquery": "1.x",
-    "jsdom": "*",
-    "walk": "*",
-    "requirejs": "*",
-    "amdefine": "*",
-    "websocket": "*"
+    "jsdom": "1.0.x",
+    "walk": "2.x",
+    "requirejs": "2.x",
+    "amdefine": "0.1.x",
+    "websocket": "1.x"
   },
   "devDependencies": {
     "express": "3.x",
-    "websocket": "*"
+    "websocket": "1.x"
   },
   "scripts": {
     "test": "bin/jaribu"
