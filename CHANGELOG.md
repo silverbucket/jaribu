@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+jaribu v0.2.2  - 2014/10/14
+---------------------------
+
+- another version bump to get around broken dependency packages
+  
 jaribu v0.2.1  - 2014/10/13
 ---------------------------
 
