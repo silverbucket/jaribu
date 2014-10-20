@@ -19,48 +19,50 @@ Features
 
 **Shared environments** : a suite has an 'env' object which you can write to and that data will be available for any test in that suite.
 
-	suites.push({
-		name: "test suite",
-		desc: "example",
-		setup: function(env) {
-			env.foo = 'bar';
-		},
-		tests: [
-			{
-				desc: "we should have the foo property",
-				run: function(env, test) {
-					test.assert(env.foo, 'bar');  // true
-				}
-			},
-			{
-				desc: "lets set a var",
-				run: function(env, test) {
-					env.pizza = 'slice';
-					test.assert(env.pizza, 'slice');  // true
-				}
-			},
-			{
-				desc: "verify it's still there",
-				run: function(env, test) {
-					test.assert(env.pizza, 'slice');   // true
-				}
-			},
-			{
-				desc: "remove a variable",
-				run: function(env, test) {
-					delete env.foo;
-					test.assertType(env.foo, 'undefined');   // true
-				}
-			},
-			{
-				desc: "we shouldn't be able to access the deleted property",
-				willFail: true,
-				run: function(env, test) {
-					test.assert(env.foo, 'bar');   // false
-				}
-			}
-		]
-	});
+```javascript
+  suites.push({
+    name: "test suite",
+    desc: "example",
+    setup: function(env) {
+      env.foo = 'bar';
+    },
+    tests: [
+      {
+        desc: "we should have the foo property",
+        run: function(env, test) {
+          test.assert(env.foo, 'bar');  // true
+        }
+      },
+      {
+        desc: "lets set a var",
+        run: function(env, test) {
+          env.pizza = 'slice';
+          test.assert(env.pizza, 'slice');  // true
+        }
+      },
+      {
+        desc: "verify it's still there",
+        run: function(env, test) {
+          test.assert(env.pizza, 'slice');   // true
+        }
+      },
+      {
+        desc: "remove a variable",
+        run: function(env, test) {
+          delete env.foo;
+          test.assertType(env.foo, 'undefined');   // true
+        }
+      },
+      {
+        desc: "we shouldn't be able to access the deleted property",
+        willFail: true,
+        run: function(env, test) {
+          test.assert(env.foo, 'bar');   // false
+        }
+      }
+    ]
+  });
+```
 
 ## Asserts
 You can use the assert family of functions to compare values with each other
@@ -70,7 +72,9 @@ You can use the assert family of functions to compare values with each other
 The `assert()` function compares two objects for truthiness and passes or fails
 the test based on the result of the comparison.
 
- 		assert(object1, object2, "testing object1 and 2 are the same")
+```javascript
+  assert(object1, object2, "testing object1 and 2 are the same")
+```
 
 ### assertAnd()
 Same as `assert()` except does not pass the test automatically when the result
@@ -87,7 +91,9 @@ match, and will fail automatically if objects match.
 The `assertType()` function tests the type of a given variable *(object, string,
 boolean, etc.)*.
 
-		assertType(object, 'object', "testing object is actually an object")
+```javascript
+  assertType(object, 'object', "testing object is actually an object")
+```
 
 ### assertTypeAnd()
 Same as `assertType()` except does not pass the test automatically when the
@@ -106,40 +112,41 @@ Technically they are all mocks, since they have info about whether they've been
 called, and how many times, but can be used as stubs as well (which are
 basically just mocks without meta data).
 
-	var mock = new this.Stub(function(p1, p2) {
-		console.log('hello world');
-	});
+```javascript
+  var mock = new this.Stub(function(p1, p2) {
+    console.log('hello world');
+  });
 
-	mock.called;  // false
+  mock.called;  // false
 
-	mock.numCalled;  // 0
+  mock.numCalled;  // 0
 
+  mock();  // hello world
 
-	mock();  // hello world
+  mock.called;  // true
 
-	mock.called;  // true
-
-	mock.numCalled;  // 1
-
+  mock.numCalled;  // 1
+```
 
 ## Testing for thrown exceptions
 Catching thrown exceptions works with normal thrown exceptions or exceptions
 thrown asyncronously. The interface is the same either way, just call the
 function you want to test. If it throws an exception, the test passes.
 
-	this.throws(function () {
-		throw new Error('oops');
-	}, Error, 'caught thrown exception');
+```javascript
+  this.throws(function () {
+    throw new Error('oops');
+  }, Error, 'caught thrown exception');
+```
 
 ## Shortcuts
 
 When resolving tests there are a number of calls you can make.
 
-	test.result(false, 'this broke because ...'); // fails test with message
-	test.result(true); // passes test
-	test.done(); // passes test
-	test.fail('problem with stuff ...'); // fails test with message
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/silverbucket/jaribu/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+```javascript
+  test.result(false, 'this broke because ...'); // fails test with message
+  test.result(true); // passes test
+  test.done(); // passes test
+  test.fail('problem with stuff ...'); // fails test with message
+```
 
