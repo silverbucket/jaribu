@@ -4,7 +4,7 @@
 
 [![Build Status](http://img.shields.io/travis/silverbucket/jaribu.svg?style=flat)](http://travis-ci.org/silverbucket/jaribu)
 [![Code Climate](http://img.shields.io/codeclimate/github/silverbucket/jaribu.svg?style=flat)](https://codeclimate.com/github/silverbucket/jaribu)
-[![Dependency Status](https://david-dm.org/silverbucket/jaribu/status.png)](https://david-dm.org/silverbucket/jaribu#info=dependencies)
+[![Dependency Status](http://img.shields.io/david/silverbucket/jaribu.svg?style=flat)](https://david-dm.org/silverbucket/jaribu#info=dependencies)
 [![license](https://img.shields.io/npm/l/jaribu.svg?style=flat)](https://npmjs.org/package/jaribu)
 [![downloads](http://img.shields.io/npm/dm/jaribu.svg?style=flat)](https://npmjs.org/package/jaribu)
 [![release](http://img.shields.io/github/release/silverbucket/jaribu.svg?style=flat)](https://github.com/silverbucket/jaribu/releases)
