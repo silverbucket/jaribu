@@ -49,6 +49,12 @@ define([], function () {
         }
       },
       {
+        desc: 'arrays should be arrays',
+        run: function (env, test) {
+          test.assertType([], 'array');
+        }
+      },
+      {
         desc: 'test for tools object',
         run: function (env, test) {
           test.assertType(test.tools, 'object');

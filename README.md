@@ -89,7 +89,7 @@ match, and will fail automatically if objects match.
 
 ### assertType()
 The `assertType()` function tests the type of a given variable *(object, string,
-boolean, etc.)*.
+boolean, array, etc.)*. NOTE: can use 'array' as a type.
 
 ```javascript
   assertType(object, 'object', "testing object is actually an object")
