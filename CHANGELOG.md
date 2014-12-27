@@ -1,15 +1,23 @@
 CHANGELOG
 =========
 
+jaribu v0.3.0  - 2014/12/27
+---------------------------
+
+- added support for using type 'array' within `assertType`
+
+
 jaribu v0.2.2  - 2014/10/14
 ---------------------------
 
 - another version bump to get around broken dependency packages
   
+
 jaribu v0.2.1  - 2014/10/13
 ---------------------------
 
 - stricter npm dependency versions, fix for a broken npm package
+
 
 jaribu v0.2.0  - 2014/09/26
 ---------------------------
@@ -37,6 +45,7 @@ jaribu v0.1.9 - 2014/03/31
 
 - fix in object assertion, an object with no properties was asserting 
   as the same as an object with an undefined property. [issue #26](http://github.com/silverbucket/jaribu/issues/26)
+
 
 jaribu v0.1.8 - 2014/03/15
 --------------------------
