@@ -61,16 +61,17 @@ define([], function () {
         }
       },
       {
-        desc: 'test for jquery support',
+        desc: 'test for fetch support',
         run: function (env, test) {
-          test.assertType(test.tools.jQuery, 'function');
+          console.log('fetch: ', test.tools.fetch);
+          test.assertType(test.tools.fetch, 'function');
         }
       },
       {
         desc: "test double assertType statements",
         run: function (env, test) {
           test.assertTypeAnd(test.tools, 'object');
-          test.assertType(test.tools.jQuery, 'function');
+          test.assertType(test.tools.fetch, 'function');
         }
       },
       {
