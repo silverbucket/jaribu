@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+jaribu v0.4.0  - 2015/03/29
+---------------------------
+
+- completely removed dependency on `jquery` (removed from `test.tools.jquery`) **(breaking change)**
+
+- removed `test.http` helper in favor of `test.tools.fetch` **(breaking change)**
+
+- updated dependencies
+
+
 jaribu v0.3.0  - 2014/12/27
 ---------------------------
 
