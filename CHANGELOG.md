@@ -1,6 +1,22 @@
 CHANGELOG
 =========
 
+jaribu v1.1.0  - 2015/03/30
+---------------------------
+
+- running jaribu tests in browser now as well (aside from websocket and rest tests which need server functionality)
+
+- added `display.write` for browser as well as console
+
+- exception handling for `test.throws()` method extended to work in browser
+
+- more Promise object bugfixes
+
+- more bugfixes related to dynamic loading of dependencies using aliases
+
+- renamed `test.tools.*` to `test.helpers` **(breaking change)**
+
+
 jaribu v1.0.1  - 2015/03/30
 ---------------------------
 
