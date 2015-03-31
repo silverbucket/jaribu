@@ -47,7 +47,8 @@
       'jaribu/tools/Throws': './lib/tools/Throws',
       'jaribu/tools/WebSocketClient': './lib/tools/WebSocketClient', 
       'jaribu/tools/WebSocketServer': './lib/tools/WebSocketServer',
-      'jaribu/testlib2': './lib/testlib2'
+      'jaribu/testlib2': './lib/testlib2',
+      'jaribu/testlib': './lib/testlib'
     },
     nodeRequire: require
   });
