@@ -17,6 +17,29 @@ Jaribu is a JavaScript testing framework built on node.js. It's meant to keep th
 Features
 --------
 
+**Console-based testing** : jaribu will automatically find tests in `test/*-suite.js` when run from console. 
+
+`$ node_modules/.bin/jaribu`
+
+**Browser testing** : When run from the browser, you can create a simple `test/index.html` file like the following:
+
+```html
+<!DOCTYPE html>
+<html>
+<head><title>tests</title></head>
+<body>
+<script>
+var jaribuTestFiles = [
+    'test1-suite.js',
+    'test2-suite.js', 
+    'test3-suite.js' 
+    ];
+</script>
+<script data-main="../node_modules/jaribu/browser/main.js" src="../node_modules/jaribu/node_modules/requirejs/require.js"></script>
+</body>
+</html>
+```
+
 **Shared environments** : a suite has an 'env' object which you can write to and that data will be available for any test in that suite.
 
 ```javascript

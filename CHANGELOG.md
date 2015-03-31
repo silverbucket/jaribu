@@ -1,8 +1,10 @@
 CHANGELOG
 =========
 
-jaribu v0.4.1  - 2015/03/30
+jaribu v1.0.0  - 2015/03/30
 ---------------------------
+
+- switching to `v1.0.0` and following semver
 
 - reworked module loadng to use AMD aliases rather than paths, so the locations can be defined at runtime
 
@@ -10,6 +12,24 @@ jaribu v0.4.1  - 2015/03/30
 
 - created fetch.json test tool `test.fetch.json` which operates like `test.helpers.fetch` except has promise handling and json parsing built in
 
+- created `browser/main.js` for browser-based tests to include and bootstrap jaribu in the browser. Only the following HTML is needed in the projects `test/` dir:
+
+```html
+<!DOCTYPE html>
+<html>
+<head><title>tests</title></head>
+<body>
+<script>
+var jaribuTestFiles = [
+    'test1-suite.js',
+    'test2-suite.js', 
+    'test3-suite.js' 
+    ];
+</script>
+<script data-main="../node_modules/jaribu/browser/main.js" src="../node_modules/jaribu/node_modules/requirejs/require.js"></script>
+</body>
+</html>
+```
 
 jaribu v0.4.0  - 2015/03/29
 ---------------------------

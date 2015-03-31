@@ -1,6 +1,6 @@
 {
   "name": "jaribu",
-  "version": "0.4.1",
+  "version": "1.0.0",
   "description": "a simple, full-featured, JavaScript testing framework",
   "main": "bin/jaribu",
   "author": {
