@@ -55,22 +55,22 @@ define([], function () {
         }
       },
       {
-        desc: 'test for tools object',
+        desc: 'test for helpers object',
         run: function (env, test) {
-          test.assertType(test.tools, 'object');
+          test.assertType(test.helpers, 'object');
         }
       },
       {
         desc: 'test for fetch support',
         run: function (env, test) {
-          test.assertType(test.tools.fetch, 'function');
+          test.assertType(test.helpers.fetch, 'function');
         }
       },
       {
         desc: "test double assertType statements",
         run: function (env, test) {
-          test.assertTypeAnd(test.tools, 'object');
-          test.assertType(test.tools.fetch, 'function');
+          test.assertTypeAnd(test.helpers, 'object');
+          test.assertType(test.helpers.fetch, 'function');
         }
       },
       {
