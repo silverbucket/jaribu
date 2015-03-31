@@ -6,6 +6,7 @@ define([], function () {
 
   suites.push({
     name: "WebSocket tests",
+    runInBrowser: false,
     desc: "collection of tests to test WebSocket communication",
     setup: function (env, test) {
       env.expected = { // struct of expected results for each http call

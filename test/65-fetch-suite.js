@@ -6,6 +6,7 @@ define([], function () {
 
   suites.push({
     name: "HTTP / REST tests",
+    runInBrowser: false,
     desc: "collection of tests to test HTTP calls (using fetch)",
     setup: function (env, test) {
       this.assertAnd(this._message, '');
