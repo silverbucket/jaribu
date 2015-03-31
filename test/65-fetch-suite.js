@@ -19,54 +19,11 @@ define([], function () {
         uris: env.expected
       });
 
-      env.fetch = (function () {
-        var baseUrl = 'http://127.0.0.1:9991';
-
-        function status(response) {
-          if (response.status >= 200 && response.status < 300) {
-            return Promise.resolve(response);
-          } else {
-            return Promise.reject(response);
-          }
-        }
-
-        function json(response) {
-          return response.json();
-        }
-
-        return function (uri, postData) {
-          if ((typeof postData === 'string') && (postData === 'delete')) {
-            return test.tools.fetch(baseUrl + uri, {
-                      method: 'delete',
-                      headers: {
-                        'Accept': 'application/json'
-                      },
-                    })
-                    .then(status)
-                    .then(json);
-          } else if (typeof postData === 'object') {
-            return test.tools.fetch(baseUrl + uri, {
-                      method: 'post',
-                      headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify(postData)
-                    })
-                    .then(status)
-                    .then(json);
-            
-          } else {
-            return test.tools.fetch(baseUrl + uri)
-                    .then(status)
-                    .then(json);
-          }
-        };
-      })();
+      env.baseUrl = 'http://127.0.0.1:9991';
 
       env.server.run(function () {
         test.write('http dummy server running');
-        env.fetch('/').then(function (data) {
+        test.fetch.json(env.baseUrl + '/').then(function (data) {
           test.assert(data, { name: "jaribu" });          
         }, function (r) {
           test.result(false, 'failed http request on / : ', r);
@@ -81,7 +38,7 @@ define([], function () {
       {
         desc: "same call as in setup, from test",
         run: function (env, test) {
-          env.fetch('/').then(function (data) {
+          test.fetch.json(env.baseUrl + '/').then(function (data) {
             console.log(data);
             test.assert(data, { name: "jaribu" });
           }, function (r) {
@@ -92,7 +49,7 @@ define([], function () {
       {
         desc: "GET /testBAD",
         run: function (env, test) {
-          env.fetch('/testBAD').then(function (data) {
+          test.fetch.json(env.baseUrl + '/testBAD').then(function (data) {
             test.result(false, 'shouldn\'t succeed in fetching a bad URL ' + data);
           }, function (r) {
             test.assertAnd(404, r.status);
@@ -103,7 +60,7 @@ define([], function () {
       {
         desc: "GET /test",
         run: function (env, test) {
-          env.fetch('/test').then(function (data) {
+          test.fetch.json(env.baseUrl + '/test').then(function (data) {
             test.assert(data, { foo:'bar' });
           }, function (r) {
             test.result(false, 'failed get /test');
@@ -113,7 +70,7 @@ define([], function () {
       {
         desc: "POST /test",
         run: function (env, test) {
-          env.fetch('/test', { foo: "baz" }).then(function (data) {
+          test.fetch.json(env.baseUrl + '/test', { foo: "baz" }).then(function (data) {
             console.log('data: ', data);
             test.assert(data, 'POST /test');
           }, function (r) {
@@ -124,7 +81,7 @@ define([], function () {
       {
         desc: "GET /test with new data",
         run: function (env, test) {
-          env.fetch('/test').then(function (data) {
+          test.fetch.json(env.baseUrl + '/test').then(function (data) {
             test.assert(data, { foo:'baz' });
           }, function (r) {
             test.result(false, 'failed get /test');
@@ -134,7 +91,7 @@ define([], function () {
       {
         desc: "DEL /test",
         run: function (env, test) {
-          env.fetch('/test', 'delete').then(function (data) {
+          test.fetch.json(env.baseUrl + '/test', 'delete').then(function (data) {
             test.assert(data, 'DEL /test');
           }, function (r) {
             test.result(false, 'failed DEL /test');

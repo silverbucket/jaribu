@@ -8,7 +8,7 @@ jaribu v0.4.1  - 2015/03/30
 
 - added display functions for use in a browser environment
 
-
+- created fetch.json test tool `test.fetch.json` which operates like `test.helpers.fetch` except has promise handling and json parsing built in
 
 
 jaribu v0.4.0  - 2015/03/29
