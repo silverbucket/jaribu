@@ -21,11 +21,11 @@
     "bluebird": "^2.9.21",
     "body-parser": "^1.12.2",
     "express": "^4.12.3",
-    "fetch": "^0.3.6",
     "node-fetch": "^1.0.6",
     "requirejs": "^2.1.16",
     "walk": "^2.3.9",
-    "websocket": "^1.0.18"
+    "websocket": "^1.0.18",
+    "whatwg-fetch": "^0.7.0"
   },
   "scripts": {
     "test": "bin/jaribu"
