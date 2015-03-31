@@ -17,7 +17,10 @@ require.config({
         'jaribu/tools/HttpServer': './../lib/tools/HttpServer', 
         'jaribu/tools/Throws': './../lib/tools/Throws',
         'jaribu/tools/WebSocketClient': './../lib/tools/WebSocketClient', 
-        'jaribu/tools/WebSocketServer': './../lib/tools/WebSocketServer'
+        'jaribu/tools/WebSocketServer': './../lib/tools/WebSocketServer',
+        'jaribu/testlib2': './../lib/testlib2',
+        'jaribu/testlib': './../lib/testlib',
+        'fetch': './../node_modules/whatwg-fetch/fetch'
     }
 });
 
