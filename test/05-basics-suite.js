@@ -63,7 +63,6 @@ define([], function () {
       {
         desc: 'test for fetch support',
         run: function (env, test) {
-          console.log('fetch: ', test.tools.fetch);
           test.assertType(test.tools.fetch, 'function');
         }
       },

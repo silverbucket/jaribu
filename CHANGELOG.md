@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+jaribu v0.4.1  - 2015/03/30
+---------------------------
+
+- reworked module loadng to use AMD aliases rather than paths, so the locations can be defined at runtime.
+
+
 jaribu v0.4.0  - 2015/03/29
 ---------------------------
 

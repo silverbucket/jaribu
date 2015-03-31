@@ -4,22 +4,25 @@
 (function (undefined) {
   "use strict";
 
-  var walk           = require('walk');
-  var files          = [];
-  var cwd            = process.cwd();
-  var argv           = process.argv.slice(2);
-  var requestedFiles = null;
+  var walk           = require('walk'),
+      requirejs      = require('requirejs'),
+      files          = [],
+      cwd            = process.cwd(),
+      argv           = process.argv.slice(2),
+      jaribuDir      = __dirname + '/../',
+      appDir         = __dirname + '/../',
+      requestedFiles;
 
-  var jaribuDir = __dirname+"/../";
-  var appDir = __dirname+"/../";
   if (__dirname.match(/node_modules\/jaribu\/bin$/)) {
     // we're a node module, set the require root
     // to the root of the app, not this module.
-    appDir = __dirname+"/../../../";
+    appDir = __dirname + '/../../../';
   }
-  console.log('jaribu is in:' + jaribuDir);
-  console.log('app is in:' + appDir);
-  var requirejs = require('requirejs');
+
+  console.log('jaribu is in: ' + jaribuDir);
+  console.log('app is in: ' + appDir);
+  
+  
   requirejs.config({
     //Pass the top-level main.js/index.js require
     //function to requirejs so that node modules
@@ -49,22 +52,22 @@
     nodeRequire: require
   });
 
-  if(argv.length > 0) {
+  if (argv.length > 0) {
     requestedFiles = {};
-    argv.forEach(function(arg) {
+    argv.forEach(function (arg) {
       var path = arg[0] == '/' ? arg : (cwd + '/' + arg);
       requestedFiles[path] = true;
     });
   }
 
   // Walker options
-  var walker  = walk.walk(cwd+'/test', { followLinks: false });
+  var walker  = walk.walk(cwd + '/test', { followLinks: false });
 
   walker.on('file', function (root, stat, next) {
     var path = root + '/' + stat.name;
     if (stat.name.match(/\-suite\.js$/g)) {
       // Add this file to the list of files
-      if((! requestedFiles) || requestedFiles[path]) {
+      if ((! requestedFiles) || requestedFiles[path]) {
         files.push(path);
       }
     } else if ((requestedFiles) && (requestedFiles[path])) {
@@ -74,11 +77,9 @@
   });
 
   walker.on('end', function () {
-    var i, n;
     files = files.sort();
     console.log(files);
 
-    var sys = require('util');
     var jaribu = requirejs('jaribu/lib/jaribu');
     var failedToLoad = [];
 
@@ -88,13 +89,13 @@
       return;
     }
 
-    for (i = 0; i < len_files; i += 1) {
+    for (var i = 0; i < len_files; i += 1) {
       var s = requirejs(files[i]);
       var suites = [];
 
       if (typeof s === 'undefined') {
-        console.error("expected an array of tests, but got 'undefined' from file: "+files[i]);
-        failedToLoad.push({'desc':files[i], 'error': 'unable to read suite data from file'});
+        console.error('expected an array of tests, but got \'undefined\' from file: ' + files[i]);
+        failedToLoad.push({ 'desc': files[i], 'error': 'unable to read suite data from file' });
         continue;
       } else if ((s.hasOwnProperty('name')) && (typeof s.name !== 'undefined')) {
         suites.push(s);
@@ -102,21 +103,19 @@
         suites = s;
       }
 
-      var num_suites = suites.length;
-      for (n = 0; n < num_suites; n += 1) {
+      for (var n = 0, nlen = suites.length; n < nlen; n += 1) {
         if (! jaribu.loadSuite(suites[n]) ) {
-          console.error("\n"+'unable to load suite: ' + suites[n].desc);
+          console.error("\n" + 'unable to load suite: ' + suites[n].desc);
           console.error(jaribu.getErrorMessage());
-          failedToLoad.push({'desc':suites[n].desc, 'error': jaribu.getErrorMessage()});
+          failedToLoad.push({ 'desc': suites[n].desc, 'error': jaribu.getErrorMessage() });
         }
       }
     }
-    jaribu.begin(function() {
+
+    jaribu.begin(function () {
       // on complete
-      var i;
       console.log('---');
-      var num_failedToLoad = failedToLoad.length;
-      for (i = 0; i < num_failedToLoad; i += 1) {
+      for (var i = 0, len = failedToLoad.length; i < len; i += 1) {
         console.log("\nsuite failed to load: " + failedToLoad[i].desc);
         console.log(failedToLoad[i].error);
       }
