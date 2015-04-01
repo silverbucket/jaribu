@@ -28,6 +28,7 @@ Features
 <html>
 <head><title>tests</title></head>
 <body>
+<div id="jaribuTestOutput"></div>
 <script>
 var jaribuTestFiles = [
     'test1-suite.js',

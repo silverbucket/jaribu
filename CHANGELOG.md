@@ -41,6 +41,7 @@ jaribu v1.0.0  - 2015/03/30
 <html>
 <head><title>tests</title></head>
 <body>
+<div id="jaribuTestOutput"></div>
 <script>
 var jaribuTestFiles = [
     'test1-suite.js',
