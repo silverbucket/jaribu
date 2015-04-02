@@ -1,6 +1,6 @@
 ![jaribu](https://raw.github.com/silverbucket/jaribu/master/design/jaribu_logo.png)
 
-*a JavaScript (node.js) testing framework*
+*a JavaScript (browser & node.js) testing framework*
 
 [![Build Status](http://img.shields.io/travis/silverbucket/jaribu.svg?style=flat)](http://travis-ci.org/silverbucket/jaribu)
 [![Code Climate](http://img.shields.io/codeclimate/github/silverbucket/jaribu.svg?style=flat)](https://codeclimate.com/github/silverbucket/jaribu)
@@ -12,7 +12,7 @@
 
 Intro
 -----
-Jaribu is a JavaScript testing framework built on node.js. It's meant to keep things simple, and make the barrier for writing tests as thin as possible.
+Jaribu is a JavaScript testing framework that runs both in the browser and via node.js. It's meant to keep things simple, and make the barrier for writing tests as thin as possible, and to run in as many javascript environments as possible.
 
 Features
 --------
@@ -40,6 +40,8 @@ var jaribuTestFiles = [
 </body>
 </html>
 ```
+
+For tests which are designed to only run on the server, you can add a `runInBrowser: false` boolean to the suite properties.
 
 **Shared environments** : a suite has an 'env' object which you can write to and that data will be available for any test in that suite.
 
