@@ -96,7 +96,10 @@
 
       if (typeof s === 'undefined') {
         console.error('expected an array of tests, but got \'undefined\' from file: ' + files[i]);
-        failedToLoad.push({ 'desc': files[i], 'error': 'unable to read suite data from file' });
+        failedToLoad.push({ 
+          desc: files[i], 
+          error: 'unable to read suite data from file' 
+        });
         continue;
       } else if ((s.hasOwnProperty('name')) && (typeof s.name !== 'undefined')) {
         suites.push(s);
@@ -115,7 +118,6 @@
 
     jaribu.begin(function () {
       // on complete
-      console.log('---');
       for (var i = 0, len = failedToLoad.length; i < len; i += 1) {
         console.log("\nsuite failed to load: " + failedToLoad[i].desc);
         console.log(failedToLoad[i].error);

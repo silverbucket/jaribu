@@ -40,8 +40,8 @@ define([ 'jaribu' ], function (jaribu) {
 
         for (i = 0, len = suites.length; i < len; i += 1) {
             if (! jaribu.loadSuite(suites[i]) ) {
-                jaribu.display.print('unable to load suite: ' + suites[i].desc);
-                jaribu.display.print(jaribu.getErrorMessage());
+                jaribu.display.printn('unable to load suite: ' + suites[i].desc);
+                jaribu.display.printn(jaribu.getErrorMessage());
                 failedToLoad.push({ 'desc': suites[i].desc, 'error': jaribu.getErrorMessage() });
             }
         }
@@ -49,8 +49,8 @@ define([ 'jaribu' ], function (jaribu) {
         jaribu.begin(function() {
             // on complete
             for (var i = 0, len = failedToLoad.length; i < len; i += 1) {
-              jaribu.display.print('suite failed to load: ' + failedToLoad[i].desc);
-              jaribu.display.print(failedToLoad[i].error);
+              jaribu.display.printn('suite failed to load: ' + failedToLoad[i].desc);
+              jaribu.display.printn(failedToLoad[i].error);
             }
         });
     });
