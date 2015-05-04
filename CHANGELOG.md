@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+jaribu v2.0.0  - 2015/05/04
+---------------------------
+
+- greatly minimized text output during testrunning to a `+` for pass, `!+` for failed but expected (aka. pass) and only displaying verbose data when there's a failure. 
+
+
 jaribu v1.1.0  - 2015/03/30
 ---------------------------
 

@@ -10,12 +10,10 @@
 [![release](http://img.shields.io/github/release/silverbucket/jaribu.svg?style=flat)](https://github.com/silverbucket/jaribu/releases)
 
 
-Intro
------
+# Intro
 Jaribu is a JavaScript testing framework that runs both in the browser and via node.js. It's meant to keep things simple, and make the barrier for writing tests as thin as possible, and to run in as many javascript environments as possible.
 
-Features
---------
+# Features
 
 **Console-based testing** : jaribu will automatically find tests in `test/*-suite.js` when run from console. 
 
@@ -89,6 +87,22 @@ For tests which are designed to only run on the server, you can add a `runInBrow
     ]
   });
 ```
+
+# Output
+
+Generally speaking, when the tests are passing as expected, the output will be
+minimal. The description of each suite of tests will be displayed, followed by 
+a series of `+` and `!+` characters, and any errors if they occur.
+
+- `+` means the test passed. 
+
+- `!+` means the test failed, but this was expected (treated as a pass).
+
+At the end of all test running, there will be a summary describing the total
+number of tests (and meta-tests, known as scaffolding) run, failures, passes, etc.
+
+
+# API
 
 ## Asserts
 You can use the assert family of functions to compare values with each other
