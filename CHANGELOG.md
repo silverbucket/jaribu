@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+jaribu v2.1.0  - 2015/12/03
+---------------------------
+
+- re-enable `test.write` function, which had been disabled for the 2.0 release and never re-enabled.
+
+
 jaribu v2.0.0  - 2015/05/04
 ---------------------------
 
