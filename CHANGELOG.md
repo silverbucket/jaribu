@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+jaribu v2.1.2  - 2015/12/16
+---------------------------
+
+- the new node_modules layout causes issue trying to include whatwg-fetch, so it's been removed and we just say fetch must be implemented in the browser.
+
+
 jaribu v2.1.1  - 2015/12/16
 ---------------------------
 

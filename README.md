@@ -21,6 +21,8 @@ Jaribu is a JavaScript testing framework that runs both in the browser and via n
 
 **Browser testing** : When run from the browser, you can create a simple `test/index.html` file like the following:
 
+**NOTE** : `fetch` is a requirement for jaribu tests to run in the browser.
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -40,6 +42,7 @@ var jaribuTestFiles = [
 ```
 
 For tests which are designed to only run on the server, you can add a `runInBrowser: false` boolean to the suite properties.
+
 
 **Shared environments** : a suite has an 'env' object which you can write to and that data will be available for any test in that suite.
 
