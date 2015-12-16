@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+jaribu v2.1.1  - 2015/12/16
+---------------------------
+
+- abortOnFail was not stopping all tests in the browser due to the lack of process.exit, fixed this so the behavior is the same as it is on the console.
+
+
 jaribu v2.1.0  - 2015/12/03
 ---------------------------
 
