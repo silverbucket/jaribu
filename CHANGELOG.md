@@ -1,6 +1,18 @@
 CHANGELOG
 =========
 
+jaribu v2.2.1  - 2015/12/17
+---------------------------
+
+- added `runInConsole` optional boolean property to suite object. If `false` it will be skipped when running tests from the console.
+
+
+jaribu v2.1.3  - 2015/12/16
+---------------------------
+
+- another subtle require.js fix so that it can always successfully include something even if it's overridden with window.fetch right after.
+
+
 jaribu v2.1.2  - 2015/12/16
 ---------------------------
 
