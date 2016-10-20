@@ -21,8 +21,7 @@
 
   console.log('jaribu is in: ' + jaribuDir);
   console.log('app is in: ' + appDir);
-  
-  
+
   requirejs.config({
     //Pass the top-level main.js/index.js require
     //function to requirejs so that node modules
@@ -30,22 +29,22 @@
     baseUrl: appDir,
     paths: {
       jaribu: jaribuDir,
-      'jaribu/colors': jaribuDir + '/lib/colors', 
-      'jaribu/display': jaribuDir + '/lib/display', 
+      'jaribu/colors': jaribuDir + '/lib/colors',
+      'jaribu/display': jaribuDir + '/lib/display',
       'jaribu/tools/Env': jaribuDir + '/lib/tools/Env',
-      'jaribu/Scaffolding': jaribuDir + '/lib/Scaffolding', 
-      'jaribu/Test': jaribuDir + '/lib/Test', 
+      'jaribu/Scaffolding': jaribuDir + '/lib/Scaffolding',
+      'jaribu/Test': jaribuDir + '/lib/Test',
       'jaribu/Suite': jaribuDir + '/lib/Suite',
       'jaribu/helpers': jaribuDir + '/lib/helpers',
-      'jaribu/tools/Write': jaribuDir + '/lib/tools/Write', 
+      'jaribu/tools/Write': jaribuDir + '/lib/tools/Write',
       'jaribu/tools/result': jaribuDir + '/lib/tools/result',
-      'jaribu/tools/assert': jaribuDir + '/lib/tools/assert', 
-      'jaribu/tools/assertType': jaribuDir + '/lib/tools/assertType', 
-      'jaribu/fakes/Stub': jaribuDir + '/lib/fakes/Stub', 
+      'jaribu/tools/assert': jaribuDir + '/lib/tools/assert',
+      'jaribu/tools/assertType': jaribuDir + '/lib/tools/assertType',
+      'jaribu/fakes/Stub': jaribuDir + '/lib/fakes/Stub',
       'jaribu/fakes/remoteStorageMock': jaribuDir + '/lib/fakes/remoteStorageMock',
-      'jaribu/tools/HttpServer': jaribuDir + '/lib/tools/HttpServer', 
+      'jaribu/tools/HttpServer': jaribuDir + '/lib/tools/HttpServer',
       'jaribu/tools/Throws': jaribuDir + '/lib/tools/Throws',
-      'jaribu/tools/WebSocketClient': jaribuDir + '/lib/tools/WebSocketClient', 
+      'jaribu/tools/WebSocketClient': jaribuDir + '/lib/tools/WebSocketClient',
       'jaribu/tools/WebSocketServer': jaribuDir + '/lib/tools/WebSocketServer',
       'jaribu/testlib2': jaribuDir + '/lib/testlib2',
       'jaribu/testlib': jaribuDir + '/lib/testlib'
@@ -96,9 +95,9 @@
 
       if (typeof s === 'undefined') {
         console.error('expected an array of tests, but got \'undefined\' from file: ' + files[i]);
-        failedToLoad.push({ 
-          desc: files[i], 
-          error: 'unable to read suite data from file' 
+        failedToLoad.push({
+          desc: files[i],
+          error: 'unable to read suite data from file'
         });
         continue;
       } else if ((s.hasOwnProperty('name')) && (typeof s.name !== 'undefined')) {
