@@ -193,3 +193,7 @@ When resolving tests there are a number of calls you can make.
   test.fail('problem with stuff ...'); // fails test with message
 ```
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/silverbucket/jaribu/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
