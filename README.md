@@ -156,7 +156,7 @@ called, and how many times, but can be used as stubs as well (which are
 basically just mocks without meta data).
 
 ```javascript
-  var mock = new this.Stub(function(p1, p2) {
+  var mock = new test.Stub(function(p1, p2) {
     console.log('hello world');
   });
 
@@ -177,7 +177,7 @@ thrown asyncronously. The interface is the same either way, just call the
 function you want to test. If it throws an exception, the test passes.
 
 ```javascript
-  this.throws(function () {
+  test.throws(function () {
     throw new Error('oops');
   }, Error, 'caught thrown exception');
 ```
