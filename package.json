@@ -17,15 +17,15 @@
   },
   "homepage": "http://github.com/silverbucket/jaribu",
   "dependencies": {
-    "amdefine": "^1.0.0",
-    "bluebird": "^3.4.6",
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "node-fetch": "^1.6.3",
-    "requirejs": "^2.3.2",
-    "walk": "^2.3.9",
-    "websocket": "^1.0.23",
-    "whatwg-fetch": "^1.0.0"
+    "amdefine": "^1.0.1",
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "node-fetch": "^1.7.3",
+    "requirejs": "^2.3.6",
+    "walk": "^2.3.14",
+    "websocket": "^1.0.28",
+    "whatwg-fetch": "^1.1.1"
   },
   "scripts": {
     "test": "bin/jaribu"
