@@ -3,8 +3,7 @@ os: linux
 arch: arm64-graviton2
 group: edge
 node_js:
-  - 6
-  - 7
+  - 'lts/*'
 script: npm test
 install:
   - npm install
