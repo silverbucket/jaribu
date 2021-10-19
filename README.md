@@ -8,8 +8,14 @@
 [![release](http://img.shields.io/github/release/silverbucket/jaribu.svg?style=flat)](https://github.com/silverbucket/jaribu/releases)
 
 
+# NO LONGER MAINTAINED
+
+Jaribu has always been a research project to learn more about the underlying technicalities of JS and testing code. I never promoted it as a testing library and although it has been used successfully in several larger projects, I'm officially closing the chapter on this project and retiring the code. I'll only release updates to dependencies as long as the few projects are still using it (they are migrating to more popular testing frameworks, but this can take time).
+
 # Intro
+
 Jaribu is a JavaScript testing framework that runs both in the browser and via node.js. It's meant to keep things simple, and make the barrier for writing tests as thin as possible, and to run in as many javascript environments as possible.
+
 
 # Features
 
