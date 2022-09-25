@@ -21,7 +21,7 @@
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.0.0",
     "requirejs": "^2.3.6",
     "walk": "^2.3.14",
     "websocket": "^1.0.28",
